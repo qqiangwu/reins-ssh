@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-9-24 22:05:15 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="com.n2cj.entity.IndexEvent" table="indexEvent">
+        <id name="indexId" type="java.lang.Integer">
+            <column name="indexId"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one name="basicIndex" class="com.n2cj.entity.BasicIndex" fetch="join">
+            <column name="basicIndexId" not-null="true"/>
+        </many-to-one>
+        <property name="indexStatus" type="string">
+            <column name="indexStatus" length="50"/>
+        </property>
+        <property name="name" type="string">
+            <column name="name" length="50"/>
+        </property>
+        <property name="country" type="string">
+            <column name="country" length="50"/>
+        </property>
+        <property name="period" type="string">
+            <column name="period" length="50"/>
+        </property>
+        <property name="importance" type="string">
+            <column name="importance" length="50"/>
+        </property>
+        <property name="lastValue" type="string">
+            <column name="lastValue" length="50"/>
+        </property>
+        <property name="predictValue" type="string">
+            <column name="predictValue" length="50"/>
+        </property>
+        <property name="value" type="string">
+            <column name="value" length="50"/>
+        </property>
+        <property name="unit" type="string">
+            <column name="unit" length="50"/>
+        </property>
+        <property name="publishTime" type="timestamp">
+            <column name="publishTime" length="19"/>
+        </property>
+        <property name="year" type="java.lang.Integer">
+            <column name="year"/>
+        </property>
+        <property name="positiveItem" type="string">
+            <column name="positiveItem" length="50"/>
+        </property>
+        <property name="negativeItem" type="string">
+            <column name="negativeItem" length="50"/>
+        </property>
+        <property name="addtime" type="timestamp">
+            <column name="addtime" length="19"/>
+        </property>
+        <property name="modifytime" type="timestamp">
+            <column name="modifytime" length="19"/>
+        </property>
+        <property name="keyword" type="string">
+            <column name="keyword" length="50"/>
+        </property>
+        <property name="reasonforlook" type="string">
+            <column name="reasonforlook" length="500"/>
+        </property>
+        <property name="publishOrganization" type="string">
+            <column name="publishOrganization" length="50"/>
+        </property>
+        <property name="publishFrequncy" type="string">
+            <column name="publishFrequncy" length="50"/>
+        </property>
+        <property name="nextpublishTime" type="timestamp">
+            <column name="nextpublishTime" length="19"/>
+        </property>
+        <property name="statisticMethod" type="string">
+            <column name="statisticMethod" length="500"/>
+        </property>
+        <property name="influence" type="string">
+            <column name="influence" length="500"/>
+        </property>
+        <property name="explanation" type="string">
+            <column name="explanation" length="500"/>
+        </property>
+        <property name="level" type="java.lang.Integer">
+            <column name="level"/>
+        </property>
+        <property name="parentId" type="java.lang.Integer">
+            <column name="parentId"/>
+        </property>
+        <property name="currency" type="string">
+            <column name="currency" length="50"/>
+        </property>
+        <property name="gold" type="java.lang.Short">
+            <column name="gold"/>
+        </property>
+        <property name="silver" type="java.lang.Short">
+            <column name="silver"/>
+        </property>
+        <property name="petro" type="java.lang.Short">
+            <column name="petro"/>
+        </property>
+        <property name="editor" type="string">
+            <column name="editor" length="50"/>
+        </property>
+        <property name="predictCurrency" type="string">
+            <column name="predictCurrency" length="50"/>
+        </property>
+        <property name="predictCurrencyRate" type="java.lang.Long">
+            <column name="predictCurrencyRate" precision="10" scale="0"/>
+        </property>
+        <property name="predictGold" type="java.lang.Long">
+            <column name="predictGold" precision="10" scale="0"/>
+        </property>
+        <property name="predictPetro" type="java.lang.Long">
+            <column name="predictPetro" precision="10" scale="0"/>
+        </property>
+        <property name="predictSilver" type="java.lang.Long">
+            <column name="predictSilver" precision="10" scale="0"/>
+        </property>
+        <property name="predictStock" type="java.lang.Long">
+            <column name="predictStock" precision="10" scale="0"/>
+        </property>
+        <property name="updated" type="java.lang.Integer">
+            <column name="updated"/>
+        </property>
+        <property name="currencyInfluence" type="java.lang.Integer">
+            <column name="currencyInfluence"/>
+        </property>
+        <property name="goldInfluence" type="java.lang.Integer">
+            <column name="goldInfluence"/>
+        </property>
+        <property name="silverInfluence" type="java.lang.Integer">
+            <column name="silverInfluence"/>
+        </property>
+        <property name="petroInfluence" type="java.lang.Integer">
+            <column name="petroInfluence"/>
+        </property>
+        <property name="stockInfluence" type="java.lang.Integer">
+            <column name="stockInfluence"/>
+        </property>
+        <property name="content" type="string">
+            <column name="content" length="250"/>
+        </property>
+    </class>
+</hibernate-mapping>

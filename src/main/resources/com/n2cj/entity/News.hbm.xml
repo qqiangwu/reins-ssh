@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-10-29 13:23:56 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.n2cj.entity.News" table="news" optimistic-lock="version">
+        <id name="newsId" type="java.lang.Integer">
+            <column name="newsId" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="editor" class="com.n2cj.entity.Editor" fetch="select">
+            <column name="editorId" not-null="true" />
+        </many-to-one>
+        <property name="newsCategoryList" type="string">
+            <column name="newsCategoryList" length="2000" />
+        </property>
+        <property name="newsTitle" type="string">
+            <column name="newsTitle" not-null="true" />
+        </property>
+        <property name="newsAbstract" type="string">
+            <column name="newsAbstract" />
+        </property>
+        <property name="newsText" type="binary">
+            <column name="newsText" />
+        </property>
+        <property name="newsView" type="int">
+            <column name="newsView" not-null="true" />
+        </property>
+        <property name="newsLike" type="int">
+            <column name="newsLike" not-null="true" />
+        </property>
+        <property name="newsDislike" type="int">
+            <column name="newsDislike" not-null="true" />
+        </property>
+        <property name="newsComment" type="int">
+            <column name="newsComment" not-null="true" />
+        </property>
+        <property name="newsForward" type="int">
+            <column name="newsForward" not-null="true" />
+        </property>
+        <property name="newsFollow" type="int">
+            <column name="newsFollow" not-null="true" />
+        </property>
+        <property name="newsIsHeadline" type="boolean">
+            <column name="newsIsHeadline" not-null="true" />
+        </property>
+        <property name="newsIsTop" type="boolean">
+            <column name="newsIsTop" not-null="true" />
+        </property>
+        <property name="newsIsRecommend" type="boolean">
+            <column name="newsIsRecommend" not-null="true" />
+        </property>
+        <property name="newsImportance" type="java.lang.Integer">
+            <column name="newsImportance" />
+        </property>
+        <property name="newsWord" type="int">
+            <column name="newsWord" not-null="true" />
+        </property>
+        <property name="newsIsAd" type="boolean">
+            <column name="newsIsAd" not-null="true" />
+        </property>
+        <property name="newsAdImage" type="string">
+            <column name="newsAdImage" />
+        </property>
+        <property name="newsAdHref" type="string">
+            <column name="newsAdHref" />
+        </property>
+        <property name="newsTagList" type="string">
+            <column name="newsTagList" length="2000" not-null="true" />
+        </property>
+        <property name="newsViewMonth" type="int">
+            <column name="newsViewMonth" not-null="true" />
+        </property>
+        <property name="newsViewWeek" type="int">
+            <column name="newsViewWeek" not-null="true" />
+        </property>
+        <property name="newsViewDay" type="int">
+            <column name="newsViewDay" not-null="true" />
+        </property>
+        <property name="newsViewDate" type="timestamp">
+            <column name="newsViewDate" length="0" not-null="true" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="20" not-null="true" />
+        </property>
+        <property name="addtime" type="timestamp">
+            <column name="addtime" length="0" not-null="true" />
+        </property>
+        <property name="updatetime" type="timestamp">
+            <column name="updatetime" length="0" not-null="true" />
+        </property>
+        <property name="newsIsOrigin" type="boolean">
+            <column name="newsIsOrigin" not-null="true" />
+        </property>
+        <property name="newsSource" type="string">
+            <column name="newsSource" />
+        </property>
+        <property name="newsAuthor" type="string">
+            <column name="newsAuthor" />
+        </property>
+        <property name="newsThumbnail" type="string">
+            <column name="newsThumbnail" />
+        </property>
+        <property name="newsPath" type="string">
+            <column name="newsPath" />
+        </property>
+        <property name="newsPages" type="java.lang.Integer">
+            <column name="newsPages" />
+        </property>
+        <property name="publishtime" type="timestamp">
+            <column name="publishtime" length="0" not-null="true" />
+        </property>
+        <set name="newsViewRankMonths" table="news_view_rank_month" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="newsId" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="com.n2cj.entity.NewsViewRankMonth" />
+        </set>
+        <set name="newsComments" table="news_comment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="newsId" not-null="true" />
+            </key>
+            <one-to-many class="com.n2cj.entity.NewsComment" />
+        </set>
+        <set name="newsCategoryRels" table="news_category_rel" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="newsId" not-null="true" />
+            </key>
+            <one-to-many class="com.n2cj.entity.NewsCategoryRel" />
+        </set>
+        <set name="newsFollows" table="news_follow" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="newsId" not-null="true" />
+            </key>
+            <one-to-many class="com.n2cj.entity.NewsFollow" />
+        </set>
+        <set name="newsViewRankWeeks" table="news_view_rank_week" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="newsId" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="com.n2cj.entity.NewsViewRankWeek" />
+        </set>
+        <set name="newsViewRankDays" table="news_view_rank_day" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="newsId" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="com.n2cj.entity.NewsViewRankDay" />
+        </set>
+        <set name="newsLikes" table="news_like" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="newsId" not-null="true" />
+            </key>
+            <one-to-many class="com.n2cj.entity.NewsLike" />
+        </set>
+        <set name="newsHeadlines" table="news_headline" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="newsId" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="com.n2cj.entity.NewsHeadline" />
+        </set>
+        <set name="newsForwards" table="news_forward" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="newsId" not-null="true" />
+            </key>
+            <one-to-many class="com.n2cj.entity.NewsForward" />
+        </set>
+        <set name="tagNewsRels" table="tag_news_rel" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="newsId" not-null="true" />
+            </key>
+            <one-to-many class="com.n2cj.entity.TagNewsRel" />
+        </set>
+        <set name="newsTops" table="news_top" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="newsId" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="com.n2cj.entity.NewsTop" />
+        </set>
+        <set name="newsIndexPageTops" table="news_index_page_top" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="newsId" not-null="true" />
+            </key>
+            <one-to-many class="com.n2cj.entity.NewsIndexPageTop" />
+        </set>
+    </class>
+</hibernate-mapping>

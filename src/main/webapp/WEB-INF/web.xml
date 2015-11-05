@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         version="3.0"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+    <display-name>reins::website</display-name>
+
+    <!-- Spring configuration -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <!-- 载入resources下所有的context-*文件 -->
+        <param-value>classpath*:context-*.xml</param-value>
+    </context-param>
+
+    <welcome-file-list>
+        <welcome-file>redirect.html</welcome-file>
+    </welcome-file-list>
+    
+    <!-- 将spring嵌入web -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+
+    <filter>
+        <!-- 用于将页面的content-encoding 在response中设置为utf-8 -->
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <!-- 目前只对/view/下面的内容设置content-encoding　-->
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/view/*</url-pattern>
+    </filter-mapping>
+
+    <!-- 这是一个设计模式，由filter管理session，这样就不用在service中管理了　-->
+    <filter>
+        <filter-name>openSession</filter-name>
+        <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+        <init-param>
+            <param-name>singleSession</param-name>
+            <param-value>false</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>openSession</filter-name>
+        <url-pattern>/action/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>openSession</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+
+
+    <!-- Struts Configuration，将struts嵌入web -->
+    <filter>
+        <filter-name>struts2</filter-name>
+        <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+    </filter>
+    <!-- 区别action与api，action用作controller，api用作ajax后台-->
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>/action/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+
+    <!-- Session -->
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+</web-app>

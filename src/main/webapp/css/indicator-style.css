@@ -1,0 +1,87 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+
+
+#page-main{ width:1200px; margin:auto; padding:40px 0 120px; overflow:hidden}
+#page-main .left{ float:left; width:138px;}
+#page-main .left .qa{width:138px; height:130px;color:#efefef; display:block}
+#page-main .left .qa b{display:block; height:65px; font-size:24px; line-height:65px; color:#efefef; text-align:center; background:#E72124}
+#page-main .left .qa span{ display:block; font-weight:300; height:65px; text-align:center; font-size:18px; line-height:22px; background:#3E3A39}
+#page-main .left .qa span font{ display:block; padding-top:11px; color:#E72124}
+#page-main .left .ad-03{ margin-top:10px; display:block; padding:0;}
+
+#page-main .right{width:1025px; float:right}
+#page-main .right .title{text-align:center; font-size:30px; font-weight:bold; border-top:#CCCCCC 6px solid; height:64px; line-height:64px}
+#page-main .right .explain{ border-top:1px #ccc solid; border-bottom:1px #ccc solid; padding:20px 0; font-size:18px}
+
+#page-main .right .chart{ margin-top:52px; overflow: hidden;}
+
+.trend{ width:387px; border-top:6px #CCCCCC solid; float:left}
+
+.data{width:587px;border-top:6px #CCCCCC solid; float:right}
+#page-main .right .chart .chart-title{ overflow: hidden;}
+#page-main .right .chart .chart-title h1{ float:left; font-size:24px; padding:14px 0; margin:0;}
+#page-main .right .chart .chart-title p{float:left; width:280px; font-size:12px; color:#999999; padding-top:14px}
+#page-main .right .chart.up .chart-title p{width: 200px;}
+
+.data-img{font-size:0; padding-top: 27px;}
+.select-box{ padding:10px; background:#CCCCCC; overflow:hidden}
+.select-box select{margin-right:15px; float:left; height:26px;}
+.select-box select.indicators{ width:60px}
+.select-box select.countries{ width:120px}
+.select-box select.other{ width:225px}
+.select-box input{ float:right; width:60px;height:20px; text-align: center;}
+
+.tz-list{ background: #ccc;}
+.tz-list td,.tz-list th{background: #fff; height: 55px; width: 33.3%; text-align: center;}
+.tz-list td span{ padding-left: 30px; position: relative;}
+.tz-list td span em{ width: 25px; height: 25px; position: absolute;left:0; top:-2px; background:url(../images/icon.png) no-repeat}
+.tz-list td span.us em{ background-position: 0 -135px; }
+.tz-list td span.gold em{background-position: -25px -135px;}
+.tz-list td span.baiyin em{background-position: -50px -135px;}
+.tz-list td span.silver em{background-position: -75px -135px;}
+.tz-list td span.stock em{background-position: -100px -135px;}
+
+.tz-list td span.down,.tz-list td span.up{ padding: 0 20px 0 0; }
+.tz-list td span.down{ color: #339966;background:url(../images/down.png) no-repeat right;}
+.tz-list td span.up{ color:#E72124;background:url(../images/up.png) no-repeat right;}
+
+.t-list{ border-top:1px #ccc solid ; border-bottom: 1px #ccc solid; margin-top: 10px;}
+.t-list td{ width: 25%; height: 55px; text-align: center; font-size: 18px;}
+.t-list tr.top-20 td{ padding-top: 16px;}
+.data-info{border-top:1px #ccc solid ; border-bottom: 1px #ccc solid; overflow: hidden; padding: 10px 0;}
+.data-info li{width: 50%; float:left; line-height: 26px;}
+.data-view p{ display: block; padding-bottom: 8px; font-size: 14px;}
+.data-view{ padding: 10px 0; border-bottom: 1px #ccc solid;}
+.star{ width: auto; margin: auto; display: inline-block;}
+.star li{ width: 22px; height: 21px; background: url(../images/icon.png) no-repeat -97px -47px; float: left;}
+
+
+
+.new-list{ border-top:6px #ccc solid; margin-top: 50px;}
+.new-list .tit{overflow: hidden; padding-bottom: 5px;}
+.new-list .tit h1{ font-size: 24px; float: left;}
+.new-list .tit p{ padding-top: 25px; padding-left: 15px; color: #999; font-size: 12px; float:left}
+.new-list .tit a{float:right; line-height: 60px; color: #717071; font-size: 14px;}
+.new-list .tit a:link{color: #717071;}
+.new-list ul{border-bottom: 1px #ccc solid;}
+.new-list  li{ height: 42px; line-height: 42px; overflow: hidden; border-top: 1px #ccc solid;}
+.new-list  li a span{ float:right; color: #9E9E9F; font-size: 10px;}
+.history-list{ background: #ccc;}
+.history-list th,.history-list td{background: #fff;   text-align: center;}
+.history-list th{ height: 50px;}
+.history-list td{height: 40px;}
+.history-list span.up{ background:url(../images/up.png) no-repeat; padding-left: 20px;}
+.history-list span.down{ background:url(../images/down.png) no-repeat; padding-left: 20px; margin-left: 5px;}
+.history-list span.ping{ background:url(../images/ping.png) no-repeat 0 center; padding-left: 20px;margin-left: 5px;}
+.new-list ul.date-s{ width: 290px; float: left; border: none; margin-left: 40px;}
+.new-list ul.date-s li{width: 33.33%; text-align: center; cursor: pointer; float: left; border: none; font-size:18px; font-weight: bold; color: #717071; border-top:4px #fff solid; line-height: 55px;}
+.new-list ul.date-s li.cur{ color: #231815; border-top:4px #E72124 solid;}
+
+.page{text-align: center; height: 40px; border-bottom: 1px #ccc solid;}
+.page a{margin: 0 5px; line-height: 40px;}
+.page a span{ border: 1px #231815 solid; padding: 0 5px;}
+.page a.un span{border: 1px #ccc solid; color: #CCCCCC;}
+

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-11-4 13:48:01 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.n2cj.entity.Hotrecommend" table="hotrecommend" optimistic-lock="version">
+        <id name="hotrecommendId" type="java.lang.Integer">
+            <column name="hotrecommendId" />
+            <generator class="identity" />
+        </id>
+        <property name="hotrecommendStatus" type="string">
+            <column name="hotrecommendStatus" length="50" />
+        </property>
+        <property name="hotrecommendText" type="string">
+            <column name="hotrecommendText" length="50" />
+        </property>
+        <property name="hotrecommendRank" type="string">
+            <column name="hotrecommendRank" length="50" />
+        </property>
+        <property name="hotrecommendLink" type="string">
+            <column name="hotrecommendLink" length="500" />
+        </property>
+    </class>
+</hibernate-mapping>

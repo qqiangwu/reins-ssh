@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-10-29 16:30:48 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.n2cj.entity.Touhang" table="touhang" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="status" type="string">
+            <column name="status" length="20" not-null="true" />
+        </property>
+        <property name="entry" type="string">
+            <column name="entry" length="20" />
+        </property>
+        <property name="target" type="string">
+            <column name="target" length="20" />
+        </property>
+         <property name="duokong" type="string">
+            <column name="duokong" length="20" />
+        </property>
+        <property name="zhisun" type="string">
+            <column name="zhisun" length="20" />
+        </property>
+        <property name="period" type="string">
+            <column name="period" length="30" />
+        </property>
+        <property name="addDate" type="timestamp">
+            <column name="addDate" length="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

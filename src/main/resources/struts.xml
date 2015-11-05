@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <constant name="struts.enable.SlashesInActionNames" value="true"/>
+    <constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>
+    <constant name="struts.patternMatcher" value="regex"/>
+
+    <!-- 国际化支持 -->
+    <!--<constant name="struts.custom.i18n.resources" value="global"/>-->
+
+    <!-- 发布版本可以改成false, 这个过程可以由maven来做，然后我懒得配置了　-->
+    <constant name="struts.devMode" value="true"/>
+
+    <!-- 路由工作由struts完成，每个子模块使用一个对应的路由文件　-->
+    <include file="router/struts-*.xml"></include>
+</struts>

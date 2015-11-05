@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-9-6 10:20:24 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.n2cj.entity.Live" table="live" optimistic-lock="version">
+        <id name="liveId" type="java.lang.Integer">
+            <column name="liveId"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one name="editor" class="com.n2cj.entity.Editor" fetch="select">
+            <column name="editorId" not-null="true"/>
+        </many-to-one>
+        <property name="liveTitle" type="binary">
+            <column name="liveTitle" not-null="true"/>
+        </property>
+        <property name="liveImportance" type="java.lang.Integer">
+            <column name="liveImportance"/>
+        </property>
+        <property name="liveIsChangedToNews" type="boolean">
+            <column name="liveIsChangedToNews" not-null="true"/>
+        </property>
+        <property name="newsId" type="java.lang.Integer">
+            <column name="newsId"/>
+        </property>
+        <property name="liveTagList" type="string">
+            <column name="liveTagList" length="2000"/>
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="20" not-null="true"/>
+        </property>
+        <property name="addtime" type="timestamp">
+            <column name="addtime" length="0" not-null="true"/>
+        </property>
+        <property name="updatetime" type="timestamp">
+            <column name="updatetime" length="0" not-null="true"/>
+        </property>
+        <property name="liveText" type="binary">
+            <column name="liveText"/>
+        </property>
+        <property name="liveUrl" type="string">
+            <column name="liveUrl" not-null="true"/>
+        </property>
+        <set name="tagLiveRels" table="tag_live_rel" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="liveId" not-null="true"/>
+            </key>
+            <one-to-many class="com.n2cj.entity.TagLiveRel"/>
+        </set>
+    </class>
+</hibernate-mapping>

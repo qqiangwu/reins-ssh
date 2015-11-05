@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-9-6 10:20:24 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.n2cj.entity.EditorRoleRel" table="editor_role_rel" optimistic-lock="version">
+        <composite-id name="id" class="com.n2cj.entity.EditorRoleRelId">
+            <key-property name="editorId" type="int">
+                <column name="editorId"/>
+            </key-property>
+            <key-property name="roleId" type="int">
+                <column name="roleId"/>
+            </key-property>
+            <key-property name="status" type="string">
+                <column name="status" length="20"/>
+            </key-property>
+            <key-property name="addtime" type="timestamp">
+                <column name="addtime" length="0"/>
+            </key-property>
+            <key-property name="updatetime" type="timestamp">
+                <column name="updatetime" length="0"/>
+            </key-property>
+        </composite-id>
+        <many-to-one name="editor" class="com.n2cj.entity.Editor" update="false" insert="false" fetch="select">
+            <column name="editorId" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="editorRole" class="com.n2cj.entity.EditorRole" update="false" insert="false" fetch="select">
+            <column name="roleId" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- Properties -->
+    <context:property-placeholder
+            ignore-resource-not-found="true" ignore-unresolvable="true"
+            location="classpath:common/app.properties, file:///${web.config}"/>
+    <!-- End properties -->
+
+    <!-- 导入数据库配置，如果有不需要mongo,可以移除 -->
+    <import resource="common/mongo.xml"></import>
+    <import resource="common/redis.xml"></import>
+    <import resource="common/mysql.xml"></import>
+
+    <!-- DAO configuration -->
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mappingLocations" value="classpath:com/n2cj/entity/*.hbm.xml"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.show_sql">${db.mysql.show_sql}</prop>
+                <prop key="hibernate.default_schema">${db.mysql.schema}</prop>
+                <prop key="hibernate.hikari.dataSource.cachePrepStmts">true</prop>
+                <prop key="hibernate.hikari.dataSource.prepStmtCacheSize">250</prop>
+                <prop key="hibernate.hikari.dataSource.prepStmtCacheSqlLimit">2048</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- 事务配置 -->
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <!-- 使用annotation定义事务 -->
+    <tx:annotation-driven/>
+
+    <!-- 扫描所有dao类，由spring托管。托管后，实例的初始化，析构，组装，依赖注入，都由spring完成　-->
+    <context:component-scan base-package="com.n2cj.dao"></context:component-scan>
+    <context:component-scan base-package="com.n2cj.service.impl"></context:component-scan>
+
+    <!--　如果需要scheduler的话，用这两行-->
+    <!--<task:scheduler id="poolTaskScheduler" pool-size="5"></task:scheduler>-->
+    <!--<task:annotation-driven scheduler="poolTaskScheduler"></task:annotation-driven>-->
+</beans>

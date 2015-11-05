@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-9-6 10:20:24 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.n2cj.entity.UserAuthority" table="user_authority" optimistic-lock="version">
+        <id name="authorityId" type="java.lang.Integer">
+            <column name="authorityId"/>
+            <generator class="identity"/>
+        </id>
+        <property name="authorityName" type="string">
+            <column name="authorityName" not-null="true" unique="true"/>
+        </property>
+        <property name="authorityDesc" type="string">
+            <column name="authorityDesc" length="2000"/>
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="20" not-null="true"/>
+        </property>
+        <property name="addtime" type="timestamp">
+            <column name="addtime" length="0" not-null="true"/>
+        </property>
+        <property name="updatetime" type="timestamp">
+            <column name="updatetime" length="0" not-null="true"/>
+        </property>
+        <set name="userroleUserauthorityRels" table="userrole_userauthority_rel" inverse="true" lazy="true"
+             fetch="select">
+            <key>
+                <column name="authorityId" not-null="true"/>
+            </key>
+            <one-to-many class="com.n2cj.entity.UserroleUserauthorityRel"/>
+        </set>
+    </class>
+</hibernate-mapping>

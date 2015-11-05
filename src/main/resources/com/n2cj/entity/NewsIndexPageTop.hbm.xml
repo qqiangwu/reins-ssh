@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-9-6 10:20:24 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.n2cj.entity.NewsIndexPageTop" table="news_index_page_top" optimistic-lock="version">
+        <composite-id name="id" class="com.n2cj.entity.NewsIndexPageTopId">
+            <key-property name="newsIndexPageId" type="int">
+                <column name="newsIndexPageId"/>
+            </key-property>
+            <key-property name="newsId" type="int">
+                <column name="newsId"/>
+            </key-property>
+            <key-property name="newsTopImage" type="string">
+                <column name="newsTopImage"/>
+            </key-property>
+            <key-property name="newsTopOrder" type="java.lang.Integer">
+                <column name="newsTopOrder"/>
+            </key-property>
+            <key-property name="status" type="string">
+                <column name="status" length="20"/>
+            </key-property>
+            <key-property name="addtime" type="timestamp">
+                <column name="addtime" length="0"/>
+            </key-property>
+            <key-property name="updatetime" type="timestamp">
+                <column name="updatetime" length="0"/>
+            </key-property>
+        </composite-id>
+        <many-to-one name="news" class="com.n2cj.entity.News" update="false" insert="false" fetch="select">
+            <column name="newsId" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="newsIndexPage" class="com.n2cj.entity.NewsIndexPage" update="false" insert="false"
+                     fetch="select">
+            <column name="newsIndexPageId" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

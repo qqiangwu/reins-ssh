@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-9-6 10:20:24 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.n2cj.entity.Holidy" table="holidy" optimistic-lock="version">
+        <id name="holidayId" type="java.lang.Integer">
+            <column name="holidayId"/>
+            <generator class="identity"/>
+        </id>
+        <property name="holidayStatus" type="string">
+            <column name="holidayStatus" length="50"/>
+        </property>
+        <property name="holidayPublishTime" type="timestamp">
+            <column name="holidayPublishTime" length="0"/>
+        </property>
+        <property name="holidayCountry" type="string">
+            <column name="holidayCountry" length="50"/>
+        </property>
+        <property name="holidayRegion" type="string">
+            <column name="holidayRegion" length="50"/>
+        </property>
+        <property name="holidayImportance" type="string">
+            <column name="holidayImportance" length="50"/>
+        </property>
+        <property name="holidayContent" type="string">
+            <column name="holidayContent" length="50"/>
+        </property>
+        <property name="holidayTitle" type="string">
+            <column name="holidayTitle" length="250"/>
+        </property>
+        <property name="holidayAddTime" type="timestamp">
+            <column name="holidayAddTime" length="0"/>
+        </property>
+        <property name="holidayModifyTime" type="timestamp">
+            <column name="holidayModifyTime" length="0"/>
+        </property>
+    </class>
+</hibernate-mapping>

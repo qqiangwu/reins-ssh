@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-9-6 10:20:24 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.n2cj.entity.User" table="user" optimistic-lock="version">
+        <id name="userId" type="java.lang.Integer">
+            <column name="userId"/>
+            <generator class="identity"/>
+        </id>
+        <property name="userTelephone" type="string">
+            <column name="userTelephone" length="20"/>
+        </property>
+        <property name="userPassword" type="string">
+            <column name="userPassword" not-null="true"/>
+        </property>
+        <property name="userEmail" type="string">
+            <column name="userEmail" not-null="true" unique="true"/>
+        </property>
+        <property name="userName" type="string">
+            <column name="userName" not-null="true" unique="true"/>
+        </property>
+        <property name="userQq" type="string">
+            <column name="userQq" length="20"/>
+        </property>
+        <property name="userSign" type="string">
+            <column name="userSign"/>
+        </property>
+        <property name="userGender" type="string">
+            <column name="userGender" length="20"/>
+        </property>
+        <property name="userOccupation" type="string">
+            <column name="userOccupation"/>
+        </property>
+        <property name="userInterests" type="string">
+            <column name="userInterests"/>
+        </property>
+        <property name="userBirth" type="date">
+            <column name="userBirth" length="0"/>
+        </property>
+        <property name="userAvatar" type="string">
+            <column name="userAvatar"/>
+        </property>
+        <property name="userPosts" type="int">
+            <column name="userPosts" not-null="true"/>
+        </property>
+        <property name="userUnreadMsg" type="int">
+            <column name="userUnreadMsg" not-null="true"/>
+        </property>
+        <property name="userPoints" type="int">
+            <column name="userPoints" not-null="true"/>
+        </property>
+        <property name="userLevel" type="int">
+            <column name="userLevel" not-null="true"/>
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="20" not-null="true"/>
+        </property>
+        <property name="addtime" type="timestamp">
+            <column name="addtime" length="0" not-null="true"/>
+        </property>
+        <property name="updatetime" type="timestamp">
+            <column name="updatetime" length="0" not-null="true"/>
+        </property>
+        <property name="type" type="string">
+            <column name="type" length="20" not-null="true"/>
+        </property>
+        <set name="newsComments" table="news_comment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="userId" not-null="true"/>
+            </key>
+            <one-to-many class="com.n2cj.entity.NewsComment"/>
+        </set>
+        <one-to-one name="analyser" class="com.n2cj.entity.Analyser"></one-to-one>
+        <set name="newsFollows" table="news_follow" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="userId" not-null="true"/>
+            </key>
+            <one-to-many class="com.n2cj.entity.NewsFollow"/>
+        </set>
+        <set name="newsLikes" table="news_like" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="userId" not-null="true"/>
+            </key>
+            <one-to-many class="com.n2cj.entity.NewsLike"/>
+        </set>
+        <set name="newsForwards" table="news_forward" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="userId" not-null="true"/>
+            </key>
+            <one-to-many class="com.n2cj.entity.NewsForward"/>
+        </set>
+        <set name="userRoleRels" table="user_role_rel" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="userId" not-null="true"/>
+            </key>
+            <one-to-many class="com.n2cj.entity.UserRoleRel"/>
+        </set>
+    </class>
+</hibernate-mapping>

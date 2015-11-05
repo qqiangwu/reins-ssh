@@ -1,0 +1,456 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Microsoft YaHei', '微软雅黑', '黑体', SimHei;
+}
+
+p {
+    margin: 0;
+    padding: 0
+}
+
+ol, ul, li, dd, dt, dl {
+    margin: 0;
+    padding: 0;
+    list-style: none
+}
+
+a:link {
+    color: #231815;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #231815;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #231815;
+    text-decoration: none;
+}
+
+a:active {
+    color: #231815;
+    text-decoration: none;
+}
+
+.clear {
+    clear: both
+}
+
+#header {
+    height: 216px;
+}
+
+#header .top-box {
+    height: 40px;
+    background: #3E3A39
+}
+
+#header .top {
+    width: 1200px;
+    margin: auto
+}
+
+#header .top ul {
+    padding-left: 115px
+}
+
+#header .top ul li {
+    float: left;
+    color: #fff;
+    line-height: 40px;
+    background: url(../img/icon-01.png) no-repeat 0 center;
+}
+
+#header .top ul li span {
+    float: left;
+    font-size: 12px;
+    margin-left: 20px;
+    background: url(../img/icon-02.png) no-repeat center 30px;
+}
+
+#header .top ul li div {
+    display: block;
+    height: 40px;
+    width: 105px;
+    float: left
+}
+
+#header .top input {
+    width: 45px;
+    height: 20px;
+    border: 1px #EEEEEF solid;
+    background: none;
+    color: #EFEFEF;
+    margin-top: 10px
+}
+
+.ad-txt {
+    width: 1200px;
+    margin: auto;
+    overflow: hidden
+}
+
+.ad-txt a {
+    background: #C8C9CA;
+    width: 33%;
+    display: block;
+    text-align: center;
+    height: 28px;
+    line-height: 28px;
+    overflow: hidden;
+    font-size: 12px;
+    float: left
+}
+
+.ad-txt a:link, .ad-txt a:visited, .ad-txt a:active, .ad-txt a:hover {
+    color: #fff
+}
+
+.ad-txt a.ad-02, ad-txt a.ad-03 {
+    margin-left: 0.5%
+}
+
+.header-bar {
+    width: 1200px;
+    margin: auto;
+}
+
+.header-bar .logoer {
+    padding: 14px 0 0 0;
+    float: left;
+    margin-right: 20px
+}
+
+.header-bar .ad {
+    float: left;
+    padding: 20px 0 18px;
+    margin: 0 5px
+}
+
+.login {
+    width: 280px;
+    float: right;
+    padding-top: 26px;
+    position: relative;
+    z-index: 2;
+}
+
+.login-box {
+    height: 45px
+}
+
+.login-box p {
+    width: 110px;
+    float: left;
+    text-align: center;
+    line-height: 26px
+}
+
+.login-box .search {
+    float: right
+}
+
+.login-box .search input.search-text {
+    width: 140px;
+    float: left;
+    border: 1px #3E3A39 solid;
+    height: 22px
+}
+
+.login-box .search input.search-btn {
+    width: 24px;
+    height: 26px;
+    float: left;
+    background: url(../img/icon.png) no-repeat #3E3A39;
+    border: none;
+    background-position: 0 -41px
+}
+
+.login ul {
+    background: #3E3A39;
+    width: 100%;
+    overflow: hidden;
+    height: 78px;
+    position: absolute;
+    bottom: -83px;
+    z-index: 2;
+    right: 0;
+}
+
+.login ul li {
+    float: left;
+    width: 20%;
+    padding-top: 7px;
+}
+
+.login ul li em {
+    width: 40px;
+    height: 40px;
+    background: url(../img/icon.png) no-repeat;
+    display: block;
+    margin: auto
+}
+
+.login ul li.act em {
+    background-position: 0 0
+}
+
+.login ul li.ana em {
+    background-position: -40px 0
+}
+
+.login ul li.str em {
+    background-position: -80px 0
+}
+
+.login ul li.bbs em {
+    background-position: -120px 0
+}
+
+.login ul li.foc em {
+    background-position: -160px 0
+}
+
+.login ul li span {
+    text-align: center;
+    display: block
+}
+
+.login ul li a:link, .login ul li a:visited, .login ul li a:active, .login ul li a:hover {
+    color: #EEEEEF;
+    font-size: 17px;
+}
+
+.menu {
+    width: 1200px;
+    margin: auto;
+    background: #3E3A39;
+    height: 38px;
+}
+
+.menu ul {
+    overflow: hidden
+}
+
+.menu ul li {
+    float: left;
+    padding: 10px 0
+}
+
+.menu ul li.cur {
+    border-top: 4px #E72124 solid;
+    padding: 6px 0 10px;
+    font-weight: bold
+}
+
+.menu ul li a {
+    display: block;
+    padding: 0 19px;
+    border-right: 1px #EEEEEF solid;
+    font-size: 17px;
+    line-height: 17px
+}
+
+.menu ul li.noborder a {
+    border: none
+}
+
+.menu ul li a:link, .menu ul li a:visited, .menu ul li a:active, .menu ul li a:hover {
+    color: #EEEEEF
+}
+
+#page-main {
+    width: 1200px;
+    margin: auto;
+    padding: 40px 0 120px;
+    overflow: hidden
+}
+
+#page-main .left {
+    float: left;
+    width: 138px;
+}
+
+#page-main .left .qa {
+    width: 138px;
+    height: 130px;
+    color: #efefef;
+    display: block
+}
+
+#page-main .left .qa b {
+    display: block;
+    height: 65px;
+    font-size: 24px;
+    line-height: 65px;
+    color: #efefef;
+    text-align: center;
+    background: #E72124
+}
+
+#page-main .left .qa span {
+    display: block;
+    font-weight: 300;
+    height: 65px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 22px;
+    background: #3E3A39
+}
+
+#page-main .left .qa span font {
+    display: block;
+    padding-top: 11px;
+    color: #E72124
+}
+
+#page-main .left .ad-03 {
+    margin-top: 10px;
+    display: block;
+    padding: 0;
+}
+
+#page-main .right {
+    width: 1025px;
+    float: right
+}
+
+#page-main .right .title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    border-top: #CCCCCC 6px solid;
+    height: 64px;
+    line-height: 64px
+}
+
+#page-main .right .explain {
+    border-top: 1px #ccc solid;
+    border-bottom: 1px #ccc solid;
+    padding: 20px 0;
+    font-size: 18px
+}
+
+#page-main .right .chart {
+    margin-top: 52px
+}
+
+.trend {
+    width: 387px;
+    border-top: 6px #CCCCCC solid;
+    float: left
+}
+
+.data {
+    width: 587px;
+    border-top: 6px #CCCCCC solid;
+    float: right
+}
+
+#page-main .right .chart .chart-title h1 {
+    float: left;
+    font-size: 24px;
+    padding: 14px 0;
+    margin: 0;
+}
+
+#page-main .right .chart .chart-title p {
+    float: right;
+    width: 280px;
+    font-size: 12px;
+    color: #999999;
+    padding-top: 14px
+}
+
+.data-img {
+    font-size: 0
+}
+
+.select-box {
+    padding: 10px;
+    background: #CCCCCC;
+    overflow: hidden
+}
+
+.select-box select {
+    margin-right: 15px;
+    float: left;
+    height: 26px;
+}
+
+.select-box select.indicators {
+    width: 60px
+}
+
+.select-box select.countries {
+    width: 120px
+}
+
+.select-box select.other {
+    width: 225px
+}
+
+.select-box input {
+    float: right;
+    width: 60px;
+    height: 20px
+}
+
+/*footer*/
+#footer {
+    background: #3E3A39;
+    overflow: hidden;
+    height: 195px
+}
+
+.footer-box {
+    width: 1200px;
+    margin: auto
+}
+
+.footer-logoer {
+    border-top: 1px #EEEEEF solid;
+    width: 1116px;
+    margin: auto;
+    margin-top: 63px;
+    position: relative
+}
+
+.footer-logoer em {
+    width: 166px;
+    height: 47px;
+    background: url(../img/icon.png) no-repeat #3E3A39;
+    background-position: 30px -80px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    margin-left: -113px;
+    top: -17px;
+    padding: 0 30px;
+}
+
+.footer-logoer em {
+    padding-top: 30px;
+    font-size: 9px;
+    color: #EFEFEF;
+    font-style: normal
+}
+
+.footer-box ul {
+    padding-top: 55px
+}
+
+.footer-box ul li {
+    width: 12.5%;
+    float: left;
+    text-align: center
+}
+
+.footer-box ul li a:link, .footer-box ul li a:visited, .footer-box ul li a:active, .footer-box ul li a:hover {
+    color: #EEEEEF
+}
