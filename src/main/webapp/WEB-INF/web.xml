@@ -44,6 +44,20 @@
         <url-pattern>/view/*</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>spring-session</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetBeanName</param-name>
+            <param-value>springSession</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>spring-session</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <!-- 这是一个设计模式，由filter管理session，这样就不用在service中管理了　-->
     <filter>
         <filter-name>openSession</filter-name>

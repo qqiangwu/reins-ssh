@@ -19,6 +19,9 @@
 
 另外，作为Ａｊａｘ后端的控制器，我一律命名为ＸＸＸＡｐｉ。参见ViewNewsDetailApi了解如何返回ｊｓｏｎ对象。
 
+#### Session
+为了保证服务器无状态，我们将session放到了redis中，这样，各服务器可以共享session。
+
 ### 表现层(Ｊｓｐ)
 根据ｓｔｒｕｔｓ-ｎｅｗ.ｘｍｌ的配置，ViewSubPageAction执行完毕后，调用/WEB-INF/view/news/subpage.jsp进行渲染。此时，我们可以直接在ｊｓｐ中调用`${result.XXX}`。
 

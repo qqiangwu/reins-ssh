@@ -229,6 +229,12 @@
             <artifactId>spring-context</artifactId>
         </dependency>
 
+        <!-- Shared Session -->
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
+        </dependency>
+
         <!-- Utils -->
         <dependency>
             <groupId>org.apache.commons</groupId>
