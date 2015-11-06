@@ -14,6 +14,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +26,7 @@ import java.util.*;
 
 @Service
 @Transactional(readOnly = true) /* 默认用只读的事务 */
+@CacheConfig(cacheNames = "cache.news")
 public final class NewsServiceImpl implements NewsService {
     private static final Logger log = LoggerFactory.getLogger(NewsServiceImpl.class);
     private static final char TAGLIST_SEPARATOR = '#';
@@ -46,6 +50,7 @@ public final class NewsServiceImpl implements NewsService {
     }
 
     @Override
+    @Cacheable
     public News getNewsById(final int id) {
         log.debug("Request for news[{}]", id);
 
@@ -59,6 +64,7 @@ public final class NewsServiceImpl implements NewsService {
     }
 
     @Override
+    @Cacheable(key = "'editor-page:' + #editorId + '.' + #pageNum")
     public List<News> getNewsByEditorInPage(final int editorId, final int pageNum) {
         log.debug("Get news by editor[{}] in page {}", editorId, pageNum);
 
@@ -69,6 +75,7 @@ public final class NewsServiceImpl implements NewsService {
     }
 
     @Override
+    @Cacheable(key = "'tag-page:' + #tagId + '.' + #pageNum")
     public List<News> getNewsByTagInPage(final int tagId, final int pageNum) {
         log.debug("Get news by tag {} in page {}", tagId, pageNum);
 
@@ -86,6 +93,7 @@ public final class NewsServiceImpl implements NewsService {
     }
 
     @Override
+    @Cacheable(key = "'subpage:' + #pageNum")
     public List<News> getSubPageList(int pageNum) {
         log.debug("Request for news of SubPage [{}]", pageNum);
 
@@ -97,7 +105,8 @@ public final class NewsServiceImpl implements NewsService {
 
         return n;
     }
-    
+
+    // I don't want to add more @Cacheable, but you should!
     @Override
     public List<News> getSubPageNewsList(int pageNum, List<Integer>idList) {
         log.debug("Request for news of SubPage [{}]", pageNum);
@@ -111,6 +120,7 @@ public final class NewsServiceImpl implements NewsService {
         return n;
     }
 
+    // I don't want to add more @Cacheable, but you should!
     @Override
     public List<News> getSubPageListByCate(int pageNum, int cateId) {
         log.debug("Request for news of SubPage by Category [{}]", pageNum, cateId);
@@ -124,6 +134,7 @@ public final class NewsServiceImpl implements NewsService {
         return n;
     }
 
+    // I don't want to add more @Cacheable, but you should!
     @Override
     public List<News> getSubPageListByTag(int pageNum, int tagId) {
         log.debug("Request for news of SubPage by Tag [{}]", pageNum, tagId);
@@ -137,6 +148,7 @@ public final class NewsServiceImpl implements NewsService {
         return n;
     }
 
+    // I don't want to add more @Cacheable, but you should!
     @Override
     public List<News> getSubPageListByEditor(int pageNum, int editorId) {
         log.debug("Request for news of SubPage by Editor [{}]", pageNum, editorId);
@@ -150,6 +162,7 @@ public final class NewsServiceImpl implements NewsService {
         return n;
     }
 
+    // I don't want to add more @Cacheable, but you should!
     @Override
     public List<News> getRelatedNews(int newsId) {
         log.debug("Request for news of Related News [{}]", newsId);
@@ -195,7 +208,8 @@ public final class NewsServiceImpl implements NewsService {
         }
         return result;
     }
-    
+
+    // I don't want to add more @Cacheable, but you should!
     @Override
     public List<News> getNewsListByCateName(String cateName) {
         log.debug("Request for news by Category name {}", cateName);
@@ -214,7 +228,8 @@ public final class NewsServiceImpl implements NewsService {
 
         return n;
     }
-    
+
+    // I don't want to add more @Cacheable, but you should!
     @Override
     public List<News> getNewsListByCateNameList(List<String> cateNameList) {
         log.debug("Request for news by Category name list");
@@ -236,7 +251,8 @@ public final class NewsServiceImpl implements NewsService {
 
         return n;
     }
-    
+
+    // I don't want to add more @Cacheable, but you should!
     @Override
     public List<News> getNewsListByTagName(String tagName) {
         log.debug("Request for news by Tag name {}", tagName);
@@ -256,7 +272,8 @@ public final class NewsServiceImpl implements NewsService {
 
         return n;
     }
-    
+
+    // I don't want to add more @Cacheable, but you should!
     @Override
     public List<News> getNewsListByTagId(int id){
     	final List<News> n = mNewsDao.getNewsListByTag(id);
@@ -267,7 +284,8 @@ public final class NewsServiceImpl implements NewsService {
 
         return n;
     }
-    
+
+    @CacheEvict(allEntries = true) // Invalidate all cache
     @Transactional(readOnly = false)
     @Override
     public void addViewCount(final int newsId) {
@@ -283,6 +301,7 @@ public final class NewsServiceImpl implements NewsService {
         }
     }
 
+    @CacheEvict(allEntries = true) // Invalidate all cache
     @Transactional(readOnly = false)
     @Override
     public void addLikeCount(final int newsId) {
@@ -298,6 +317,7 @@ public final class NewsServiceImpl implements NewsService {
         }
     }
 
+    @CacheEvict(allEntries = true) // Invalidate all cache
     @Transactional(readOnly = false)
     @Override
     public void addDislikeCount(final int newsId) {
@@ -313,6 +333,7 @@ public final class NewsServiceImpl implements NewsService {
         }
     }
 
+    @CacheEvict(allEntries = true) // Invalidate all cache
     @Transactional(readOnly = false)
     @Override
     public void addCommentCount(final int newsId) {
@@ -328,6 +349,7 @@ public final class NewsServiceImpl implements NewsService {
         }
     }
 
+    @CacheEvict(allEntries = true) // Invalidate all cache
     @Transactional(readOnly = false)
     @Override
     public void addForwardCount(final int newsId) {
@@ -343,6 +365,7 @@ public final class NewsServiceImpl implements NewsService {
         }
     }
 
+    @CacheEvict(allEntries = true) // Invalidate all cache
     @Transactional(readOnly = false)
     @Override
     public void addFollowCount(final int newsId) {

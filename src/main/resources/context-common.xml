@@ -2,10 +2,11 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns="http://www.springframework.org/schema/beans" xmlns:cache="http://www.springframework.org/schema/cache"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
     <!-- Properties -->
     <context:property-placeholder
@@ -50,4 +51,13 @@
     <!--　如果需要scheduler的话，用这两行-->
     <!--<task:scheduler id="poolTaskScheduler" pool-size="5"></task:scheduler>-->
     <!--<task:annotation-driven scheduler="poolTaskScheduler"></task:annotation-driven>-->
+
+    <!-- 业务层Cache -->
+    <!--<cache:annotation-driven/>-->
+    <!--<bean id="cacheManager"-->
+          <!--class="org.springframework.data.redis.cache.RedisCacheManager"-->
+          <!--c:template-ref="redisTemplate">-->
+        <!--<property name="usePrefix" value="true"/>-->
+        <!--<property name="defaultExpiration" value="${cache.expire}"/>-->
+    <!--</bean>-->
 </beans>
