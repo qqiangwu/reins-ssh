@@ -10,9 +10,22 @@
     <!-- 国际化支持 -->
     <!--<constant name="struts.custom.i18n.resources" value="global"/>-->
 
-    <!-- 发布版本可以改成false, 这个过程可以由maven来做，然后我懒得配置了　-->
-    <constant name="struts.devMode" value="true"/>
+    <!-- All action packages should extend this package for infrastructure support -->
+    <package name="reins-default" extends="struts-default">
+        <result-types>
+            <result-type name="json" class="org.apache.struts2.json.JSONResult"/>
+        </result-types>
+
+        <global-results>
+            <result name="none" type="httpheader">
+                <param name="status">404</param>
+            </result>
+            <result name="input" type="httpheader">
+                <param name="status">400</param>
+            </result>
+        </global-results>
+    </package>
 
     <!-- 路由工作由struts完成，每个子模块使用一个对应的路由文件　-->
-    <include file="router/struts-*.xml"></include>
+    <include file="router/*.xml"></include>
 </struts>
