@@ -37,6 +37,7 @@ public final class ReinsAuthenticationProvider implements UserDetailsService {
                 toAuthorities(user.getRoles()));
     }
 
+
     private Set<GrantedAuthority> toAuthorities(final List<String> roles) {
         val result = new HashSet<GrantedAuthority>();
 
