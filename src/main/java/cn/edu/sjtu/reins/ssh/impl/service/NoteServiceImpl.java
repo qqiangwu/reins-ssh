@@ -29,6 +29,7 @@ public class NoteServiceImpl implements NoteService {
     @Autowired NoteRepo mNoteRepo;
 
     @Override
+    @Cacheable(key = "#id + ''")
     public Note get(final int id) {
         return null;
     }
