@@ -23,7 +23,7 @@
         <property name="jpaProperties">
             <props>
                 <!-- 命名规则 My_NAME->MyName -->
-                <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+                <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.EJB3NamingStrategy</prop>
             </props>
         </property>
         <property name="jpaVendorAdapter">

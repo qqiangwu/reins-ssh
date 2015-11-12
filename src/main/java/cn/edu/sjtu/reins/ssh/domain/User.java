@@ -2,6 +2,7 @@ package cn.edu.sjtu.reins.ssh.domain;
 
 import lombok.Value;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * don't know who wrote it.
  */
 @Value
-public class User {
+public class User implements Serializable {
     String username;
     String password;
     List<String> roles;

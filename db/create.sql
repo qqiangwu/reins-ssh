@@ -31,11 +31,9 @@ CREATE TABLE `user_role_rel` (
 
 
 CREATE TABLE `note` (
-  `id` varchar(32) NOT NULL,
-  `user` VARCHAR(32) NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `title` varchar(32) NOT NULL,
   `content` LONGTEXT NOT NULL,
   `creationDate` timestamp NOT NULL default now(),
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`user`) REFERENCES user(`id`)
+  PRIMARY KEY (`id`)
 );

@@ -6,4 +6,4 @@ INSERT INTO `user` (`id`,`password`,`enabled`,`firstName`,`lastName`,`email`,`cr
 INSERT INTO `role` (`role`) VALUES ("ROLE_ADMIN");
 INSERT INTO `role` (`role`) VALUES ("ROLE_USER");
 INSERT INTO `user_role_rel` (`id`,`role`) VALUES ("admin","ROLE_ADMIN");
-INSERT INTO `user_role_rel` (`id`,`role`) VALUES ("admin","ROLE_USER");
+INSERT INTO `user_role_rel` (`id`,`role`) VALUES ("user","ROLE_USER");

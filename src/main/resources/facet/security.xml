@@ -13,7 +13,11 @@
     <security:http auto-config="true"
                    entry-point-ref="reinsAuthenticationEntryPoint"
                    use-expressions="false">
-        <security:intercept-url pattern="/index.do" access="ROLE_USER"/>
+        <security:intercept-url pattern="/index.do" access="ROLE_USER, ROLE_ADMIN"/>
+        <security:intercept-url pattern="/user/admin.do" access="ROLE_ADMIN"/>
+        <security:intercept-url pattern="/user/user.do" access="ROLE_USER"/>
+        <security:intercept-url pattern="/note/**" access="ROLE_USER, ROLE_ADMIN"/>
+        <security:intercept-url pattern="/api/**" access="ROLE_ADMIN, ROLE_USER"/>
 
         <security:access-denied-handler ref="reinsAccessDeniedHandler"/>
         <security:form-login login-page="/login.do"

@@ -1,3 +1,4 @@
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: qqiangwu
@@ -9,6 +10,9 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+    <security:authorize ifNotGranted="ROLE_ANONYMOUS">
+        <meta http-equiv="refresh" content="0; url=/index.do"/>
+    </security:authorize>
     <title>Login Failed</title>
 </head>
 <body>
