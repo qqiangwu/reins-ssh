@@ -11,19 +11,18 @@
     </security:authentication-manager>
 
     <security:http auto-config="true"
-                   entry-point-ref="reinsAuthenticationEntryPoint">
-        <security:intercept-url pattern="index.do" access="ROLE_USER, ROLE_ADMIN"/>
-        <security:intercept-url pattern="/**" access="ROLE_ANONYMOUS"/>
+                   entry-point-ref="reinsAuthenticationEntryPoint"
+                   use-expressions="false">
+        <security:intercept-url pattern="/index.do" access="ROLE_USER"/>
 
-        <security:remember-me/>
-        <security:access-denied-handler
-                ref="reinsAccessDeniedHandler"/>
+        <security:access-denied-handler ref="reinsAccessDeniedHandler"/>
         <security:form-login login-page="/login.do"
+                             username-parameter="username"
+                             password-parameter="password"
                              default-target-url="/index.do"
                              authentication-failure-url="/loginfailed.do"
-                             always-use-default-target="true"></security:form-login>
-        <security:logout
-                invalidate-session="true"
+                             always-use-default-target="true"/>
+        <security:logout invalidate-session="true"
                 logout-success-url="/login.do"/>
     </security:http>
 </beans>

@@ -13,5 +13,12 @@
 </head>
 <body>
     Login Page
+<form method="post" action="/j_spring_security_check">
+    <label>Username</label>
+    <input type="text" placeholder="User Name" name="username">
+    <label>Password</label>
+    <input type="password" placeholder="Password" name="password">
+    <button type="submit">Login</button>
+</form>
 </body>
 </html>

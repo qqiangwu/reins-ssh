@@ -10,7 +10,7 @@
             <result>/WEB-INF/pages/loginfailed.jsp</result>
         </action>
         <action name="denied">
-            <result>/WEB-INF/pages/accessdenied.jsp</result>
+            <result>/WEB-INF/pages/denied.jsp</result>
         </action>
         <action name="logout">
             <result>/WEB-INF/pages/logout.jsp</result>
