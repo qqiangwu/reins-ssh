@@ -16,4 +16,5 @@ public interface BlogService {
     void delete(int id);
 
     boolean exists(int id);
+    boolean hasAccessTo(int userId, int blogId);
 }

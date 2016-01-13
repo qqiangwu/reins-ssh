@@ -1,0 +1,27 @@
+<div class="navbar navbar-right nav-bar-menu">
+    <a class="nav-badge btn" ng-href="#">
+        <span class="glyphicon glyphicon-home"></span>
+        Main
+    </a>
+    <a class="nav-badge btn" ng-click="logout()" ng-show="hasLogin">
+        <span class="glyphicon glyphicon-log-out"></span>
+        Logout
+    </a>
+    <a ng-if="!hasLogin" class="nav-badge btn" ng-href="#/login">
+        <span class="glyphicon glyphicon-log-in"></span>
+        Login
+    </a>
+    <a ng-if="!hasLogin" class="nav-badge btn" ng-href="#/register">
+        <span class="glyphicon glyphicon-registration-mark"></span>
+        Register
+    </a>
+</div>
+
+<div class="container">
+    <article class="jumbotron">
+        <h1>About me </h1>
+        <p>
+            This is something about me.
+        </p>
+    </article>
+</div>

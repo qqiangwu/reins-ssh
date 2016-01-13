@@ -1,0 +1,43 @@
+<div class="navbar navbar-right nav-bar-menu">
+    <a ng-if="hasLogin" class="nav-badge btn" ng-href="#/blogCreate">
+        <span class="glyphicon glyphicon-plus"></span>
+        New Blog
+    </a>
+    <a class="nav-badge btn" ng-href="#">
+        <span class="glyphicon glyphicon-home"></span>
+        Main
+    </a>
+    <a ng-if="hasLogin" class="nav-badge btn" ng-click="logout()">
+        <span class="glyphicon glyphicon-log-out"></span>
+        Logout
+    </a>
+    <a ng-if="!hasLogin" class="nav-badge btn" ng-href="#/login">
+        <span class="glyphicon glyphicon-log-in"></span>
+        Login
+    </a>
+    <a ng-if="!hasLogin" class="nav-badge btn" ng-href="#/register">
+        <span class="glyphicon glyphicon-registration-mark"></span>
+        Register
+    </a>
+</div>
+
+<section class="container">
+    <div>
+        <article class="jumbotron blog-listing" ng-repeat="blog in blogs">
+            <h1 class="article-title">
+                <a ng-href="#/blogView/{{blog.id}}">{{blog.title}}</a>
+            </h1>
+        </article>
+    </div>
+
+    <pagination class="pagination-sm"
+                ng-show="numPages > 1"
+                ng-model="currentPage"
+                max-size="maxPgSize"
+                items-per-page="itemsPerPage"
+                total-items="count"
+                boundary-links="true"
+                num-pages="numPages"
+                ng-change="loadPage()">
+    </pagination>
+</section>

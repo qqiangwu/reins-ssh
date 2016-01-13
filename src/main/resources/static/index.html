@@ -1,0 +1,90 @@
+<!doctype html>
+<html ng-app="miao">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+    <!-- build:css css/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    
+    <!-- build:css({public, .tmp}) css/app.css -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="css/app.css">
+    <!-- endinject -->     
+    <!-- endbuild -->
+
+    <link href="favicon.ico" rel="bookmark" type="image/x-icon" />
+    <link href="favicon.ico" rel="icon" type="image/x-icon" /> 
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
+
+    <title>Blog</title>
+</head>
+<body>
+    <header class="navbar">
+        <div class="container text-center">
+            <h1 class="blog-title">
+                <a ng-href="#"> 幸而有诗，不复忘 </a>
+            </h1>
+            <p class="subtitle"><small>我及我的生活</small></p>
+        </div>
+    </header>
+    
+    <!-------------------------------------------------------------------------->
+    <section ng-view class="view-frame">
+    </section>
+
+    <!-------------------------------------------------------------------------->
+    <footer class="container">
+        <hr/>
+        <div class="text-center">
+            <p> Writen by Zhang Yan </p>
+            <ul class="navbar list-inline">
+                <li><a ng-href="./" class="btn btn-sm"> Main Page </a></li>
+                <li><a ng-href="#/self" class="btn btn-sm"> About Me </a></li>
+                <li><a href="mailto: wqzhiep@gmail.com?subject=From Blog"
+                       target = "_blank"
+                       class="btn btn-sm"> Contact Me </a></li>
+            </ul>
+        </div>
+    </footer>
+    
+    <!--------------------------------------------------->
+    <!-- build:js js/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/showdown/src/showdown.js"></script>
+    <script src="bower_components/angular-markdown-directive/markdown.js"></script>
+    <script src="bower_components/angular-local-storage/angular-local-storage.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js js/main.js -->
+    <!-- inject:js -->
+    <script src="js/app.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/controller/blogCreate.js"></script>
+    <script src="js/controller/blogEdit.js"></script>
+    <script src="js/controller/blogView.js"></script>
+    <script src="js/controller/login.js"></script>
+    <script src="js/controller/register.js"></script>
+    <script src="js/controller/main.js"></script>
+    <script src="js/controller/modalInstance.js"></script>
+    <script src="js/directive/editor.js"></script>
+    <script src="js/filter/trusted.js"></script>
+    <script src="js/resource/blog.js"></script>
+    <script src="js/service/auth.js"></script>
+    <script src="js/service/monitor.js"></script>
+    <!-- endinject -->
+    <!-- inject:tpl -->
+    <!-- endinject -->
+    <!-- endbuild -->
+</body>
+</html>

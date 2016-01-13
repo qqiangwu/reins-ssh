@@ -1,0 +1,20 @@
+<div class="navbar navbar-right nav-bar-menu">
+    <a class="nav-badge btn" ng-href="#">
+        <span class="glyphicon glyphicon-backward"></span>
+        Main
+    </a>
+    <a ng-if="!hasLogin" class="nav-badge btn" ng-href="#/login">
+        <span class="glyphicon glyphicon-log-in"></span>
+        Login
+    </a>
+</div>
+
+<div class="container">
+    <form class="form-signin" role="form">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input type="email" ng-model="email" class="form-control" placeholder="Email address" required autofocus/>
+        <input type="text" ng-model="username" class="form-control" placeholder="User Name" required/>
+        <input type="password" ng-model="password" class="form-control" placeholder="Password" required/>
+        <button class="btn btn-lg btn-primary btn-block" ng-click="register()">Sign in</button>
+    </form>
+</div>

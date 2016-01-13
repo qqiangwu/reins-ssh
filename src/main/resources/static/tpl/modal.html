@@ -1,0 +1,14 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{title}}</h3>
+</div>
+
+<div class="modal-body">
+    <p>{{message}}</p>
+</div>
+
+<div class="modal-footer">
+    <span ng-show="timeout">[<strong>{{timeout}}</strong>seconds left]</span>
+    <a href="#" class="btn btn-warning"
+       ng-click="ok()"
+       aria-hidden="true">Close&nbsp;&nbsp;This</a>
+</div>

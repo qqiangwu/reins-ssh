@@ -49,7 +49,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Page<Blog> find(final int userId, final Pageable page) {
-        return mBlogRepo.findUser(userId, page).map(this::fromEntity);
+        return mBlogRepo.findByUserOrderByCreationDateDesc(userId, page).map(this::fromEntity);
     }
 
     @Transactional(readOnly = false)
@@ -75,6 +75,11 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public boolean exists(final int id) {
         return mBlogRepo.exists(id);
+    }
+
+    @Override
+    public boolean hasAccessTo(final int userId, final int blogId) {
+        return false;
     }
 
     private final Blog fromEntity(final BlogEntity entity) {

@@ -4,10 +4,12 @@ import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import zy.domain.User;
+import zy.domain.ZyUserDetails;
 import zy.exception.user.EmailAlreadyFoundException;
 import zy.exception.user.InvalidNewUserException;
 import zy.exception.user.UserException;
@@ -34,7 +36,7 @@ public class UserServiceImpl implements UserService {
             throw new InvalidNewUserException(password);
         }
 
-        if (mUserRepo.emailEExists(email)) {
+        if (mUserRepo.findByEmailOrderByCreationDateDesc(email) != null) {
             throw new EmailAlreadyFoundException(email);
         }
 
@@ -73,5 +75,12 @@ public class UserServiceImpl implements UserService {
 
     private final User fromEntity(final UserEntity entity) {
         return new User(entity.getId(), entity.getName(), entity.getEmail(), entity.getCreationDate().getTime());
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
+        val entity = mUserRepo.findByEmailOrderByCreationDateDesc(email);
+
+        return new ZyUserDetails(fromEntity(entity), entity.getPassword());
     }
 }

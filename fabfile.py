@@ -2,7 +2,6 @@ from fabric.api import local, lcd
 
 def prepare():
     local('docker start mysql')
-    local('docker start redis')
 
 def run():
     prepare()

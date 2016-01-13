@@ -6,6 +6,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import zy.impl.entity.CommentEntity;
 
 public interface CommentRepo extends PagingAndSortingRepository<CommentEntity, Integer> {
-    Page<CommentEntity> findUser(int userId, Pageable page);
-    Page<CommentEntity> findBlog(int blogId, Pageable page);
+    Page<CommentEntity> findByUserOrderByCreationDateDesc(int userId, Pageable page);
+    Page<CommentEntity> findByBlogOrderByCreationDateDesc(int blogId, Pageable page);
 }

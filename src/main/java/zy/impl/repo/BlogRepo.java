@@ -6,5 +6,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import zy.impl.entity.BlogEntity;
 
 public interface BlogRepo extends PagingAndSortingRepository<BlogEntity, Integer> {
-    Page<BlogEntity> findUser(int userId, Pageable page);
+    Page<BlogEntity> findByUserOrderByCreationDateDesc(int userId, Pageable page);
 }

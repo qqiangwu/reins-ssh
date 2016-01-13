@@ -42,12 +42,12 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Page<Comment> findByBlog(final int blogId, final Pageable page) {
-        return mCommentRepo.findBlog(blogId, page).map(this::fromEntity);
+        return mCommentRepo.findByBlogOrderByCreationDateDesc(blogId, page).map(this::fromEntity);
     }
 
     @Override
     public Page<Comment> findByUser(final int userId, final Pageable page) {
-        return mCommentRepo.findUser(userId, page).map(this::fromEntity);
+        return mCommentRepo.findByUserOrderByCreationDateDesc(userId, page).map(this::fromEntity);
     }
 
     @Override
