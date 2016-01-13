@@ -1,0 +1,104 @@
+body {
+    background-image: url(/img/bk.jpg);
+    height: 100%;
+}
+
+footer {
+    color: #ffffff;
+    padding-top: 40px;
+}
+
+footer a {
+    color: #ffffff;
+}
+
+.nav-badge {
+    background: #000;
+    background: rgba(0, 0, 0, 0.8);
+    color: #ffffff;
+}
+
+.nav-badge:hover {
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.nav-bar-menu {
+    position: fixed;
+    right: 3%;
+    top: 5%;
+}
+
+.blog-title {
+    font-size: 60px;
+    font-weight: bold;
+    margin-top: 8%;
+}
+
+.blog-title a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.subtitle {
+    color: #ffffff;
+    margin-top: 60px;
+    margin-bottom: 40px
+}
+
+.article-title a {
+    text-decoration: none;
+}
+
+/* Animation support for items */
+.blog-listing.ng-enter {
+    -webkit-animation: 1s fade-in;
+}
+
+.blog-listing.ng-leave {
+    -webkit-animation: 1s fade-out;
+}
+
+/* cross fading between routes with ngView */
+section.view-frame.ng-enter {
+  -webkit-animation: 0.5s fade-in;
+  -moz-animation: 0.5s fade-in;
+  -o-animation: 0.5s fade-in;
+  animation: 0.5s fade-in;
+  z-index: 100;
+  -webkit-transition: 0.5s linear all;
+}
+
+section.view-frame.ng-leave {
+  -webkit-animation: 0.5s fade-out;
+  -moz-animation: 0.5s fade-out;
+  -o-animation: 0.5s fade-out;
+  animation: 0.5s fade-out;
+  z-index: 99;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@-moz-keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@-webkit-keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@-moz-keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@-webkit-keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
