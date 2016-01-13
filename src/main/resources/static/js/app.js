@@ -25,9 +25,16 @@
         version: 'v0.0.1'
     });
 
-    app.config(['$httpProvider',
-        function($httpProvider) {
+    app.config(['$httpProvider', function($httpProvider) {
             $httpProvider.interceptors.push('Monitor.responseFilter');
+            $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+            $httpProvider.defaults.transformRequest = function(req) {
+                var str = [];
+                for(var p in req) {
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(req[p]));
+                }
+                return str.join("&");
+            };
         }
     ]);
     

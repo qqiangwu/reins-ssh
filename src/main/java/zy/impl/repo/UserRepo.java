@@ -4,5 +4,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import zy.impl.entity.UserEntity;
 
 public interface UserRepo extends PagingAndSortingRepository<UserEntity, Integer> {
-    UserEntity findByEmailOrderByCreationDateDesc(String email);
+    UserEntity findByEmail(String email);
 }

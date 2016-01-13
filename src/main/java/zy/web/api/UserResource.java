@@ -8,6 +8,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import zy.domain.User;
+import zy.domain.ZyUserDetails;
 import zy.exception.user.EmailAlreadyFoundException;
 import zy.exception.user.InvalidNewUserException;
 import zy.exception.user.UserException;
@@ -25,15 +26,12 @@ public class UserResource {
     public User create(@RequestParam("email") final String email,
                        @RequestParam("name") final String name,
                        @RequestParam("password") final String password) throws UserException {
-        System.out.println("???");
-        val user = mUserService.create(email, name, password);
+        mUserService.create(email, name, password);
 
-        loginAfterRegistration(email);
-
-        return user;
+        return loginAfterRegistration(email);
     }
 
-    @RequestMapping
+    @RequestMapping(method = RequestMethod.GET)
     public User get() throws UserException {
         return SecurityUtils.getUser().getUser();
     }
@@ -50,7 +48,7 @@ public class UserResource {
         return new ErrorCode(e.getMessage());
     }
 
-    private final void loginAfterRegistration(final String email) {
+    private final User loginAfterRegistration(final String email) {
         val details = mUserService.loadUserByUsername(email);
         val auth = new UsernamePasswordAuthenticationToken(
                 details,
@@ -61,5 +59,7 @@ public class UserResource {
         if (auth.isAuthenticated()) {
             SecurityContextHolder.getContext().setAuthentication(auth);
         }
+
+        return ((ZyUserDetails) details).getUser();
     }
 }

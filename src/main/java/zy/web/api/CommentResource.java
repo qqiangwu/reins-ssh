@@ -16,10 +16,10 @@ import zy.web.util.SecurityUtils;
 public class CommentResource {
     @Autowired CommentService mCommentService;
 
-    @RequestMapping
+    @RequestMapping(method = RequestMethod.GET)
     public Page<Comment> get(@PathVariable("blogId") final int blogId,
-                             @PathVariable("page") final int page,
-                             @PathVariable("size") final int size) {
+                             @RequestParam("page") final int page,
+                             @RequestParam("size") final int size) {
         return mCommentService.findByBlog(blogId, new PageRequest(page, size));
     }
 

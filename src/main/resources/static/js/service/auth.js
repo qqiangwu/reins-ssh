@@ -7,11 +7,11 @@
                 var deferred = $q.defer();
 
                 $http.post('/api/users', userInfo)
-                    .then(function(result){
-                        $root.$broadcast('auth:login', result);
-                        deferred.resolve(result);
-                    }, function(ec){
-                        deferred.reject(ec);
+                    .then(function(resp){
+                        $root.$broadcast('auth:login', resp.data);
+                        deferred.resolve(resp.data);
+                    }, function(resp){
+                        deferred.reject(resp.data, resp.status);
                     });
 
                 return deferred.promise;
@@ -29,10 +29,10 @@
                 }, {
                     headers: headers
                 }).then(function(result){
-                    $root.$broadcast('auth:login', result);
-                    deferred.resolve(result);
-                }, function(ec){
-                    deferred.reject(ec);
+                    $root.$broadcast('auth:login', result.data);
+                    deferred.resolve(result.data);
+                }, function(resp){
+                    deferred.reject(resp.data, resp.status);
                 });
 
                 return deferred.promise;

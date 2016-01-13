@@ -7,9 +7,10 @@ import zy.domain.User;
 import zy.exception.user.UserException;
 
 public interface UserService extends UserDetailsService {
-    User create(String email, String name, String password) throws UserException;
+    void create(String email, String name, String password) throws UserException;
 
     User find(int id);
+
     Page<User> find(Pageable page);
 
     void delete(int id);

@@ -3,27 +3,27 @@
 
     module.controller('RegisterCtrl', ['$scope', 'Auth',
         function($scope, Auth){
-            $scope.email = null;
-            $scope.username = null;
-            $scope.password = null;
+            $scope.user = {};
 
             $scope.register = function(){
-                Auth.register({
-                    email: $scope.email,
-                    name: $scope.username,
-                    password: $scope.password
-                }).then(function(){
+                if (!$scope.userForm.$valid) {
                     $scope.report({
-                        message: 'Register accomplished!',
-                        timeout: 2,
-                        url: '/'
+                        message: 'Invalid Input'
                     });
-                }).catch(function(ec){
-                    $scope.report({
-                        message: ec.msg,
-                        timeout: 2
+                } else {
+                    Auth.register($scope.user).then(function(){
+                        $scope.report({
+                            message: 'Register accomplished!',
+                            timeout: 2,
+                            url: '/'
+                        });
+                    }).catch(function(ec){
+                        $scope.report({
+                            message: ec.message,
+                            timeout: 2
+                        });
                     });
-                });
+                }
             };
         }
     ]);

@@ -2,4 +2,4 @@
 .mvn/
 target
 src/main/java/META-INF/
-*.iml
+*.iml.*pyc

@@ -20,15 +20,15 @@ import zy.web.util.SecurityUtils;
 public class BlogResource {
     @Autowired BlogService mBlogService;
 
-    @RequestMapping
-    public Page<Blog> get(@PathVariable("page") final int page,
-                          @PathVariable("size") final int size) {
+    @RequestMapping(method = RequestMethod.GET)
+    public Page<Blog> get(@RequestParam("page") final int page,
+                          @RequestParam("size") final int size) {
         val pageReq = new PageRequest(page, size, Sort.Direction.DESC, "creationDate");
 
         return mBlogService.find(pageReq);
     }
 
-    @RequestMapping("{id}")
+    @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public Blog get(@PathVariable("id") final int id) {
         return mBlogService.find(id);
     }

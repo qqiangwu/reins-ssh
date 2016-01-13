@@ -17,13 +17,16 @@ import zy.impl.entity.UserEntity;
 import zy.impl.repo.UserRepo;
 import zy.service.UserService;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired UserRepo mUserRepo;
 
     @Override
     @Transactional
-    public User create(final String email, final String name, final String password) throws UserException {
+    public void create(final String email, final String name, final String password) throws UserException {
         if (email.length() > 64) {
             throw new InvalidNewUserException(email);
         }
@@ -36,7 +39,7 @@ public class UserServiceImpl implements UserService {
             throw new InvalidNewUserException(password);
         }
 
-        if (mUserRepo.findByEmailOrderByCreationDateDesc(email) != null) {
+        if (mUserRepo.findByEmail(email) != null) {
             throw new EmailAlreadyFoundException(email);
         }
 
@@ -45,10 +48,13 @@ public class UserServiceImpl implements UserService {
         user.setEmail(email);
         user.setName(name);
         user.setPassword(password);
+        user.setEnabled((byte) 1);
 
-        val entity = mUserRepo.save(user);
+        val now = new Timestamp(new Date().getTime());
+        user.setCreationDate(now);
+        user.setLastAccessDate(now);
 
-        return fromEntity(entity);
+        mUserRepo.save(user);
     }
 
     @Override
@@ -79,7 +85,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
-        val entity = mUserRepo.findByEmailOrderByCreationDateDesc(email);
+        val entity = mUserRepo.findByEmail(email);
 
         return new ZyUserDetails(fromEntity(entity), entity.getPassword());
     }
