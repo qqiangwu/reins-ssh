@@ -12,7 +12,7 @@ import zy.web.util.ErrorCode;
 import zy.web.util.SecurityUtils;
 
 @RestController
-@RequestMapping("api/blogs/{blogId}/comment")
+@RequestMapping("api/blogs/{blogId}/comments")
 public class CommentResource {
     @Autowired CommentService mCommentService;
 
@@ -25,7 +25,7 @@ public class CommentResource {
 
     @RequestMapping(method = RequestMethod.POST)
     public Comment post(@PathVariable("blogId") final int blogId,
-                        @PathVariable("content") final String content) throws CommentException {
+                        @RequestParam("content") final String content) throws CommentException {
         return mCommentService.create(SecurityUtils.getUserId(), blogId, content);
     }
 

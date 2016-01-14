@@ -15,6 +15,9 @@ import zy.service.CommentService;
 import zy.service.UserService;
 import zy.support.aop.Monitor;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 @Service
 @Monitor
 public class CommentServiceImpl implements CommentService {
@@ -38,6 +41,7 @@ public class CommentServiceImpl implements CommentService {
         entity.setBlog(blogId);
         entity.setUser(userId);
         entity.setContent(content);
+        entity.setCreationDate(new Timestamp(new Date().getTime()));
 
         return fromEntity(mCommentRepo.save(entity));
     }
