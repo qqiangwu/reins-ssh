@@ -25,15 +25,15 @@
                 });
             };
             $scope.postComment = function(content){
-                var c = new Comment({
+                new Comment({
                     id: $scope.blog.id,
                     content: content
-                }).$save(function(){
+                }).$save(function(c){
                     $scope.report({
                         message: 'Post comment successfully',
                         timeout: 1
                     });
-                    $scope.loadPage();
+                    $scope.comments.unshift(c);
                 });
             };
         }
