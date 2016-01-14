@@ -52,7 +52,7 @@ public class UserResource {
     }
 
     @RequestMapping(value = "{id}/blogs", method = RequestMethod.GET)
-    public Page<Blog> get(@PathVariable("id") final int id,
+    public Page<Blog> getBlogs(@PathVariable("id") final int id,
                           @RequestParam("page") final int page,
                           @RequestParam("size") final int size) {
         return mBlogService.findByUser(id, new PageRequest(page, size));

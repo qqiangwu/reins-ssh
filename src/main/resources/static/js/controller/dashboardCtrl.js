@@ -11,7 +11,7 @@
             $scope.currentPage = 1;
 
             $scope.loadPage = function(){
-                $scope.blogs = Blog.query({
+                $scope.blogs = Blog.queryByUser({
                     user: $scope.user.id,
                     page: $scope.currentPage - 1,
                     size: $scope.pageSize

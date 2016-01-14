@@ -1,13 +1,10 @@
-/**
- * Created by Float on 14-9-4.
- */
 (function(module){
     'use strict';
 
     module.constant('InternalServerError', 500);
 
-    module.factory('Monitor', ['$location', '$log', 'InternalServerError', '$q',
-        function($location, $log, InternalServerError, $q){
+    module.factory('Monitor', ['$rootScope', '$location', '$log', 'InternalServerError', '$q',
+        function($root, $location, $log, InternalServerError, $q){
             var monitorApi = {};
 
             Object.defineProperties(monitorApi, {
@@ -21,6 +18,9 @@
                 },
                 responseFilter: {
                     value: function(resp){
+                        if (resp.status == 401) {
+                            $root.$broadcast('monitor:unauthorized');
+                        }
                         if (resp.status === InternalServerError) {
                             $log.error('[Monitor] Internal server error:', resp);
 

@@ -15,6 +15,11 @@
                 query: {
                     isArray: false,
                     method: 'GET'
+                },
+                queryByUser: {
+                    url: 'api/users/:user/blogs',
+                    method: 'GET',
+                    isArray: false
                 }
             });
         }

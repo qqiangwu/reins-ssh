@@ -4,24 +4,34 @@
 
     module.controller('LoginCtrl', ['$scope', 'Auth',
         function($scope, Auth){
-            $scope.email = null;
-            $scope.password = null;
-
             $scope.login = function(){
-                Auth.login($scope.email, $scope.password)
-                    .then(function(user){
-                        $scope.report({
-                            message: 'Login accomplished!',
-                            timeout: 2,
-                            url: '/'
-                        });
+                var token = $scope.token;
+                if (!token.email) {
+                    $scope.report({
+                        message: 'Invalid email',
+                        timeout: 1
                     })
-                    .catch(function(ec, status) {
-                        $scope.report({
-                            message: 'Errant in either email or password:' + ec.msg,
-                            timeout: 2
-                        });
+                } else if (!token.password) {
+                    $scope.report({
+                        message: 'Invalid password',
+                        timeout: 1
                     });
+                } else {
+                    Auth.login(token.email, token.password)
+                        .then(function(){
+                            $scope.report({
+                                message: 'Login accomplished!',
+                                timeout: 2,
+                                url: '/'
+                            });
+                        })
+                        .catch(function(ec, status) {
+                            $scope.report({
+                                message: 'Errant in either email or password:' + ec.msg,
+                                timeout: 2
+                            });
+                        });
+                }
             };
         }
     ]);

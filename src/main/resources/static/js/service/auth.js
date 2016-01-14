@@ -3,6 +3,7 @@
 
     module.factory('Auth', ['$http', '$q', '$rootScope', 'Conf',
         function($http, $q, $root, $conf){
+            var key = 'auth_user';
             var _user = null;
 
             function register(userInfo) {
@@ -20,16 +21,11 @@
             }
 
             function login(email, password) {
-                var headers = {
-                    authorization: 'Basic ' + email + ':' + password
-                };
                 var deferred = $q.defer();
 
-                $http.get('/api/users', {
+                $http.post('/login', {
                     email: email,
                     password: password
-                }, {
-                    headers: headers
                 }).then(function(result){
                     $root.$broadcast('auth:login', result.data);
                     deferred.resolve(result.data);
@@ -52,18 +48,27 @@
                 return deferred.promise;
             }
 
+            function invalidate() {
+                $conf.clear(key);
+                _user = null;
+            }
+
             // log info persistence
             (function init(){
-                var key = 'auth_user';
-
                 _user = $conf.get(key);
 
                 $root.$on('auth:login', function(ev, user){
                     $conf.set(key, user);
+                    _user = user;
                 });
 
                 $root.$on('auth:logout', function(){
-                    $conf.clear(key);
+                    invalidate();
+                });
+
+                $root.$on('monitor:unauthorized', function(){
+                    invalidate();
+                    $scope.go();
                 });
             })();
 
@@ -71,6 +76,7 @@
                 register: register,
                 login: login,
                 logout: logout,
+                invalidate: invalidate,
                 user: function() {
                     return _user;
                 }

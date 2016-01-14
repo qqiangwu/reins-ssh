@@ -80,7 +80,7 @@
 
     app.run(['$rootScope', 'Auth', function($root, Auth){
         $root.$on('auth:login', function(_, user){
-            $root.log.info('login');
+            $root.log.info('login', user);
             $root.hasLogin = true;
             $root.user = user;
         });
@@ -104,7 +104,7 @@
         var user = Auth.user();
 
         if (user) {
-            $root.log.info('app init login');
+            $root.log.info('app init login', user);
             $root.user = user;
             $root.hasLogin = true;
         }
