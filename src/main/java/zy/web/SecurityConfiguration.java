@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
@@ -34,7 +35,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         http
                 .userDetailsService(mUserDetailsService)
-                .formLogin()
+                .exceptionHandling()
+                    .authenticationEntryPoint(new AuthenticationEntryPoint() {
+                        @Override
+                        public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
+                            httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                        }
+                    })
+                .and().formLogin()
                     .passwordParameter("password")
                     .usernameParameter("email")
                     .loginProcessingUrl("/login")
@@ -55,16 +63,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                             httpServletResponse.sendError(HttpServletResponse.SC_BAD_REQUEST);
                         }
                     })
-                    .and()
-                .authorizeRequests()
+                .and().authorizeRequests()
                     .antMatchers(HttpMethod.POST, "/api/users").permitAll()
                     .antMatchers(HttpMethod.GET, "/api/users").authenticated()
-                    .antMatchers(HttpMethod.POST, "/api/blogs/*").authenticated()
+                    .antMatchers(HttpMethod.POST, "/api/blogs/*", "/api/blogs/*/comments").authenticated()
                     .antMatchers(HttpMethod.PUT, "/api/blogs/*").authenticated()
                     .antMatchers(HttpMethod.DELETE, "/api/blogs/*").authenticated()
                     .anyRequest().permitAll()
-                    .and()
-                .logout()
+                .and().logout()
                     .invalidateHttpSession(true)
                     .clearAuthentication(true)
                     .logoutUrl("/logout")
@@ -75,8 +81,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                             httpServletResponse.getWriter().close();
                         }
                     })
-                    .and()
-                .csrf()
+                .and().csrf()
                     .disable();
     }
 }

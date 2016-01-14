@@ -68,7 +68,7 @@
 
                 $root.$on('monitor:unauthorized', function(){
                     invalidate();
-                    $scope.go();
+                    $root.go();
                 });
             })();
 
@@ -79,6 +79,9 @@
                 invalidate: invalidate,
                 user: function() {
                     return _user;
+                },
+                hasLogin: function() {
+                    return _user !== null;
                 }
             };
         }

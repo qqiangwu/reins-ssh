@@ -7,7 +7,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import zy.domain.Blog;
 import zy.domain.User;
@@ -68,21 +67,5 @@ public class UserResource {
     @ExceptionHandler(EmailAlreadyFoundException.class)
     public ErrorCode handleConflict(final EmailAlreadyFoundException e) {
         return new ErrorCode(e.getMessage());
-    }
-
-    private final User loginAfterRegistration(final HttpServletRequest req, final String email) {
-        val details = mUserService.loadUserByUsername(email);
-
-        val token = new UsernamePasswordAuthenticationToken(
-                details,
-                details.getPassword(),
-                details.getAuthorities());
-        mAuthenticationManager.authenticate(token);
-
-        if (token.isAuthenticated()) {
-            SecurityContextHolder.getContext().setAuthentication(token);
-        }
-
-        return ((ZyUserDetails) details).getUser();
     }
 }

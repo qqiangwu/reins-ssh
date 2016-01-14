@@ -22,7 +22,7 @@
                 });
             };
 
-            if ($scope.hasLogin) {
+            if ($scope.hasLogin()) {
                 $scope.postComment = function(content){
                     new Comment({
                         id: $scope.blog.id,

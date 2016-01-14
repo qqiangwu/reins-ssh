@@ -31,7 +31,9 @@
             $httpProvider.defaults.transformRequest = function(req) {
                 var str = [];
                 for(var p in req) {
-                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(req[p]));
+                    if (p[0] != '$') {
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(req[p]));
+                    }
                 }
                 return str.join("&");
             };
@@ -79,15 +81,15 @@
     ]);
 
     app.run(['$rootScope', 'Auth', function($root, Auth){
+        $root.hasLogin = Auth.hasLogin;
+
         $root.$on('auth:login', function(_, user){
             $root.log.info('login', user);
-            $root.hasLogin = true;
             $root.user = user;
         });
 
         $root.$on('auth:logout', function(){
             $root.log.info('logout');
-            $root.hasLogin = false;
             $root.user = null;
         });
 
@@ -106,7 +108,6 @@
         if (user) {
             $root.log.info('app init login', user);
             $root.user = user;
-            $root.hasLogin = true;
         }
     }]);
 })();

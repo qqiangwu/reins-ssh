@@ -3,7 +3,7 @@
 
     module.controller('BlogEditCtrl', ['$scope', '$routeParams', 'Blog',
         function($scope, $routeParams, Blog){
-            if (!$scope.hasLogin) {
+            if (!$scope.hasLogin()) {
                 $scope.go();
             }
 

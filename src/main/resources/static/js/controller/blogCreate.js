@@ -3,7 +3,7 @@
 
     module.controller('BlogCreateCtrl', ['$scope', 'Blog',
         function($scope, Blog){
-            if (!$scope.hasLogin) {
+            if (!$scope.hasLogin()) {
                 $scope.go();
             }
 

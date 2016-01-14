@@ -1,5 +1,5 @@
 <div class="navbar navbar-right nav-bar-menu">
-    <a ng-if="hasLogin" class="nav-badge btn" ng-href="#/blogCreate">
+    <a ng-if="hasLogin()" class="nav-badge btn" ng-href="#/blogCreate">
         <span class="glyphicon glyphicon-plus"></span>
         New Blog
     </a>
@@ -7,7 +7,7 @@
         <span class="glyphicon glyphicon-home"></span>
         Main
     </a>
-    <a ng-if="hasLogin" class="nav-badge btn" ng-click="logout()">
+    <a ng-if="hasLogin()" class="nav-badge btn" ng-click="logout()">
         <span class="glyphicon glyphicon-log-out"></span>
         Logout
     </a>
