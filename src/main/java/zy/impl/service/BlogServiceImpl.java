@@ -55,7 +55,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Page<Blog> find(final int userId, final Pageable page) {
+    public Page<Blog> findByUser(final int userId, final Pageable page) {
         return mBlogRepo.findByUserOrderByCreationDateDesc(userId, page).map(this::fromEntity);
     }
 
@@ -86,7 +86,9 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public boolean hasAccessTo(final int userId, final int blogId) {
-        return false;
+        val blog = find(blogId);
+
+        return blog == null? false: blog.getUser().getId() == userId;
     }
 
     private final Blog fromEntity(final BlogEntity entity) {

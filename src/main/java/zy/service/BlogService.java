@@ -10,7 +10,7 @@ public interface BlogService {
 
     Blog find(int id);
     Page<Blog> find(Pageable page);
-    Page<Blog> find(int userId, Pageable page);
+    Page<Blog> findByUser(int userId, Pageable page);
 
     boolean update(int id, String title, String content);
     void delete(int id);

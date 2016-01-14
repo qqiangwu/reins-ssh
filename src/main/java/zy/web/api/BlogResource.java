@@ -43,6 +43,14 @@ public class BlogResource {
         mBlogService.update(id, title, content);
     }
 
+    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable("id") final int id) throws UserException {
+        if (!mBlogService.hasAccessTo(SecurityUtils.getUser().getId(), id)) {
+            throw new UserException("user has no access");
+        }
+        mBlogService.delete(id);
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public Blog post(@RequestParam("title") final String title,
                      @RequestParam("content") final String content) throws BlogException {

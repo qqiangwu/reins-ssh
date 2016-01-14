@@ -7,28 +7,23 @@
         <span class="glyphicon glyphicon-home"></span>
         Main
     </a>
-    <a ng-if="hasLogin" class="nav-badge btn" ng-href="#/dashboard">
-        <span class="glyphicon glyphicon-dashboard"></span>
-        Dashboard
-    </a>
     <a ng-if="hasLogin" class="nav-badge btn" ng-click="logout()">
         <span class="glyphicon glyphicon-log-out"></span>
         Logout
     </a>
-    <a ng-if="!hasLogin" class="nav-badge btn" ng-href="#/login">
-        <span class="glyphicon glyphicon-log-in"></span>
-        Login
-    </a>
-    <a ng-if="!hasLogin" class="nav-badge btn" ng-href="#/register">
-        <span class="glyphicon glyphicon-registration-mark"></span>
-        Register
-    </a>
 </div>
+
+<h1>Personal Blogs</h1>
+
 <section class="container">
     <div>
         <article class="jumbotron blog-listing" ng-repeat="blog in blogs">
             <h1 class="article-title">
                 <a ng-href="#/blogView/{{blog.id}}">{{blog.title}}</a>
+                <small>
+                    <span ng-click="remove($index, blog)" class="btn btn-small glyphicon glyphicon-remove"></span>
+                    <a ng-href="#/blogEdit/{{blog.id}}" class="btn btn-small glyphicon glyphicon-edit"></a>
+                </small>
             </h1>
         </article>
     </div>

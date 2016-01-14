@@ -2,16 +2,20 @@ package zy.web.api;
 
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import zy.domain.Blog;
 import zy.domain.User;
 import zy.domain.ZyUserDetails;
 import zy.exception.user.EmailAlreadyFoundException;
 import zy.exception.user.InvalidNewUserException;
 import zy.exception.user.UserException;
+import zy.service.BlogService;
 import zy.service.UserService;
 import zy.web.util.ErrorCode;
 
@@ -24,6 +28,7 @@ import java.security.Principal;
 public class UserResource {
     @Autowired UserService mUserService;
     @Autowired AuthenticationManager mAuthenticationManager;
+    @Autowired BlogService mBlogService;
 
     @RequestMapping(method = RequestMethod.POST)
     public User create(final HttpServletRequest req,
@@ -44,6 +49,13 @@ public class UserResource {
         val details = (ZyUserDetails) token.getPrincipal();
 
         return details.getUser();
+    }
+
+    @RequestMapping(value = "{id}/blogs", method = RequestMethod.GET)
+    public Page<Blog> get(@PathVariable("id") final int id,
+                          @RequestParam("page") final int page,
+                          @RequestParam("size") final int size) {
+        return mBlogService.findByUser(id, new PageRequest(page, size));
     }
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)

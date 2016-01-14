@@ -24,7 +24,7 @@ CREATE TABLE `blog` (
   `creationDate` timestamp NOT NULL default now(),
   `modifiedDate` timestamp NOT NULL default now(),
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user`) REFERENCES user(`id`)
+  FOREIGN KEY (`user`) REFERENCES user(`id`) ON DELETE CASCADE
 );
 
 CREATE TABLE `comment` (
@@ -34,8 +34,8 @@ CREATE TABLE `comment` (
   `blog` INT NOT NULL,
   `user` INT NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`blog`) REFERENCES blog(`id`),
-  FOREIGN KEY (`user`) REFERENCES user(`id`)
+  FOREIGN KEY (`blog`) REFERENCES blog(`id`) ON DELETE CASCADE ,
+  FOREIGN KEY (`user`) REFERENCES user(`id`) ON DELETE CASCADE
 );
 
 CREATE UNIQUE INDEX user_email on user(email);

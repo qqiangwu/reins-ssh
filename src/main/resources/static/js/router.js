@@ -22,6 +22,10 @@
                 .when('/self', {
                     templateUrl: 'tpl/selfIntro.html'
                 })
+                .when('/dashboard', {
+                    templateUrl: 'tpl/dashboard.html',
+                    controller: 'DashboardCtrl'
+                })
                 .when('/blogView/:id', {
                     templateUrl: 'tpl/blogView.html',
                     controller: 'BlogViewCtrl'

@@ -1,9 +1,17 @@
 <div class="navbar navbar-right nav-bar-menu">
+    <a ng-if="hasLogin" class="nav-badge btn" ng-href="#/blogCreate">
+        <span class="glyphicon glyphicon-plus"></span>
+        New Blog
+    </a>
     <a class="nav-badge btn" ng-href="#">
         <span class="glyphicon glyphicon-home"></span>
         Main
     </a>
-    <a class="nav-badge btn" ng-click="logout()" ng-show="hasLogin">
+    <a ng-if="hasLogin" class="nav-badge btn" ng-href="#/dashboard">
+        <span class="glyphicon glyphicon-dashboard"></span>
+        Dashboard
+    </a>
+    <a ng-if="hasLogin" class="nav-badge btn" ng-click="logout()">
         <span class="glyphicon glyphicon-log-out"></span>
         Logout
     </a>
@@ -16,7 +24,6 @@
         Register
     </a>
 </div>
-
 <div class="container">
     <article class="jumbotron">
         <h1>About me </h1>

@@ -1,22 +1,20 @@
-/**
- * Created by Float on 14-9-2.
- */
 (function(module){
     'use strict';
 
-    module.controller('BlogEditCtrl', ['$scope', '$routeParams', 'Blog', 'Category',
-        function($scope, $routeParams, Blog, Category){
+    module.controller('BlogEditCtrl', ['$scope', '$routeParams', 'Blog',
+        function($scope, $routeParams, Blog){
+            if (!$scope.hasLogin) {
+                $scope.go();
+            }
+
             Blog.get({id: $routeParams.id})
                 .$promise
-                .then(function(res){
-                    $scope.blog = res;
-                    $scope.categories = Category.query(function(){
-                        $scope.blog.category = _.find($scope.categories, $scope.blog.category? function(elem){ 
-                            return elem.id === $scope.blog.category.id;
-                        }: function(elem){
-                            return elem.name === 'Default';
-                        });
-                    });
+                .then(function(blog){
+                    $scope.blog = blog;
+
+                    if ($scope.blog.user.id !== $scope.user.id) {
+                        $scope.go();
+                    }
                 });
 
             $scope.update = function(){
@@ -28,11 +26,25 @@
                             url: '/blogView/' + $routeParams.id
                         });
                     },
-                    function(){
-                        $scope.report({
-                            message: 'Modify blog wrong. Please check your network',
-                            timeout: 2
-                        });
+                    function(resp){
+                        var ec = resp.data;
+                        var status = resp.status;
+
+                        switch (status) {
+                            case 400:
+                                $scope.report({
+                                    message: 'Either title or content is invalid:'+ec.message,
+                                    timeout: 2
+                                });
+                                break;
+
+                            default:
+                                $scope.report({
+                                    message: 'Modify blog wrong. Please check your network',
+                                    timeout: 2
+                                });
+                                break;
+                        }
                     }
                 );
             };
