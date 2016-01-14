@@ -16,11 +16,13 @@ import zy.exception.user.UserException;
 import zy.impl.entity.UserEntity;
 import zy.impl.repo.UserRepo;
 import zy.service.UserService;
+import zy.support.aop.Monitor;
 
 import java.sql.Timestamp;
 import java.util.Date;
 
 @Service
+@Monitor
 public class UserServiceImpl implements UserService {
     @Autowired UserRepo mUserRepo;
 

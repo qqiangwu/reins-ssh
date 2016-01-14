@@ -1,8 +1,11 @@
 package zy.domain;
 
 
+import lombok.ToString;
+
 import java.util.Collections;
 
+@ToString
 public final class ZyUserDetails extends org.springframework.security.core.userdetails.User {
     private User mUser;
 

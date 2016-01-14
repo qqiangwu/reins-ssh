@@ -14,7 +14,10 @@ import zy.exception.user.InvalidNewUserException;
 import zy.exception.user.UserException;
 import zy.service.UserService;
 import zy.web.util.ErrorCode;
-import zy.web.util.SecurityUtils;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 @RestController
 @RequestMapping("api/users")
@@ -23,17 +26,24 @@ public class UserResource {
     @Autowired AuthenticationManager mAuthenticationManager;
 
     @RequestMapping(method = RequestMethod.POST)
-    public User create(@RequestParam("email") final String email,
+    public User create(final HttpServletRequest req,
+                       @RequestParam("email") final String email,
                        @RequestParam("name") final String name,
-                       @RequestParam("password") final String password) throws UserException {
+                       @RequestParam("password") final String password) throws UserException, ServletException {
         mUserService.create(email, name, password);
 
-        return loginAfterRegistration(email);
+        req.logout();
+        req.login(email, password);
+
+        return ((ZyUserDetails)mUserService.loadUserByUsername(email)).getUser();
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public User get() throws UserException {
-        return SecurityUtils.getUser().getUser();
+    public User get(final Principal user) throws UserException {
+        val token = (UsernamePasswordAuthenticationToken) user;
+        val details = (ZyUserDetails) token.getPrincipal();
+
+        return details.getUser();
     }
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
@@ -48,16 +58,17 @@ public class UserResource {
         return new ErrorCode(e.getMessage());
     }
 
-    private final User loginAfterRegistration(final String email) {
+    private final User loginAfterRegistration(final HttpServletRequest req, final String email) {
         val details = mUserService.loadUserByUsername(email);
-        val auth = new UsernamePasswordAuthenticationToken(
+
+        val token = new UsernamePasswordAuthenticationToken(
                 details,
                 details.getPassword(),
                 details.getAuthorities());
-        mAuthenticationManager.authenticate(auth);
+        mAuthenticationManager.authenticate(token);
 
-        if (auth.isAuthenticated()) {
-            SecurityContextHolder.getContext().setAuthentication(auth);
+        if (token.isAuthenticated()) {
+            SecurityContextHolder.getContext().setAuthentication(token);
         }
 
         return ((ZyUserDetails) details).getUser();

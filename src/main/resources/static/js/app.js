@@ -78,15 +78,35 @@
         }
     ]);
 
-    app.run(['$rootScope', function($root){
-        $root.$on('auth:login', function(user){
+    app.run(['$rootScope', 'Auth', function($root, Auth){
+        $root.$on('auth:login', function(_, user){
+            $root.log.info('login');
             $root.hasLogin = true;
             $root.user = user;
         });
 
         $root.$on('auth:logout', function(){
+            $root.log.info('logout');
             $root.hasLogin = false;
             $root.user = null;
         });
+
+        $root.logout = function() {
+            Auth.logout().then(function(){
+                $root.report({
+                    message: 'Logout successfully',
+                    timeout: 2,
+                    url: '/'
+                });
+            });
+        };
+
+        var user = Auth.user();
+
+        if (user) {
+            $root.log.info('app init login');
+            $root.user = user;
+            $root.hasLogin = true;
+        }
     }]);
 })();

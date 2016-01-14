@@ -13,8 +13,10 @@ import zy.impl.entity.BlogEntity;
 import zy.impl.repo.BlogRepo;
 import zy.service.BlogService;
 import zy.service.UserService;
+import zy.support.aop.Monitor;
 
 @Service
+@Monitor
 public class BlogServiceImpl implements BlogService {
     @Autowired BlogRepo mBlogRepo;
     @Autowired UserService mUserService;

@@ -16,7 +16,7 @@
                             url: '/'
                         });
                     })
-                    .catch(function(ec) {
+                    .catch(function(ec, status) {
                         $scope.report({
                             message: 'Errant in either email or password:' + ec.msg,
                             timeout: 2

@@ -13,8 +13,10 @@ import zy.impl.repo.CommentRepo;
 import zy.service.BlogService;
 import zy.service.CommentService;
 import zy.service.UserService;
+import zy.support.aop.Monitor;
 
 @Service
+@Monitor
 public class CommentServiceImpl implements CommentService {
     @Autowired CommentRepo mCommentRepo;
     @Autowired UserService mUserService;

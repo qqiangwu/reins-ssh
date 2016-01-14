@@ -22,7 +22,7 @@ public class TrackAdvice {
         mLogger = support.getLogger("track");
     }
 
-    @Pointcut("@within(Monitor)")
+    @Pointcut("@within(Monitor) || @within(org.springframework.web.bind.annotation.RestController)")
     public void methodExecution() {
     }
 

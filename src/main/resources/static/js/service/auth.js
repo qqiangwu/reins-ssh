@@ -1,8 +1,10 @@
 (function(module){
     'use strict';
 
-    module.factory('Auth', ['$http', '$q', '$rootScope',
-        function($http, $q, $root){
+    module.factory('Auth', ['$http', '$q', '$rootScope', 'Conf',
+        function($http, $q, $root, $conf){
+            var _user = null;
+
             function register(userInfo) {
                 var deferred = $q.defer();
 
@@ -50,10 +52,28 @@
                 return deferred.promise;
             }
 
+            // log info persistence
+            (function init(){
+                var key = 'auth_user';
+
+                _user = $conf.get(key);
+
+                $root.$on('auth:login', function(ev, user){
+                    $conf.set(key, user);
+                });
+
+                $root.$on('auth:logout', function(){
+                    $conf.clear(key);
+                });
+            })();
+
             return {
                 register: register,
                 login: login,
-                logout: logout
+                logout: logout,
+                user: function() {
+                    return _user;
+                }
             };
         }
     ]);
