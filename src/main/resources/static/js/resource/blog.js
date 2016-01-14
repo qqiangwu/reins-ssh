@@ -6,7 +6,7 @@
         function($resource){
             return $resource('api/blogs/:id', {id: '@id'}, {
                 update: {
-                    method: 'PUT'
+                    method: 'POST'
                 },
                 save: {
                     method: 'POST',

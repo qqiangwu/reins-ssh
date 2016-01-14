@@ -33,7 +33,8 @@ public class BlogResource {
         return mBlogService.find(id);
     }
 
-    @RequestMapping(value = "{id}", method = RequestMethod.PUT)
+    // USE POST DUE TO SERVLET API DEFECTION
+    @RequestMapping(value = "{id}", method = RequestMethod.POST)
     public void put(@PathVariable("id") final int id,
                     @RequestParam("title") final String title,
                     @RequestParam("content") final String content) throws UserException {
