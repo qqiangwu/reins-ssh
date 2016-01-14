@@ -4,17 +4,16 @@
 
     module.factory('Blog', ['$resource',
         function($resource){
-            return $resource('api/blog/:id', {id: '@id'}, {
+            return $resource('api/blogs/:id', {id: '@id'}, {
                 update: {
                     method: 'PUT'
                 },
-                meta: {
-                    url: 'api/blog',
-                    method: 'GET'
+                save: {
+                    method: 'POST',
+                    url: 'api/blogs'
                 },
                 query: {
-                    isArray: true,
-                    url: 'api/blog/:from/:to',
+                    isArray: false,
                     method: 'GET'
                 }
             });

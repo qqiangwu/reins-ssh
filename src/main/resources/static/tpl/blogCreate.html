@@ -1,9 +1,9 @@
-<div ng-show="authorize(Role.owner)" class="navbar navbar-right nav-bar-menu">
+<div class="navbar navbar-right nav-bar-menu">
     <a class="nav-badge btn" ng-click="save()">
         <span class="glyphicon glyphicon-file"></span>
         Create
     </a>
-    <a class="nav-badge btn" ng-href="#/blogList">
+    <a class="nav-badge btn" ng-href="#">
         <span class="glyphicon glyphicon-remove"></span>
         Discard
     </a>
@@ -11,22 +11,13 @@
         <span class="glyphicon glyphicon-home"></span>
         Main
     </a>
-    <a class="nav-badge btn" ng-click="logout()" ng-show="authorize(Role.visit)">
-        <span class="glyphicon glyphicon-log-out"></span>
-        Logout
-    </a>
 </div>
 
-<div ng-show="authorize(Role.owner)" class="container">
+<div class="container">
     <form role="form">
         <div class="form-group">
             <input class="form-control" type="text" placeholder="Title" required ng-model="blog.title"/>
         </div>
-        <tags-input ng-model="blog.tags"></tags-input>
-        <select class="form-control"
-                ng-model="blog.category" ng-options="cat.name for cat in categories">
-            <option value=""> None </option>
-        </select>
         <div class="form-group">
             <textarea editor class="form-control" rows="20" required ng-model="blog.content"></textarea>
         </div>

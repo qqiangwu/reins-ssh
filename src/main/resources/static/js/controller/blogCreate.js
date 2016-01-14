@@ -1,19 +1,13 @@
-/**
- * Created by Float on 14-9-2.
- */
 (function(module){
     'use strict';
 
-    module.controller('BlogCreateCtrl', ['$scope', 'Blog', 'Category',
-        function($scope, Blog, Category){
-            Category.query()
-                    .$promise
-                    .then(function(res){
-                        var category = _.find(res, function(elem){ return elem.name === 'Default'; });
-                        $scope.categories = res;
-                        $scope.blog = new Blog({category: category});
-                    });
+    module.controller('BlogCreateCtrl', ['$scope', 'Blog',
+        function($scope, Blog){
+            if (!$scope.hasLogin) {
+                $scope.go();
+            }
 
+            $scope.blog = new Blog();
             $scope.save = function(){
                 $scope.blog.$save(
                     function(blog){

@@ -8,7 +8,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import javax.servlet.ServletException;
@@ -26,10 +28,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .userDetailsService(mUserDetailsService)
                 .httpBasic()
+                    .authenticationEntryPoint(new AuthenticationEntryPoint() {
+                        @Override
+                        public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
+                            httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                        }
+                    })
                     .and()
                 .authorizeRequests()
                     .antMatchers(HttpMethod.POST, "/api/users").permitAll()
                     .antMatchers(HttpMethod.GET, "/api/users").authenticated()
+                    .antMatchers(HttpMethod.POST, "/api/blogs/*").authenticated()
+                    .antMatchers(HttpMethod.PUT, "/api/blogs/*").authenticated()
+                    .antMatchers(HttpMethod.DELETE, "/api/blogs/*").authenticated()
                     .anyRequest().permitAll()
                     .and()
                 .logout()

@@ -33,9 +33,9 @@
     <pagination class="pagination-sm"
                 ng-show="numPages > 1"
                 ng-model="currentPage"
-                max-size="maxPgSize"
-                items-per-page="itemsPerPage"
-                total-items="count"
+                max-size="10"
+                items-per-page="pageSize"
+                total-items="totalElements"
                 boundary-links="true"
                 num-pages="numPages"
                 ng-change="loadPage()">

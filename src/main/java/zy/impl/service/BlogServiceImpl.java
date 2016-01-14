@@ -15,6 +15,9 @@ import zy.service.BlogService;
 import zy.service.UserService;
 import zy.support.aop.Monitor;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 @Service
 @Monitor
 public class BlogServiceImpl implements BlogService {
@@ -33,6 +36,8 @@ public class BlogServiceImpl implements BlogService {
         entity.setUser(userId);
         entity.setTitle(title);
         entity.setContent(content);
+        entity.setCreationDate(new Timestamp(new Date().getTime()));
+        entity.setModifiedDate(entity.getCreationDate());
 
         return fromEntity(mBlogRepo.save(entity));
     }

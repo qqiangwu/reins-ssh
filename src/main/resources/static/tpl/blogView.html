@@ -1,13 +1,5 @@
 <div class="navbar navbar-right nav-bar-menu">
-    <a ng-show="authorize(Role.owner)" class="nav-badge btn" ng-href="#/blogEdit/{{blog.id}}">
-        <span class="glyphicon glyphicon-edit"></span>
-        Edit
-    </a>
-    <a ng-show="authorize(Role.owner)" class="nav-badge btn" ng-click="remove()">
-        <span class="glyphicon glyphicon-remove"></span>
-        Remove
-    </a>
-    <a class="nav-badge btn" ng-href="#/blogList">
+    <a class="nav-badge btn" ng-href="#">
         <span class="glyphicon glyphicon-backward"></span>
         Back
     </a>
@@ -15,15 +7,15 @@
         <span class="glyphicon glyphicon-home"></span>
         Main
     </a>
-    <a class="nav-badge btn" ng-click="logout()" ng-show="authorize(Role.visit)">
+    <a class="nav-badge btn" ng-click="logout()" ng-show="hasLogin">
         <span class="glyphicon glyphicon-log-out"></span>
         Logout
     </a>
-    <a ng-if="!hasLogin" class="nav-badge btn" ng-href="/login.html">
+    <a ng-if="!hasLogin" class="nav-badge btn" ng-href="#/login">
         <span class="glyphicon glyphicon-log-in"></span>
         Login
     </a>
-    <a ng-if="!hasLogin" class="nav-badge btn" ng-href="/register.html">
+    <a ng-if="!hasLogin" class="nav-badge btn" ng-href="#/register">
         <span class="glyphicon glyphicon-registration-mark"></span>
         Register
     </a>
@@ -34,8 +26,6 @@
         <article class="jumbotron">
             <h1>
                 {{blog.title}}
-                <span><a class="well well-sm" ng-repeat="tag in blog.tags">{{tag.text}}</a></span>
-                <a>{{blog.category.name}}</a>
             </h1>
             <hr/>
             <div btf-markdown="blog.content"></div>

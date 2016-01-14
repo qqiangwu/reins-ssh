@@ -5,7 +5,7 @@ import zy.domain.ZyUserDetails;
 
 public abstract class SecurityUtils {
     public static final ZyUserDetails getUser() {
-        return (ZyUserDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
+        return (ZyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
     public static final int getUserId() {

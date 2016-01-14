@@ -14,6 +14,7 @@ public class BlogEntity {
     private Timestamp mModifiedDate;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public int getId() {
         return mId;

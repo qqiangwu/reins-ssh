@@ -44,9 +44,9 @@ public class BlogResource {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void post(@RequestParam("title") final String title,
+    public Blog post(@RequestParam("title") final String title,
                      @RequestParam("content") final String content) throws BlogException {
-        mBlogService.create(SecurityUtils.getUser().getId(), title, content);
+        return mBlogService.create(SecurityUtils.getUser().getId(), title, content);
     }
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
