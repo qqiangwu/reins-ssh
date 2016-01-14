@@ -1,6 +1,3 @@
-/**
- * Created by Float on 14-9-2.
- */
 (function(module){
     'use strict';
 
@@ -24,18 +21,21 @@
                     $scope.currentPage = value.number + 1;
                 });
             };
-            $scope.postComment = function(content){
-                new Comment({
-                    id: $scope.blog.id,
-                    content: content
-                }).$save(function(c){
-                    $scope.report({
-                        message: 'Post comment successfully',
-                        timeout: 1
+
+            if ($scope.hasLogin) {
+                $scope.postComment = function(content){
+                    new Comment({
+                        id: $scope.blog.id,
+                        content: content
+                    }).$save(function(c){
+                        $scope.report({
+                            message: 'Post comment successfully',
+                            timeout: 1
+                        });
+                        $scope.comments.unshift(c);
                     });
-                    $scope.comments.unshift(c);
-                });
-            };
+                };
+            }
         }
     ]);
 })(angular.module('miao.controller'));

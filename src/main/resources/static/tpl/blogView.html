@@ -33,7 +33,7 @@
         </article>
     </div>
 
-    <div ng-init="zy_comment = null">
+    <div ng-show="hasLogin" ng-init="zy_comment = null">
         <textarea editor class="form-control" rows="5" required ng-model="zy_comment"></textarea>
         <button class="form-control"  ng-click="postComment(zy_comment)" ng-disabled="!zy_comment || zy_comment.length === 0">Comment</button>
     </div>
