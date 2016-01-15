@@ -16,7 +16,7 @@
         <div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
             <label>Username</label>
             <input type="text" name="username" class="form-control" ng-model="user.name"
-                   ng-minlength="6"
+                   ng-minlength="3"
                    ng-maxlength="16">
             <p ng-show="userForm.username.$error.minlength" class="help-block">Username is too short.</p>
             <p ng-show="userForm.username.$error.maxlength" class="help-block">Username is too long.</p>

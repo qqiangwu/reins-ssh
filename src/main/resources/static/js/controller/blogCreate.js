@@ -17,11 +17,15 @@
                             url: '/blogView/' + blog.id
                         });
                     },
-                    function(){
-                        $scope.report({
-                            message: 'Post blog wrong. Please check your network',
-                            timeout: 2
-                        });
+                    function(resp){
+                        var status = resp.status;
+
+                        if (status === 400) {
+                            $scope.report({
+                                message: 'Invalid title or content',
+                                timeout: 2
+                            });
+                        }
                     }
                 );
             };

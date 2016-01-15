@@ -8,5 +8,7 @@ public class Blog {
     String title;
     String content;
     long createTime;
+    int viewCount;
+    int commentCount;
     User user;
 }

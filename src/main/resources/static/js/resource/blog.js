@@ -20,6 +20,10 @@
                     url: 'api/users/:user/blogs',
                     method: 'GET',
                     isArray: false
+                },
+                addView: {
+                    method: 'POST',
+                    url: 'api/blogs/:id/view'
                 }
             });
         }

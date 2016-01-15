@@ -31,9 +31,9 @@ public class UserResource {
 
     @RequestMapping(method = RequestMethod.POST)
     public User create(final HttpServletRequest req,
-                       @RequestParam("email") final String email,
-                       @RequestParam("name") final String name,
-                       @RequestParam("password") final String password) throws UserException, ServletException {
+                       @RequestParam final String email,
+                       @RequestParam final String name,
+                       @RequestParam final String password) throws UserException, ServletException {
         mUserService.create(email, name, password);
 
         req.logout();
@@ -51,9 +51,9 @@ public class UserResource {
     }
 
     @RequestMapping(value = "{id}/blogs", method = RequestMethod.GET)
-    public Page<Blog> getBlogs(@PathVariable("id") final int id,
-                          @RequestParam("page") final int page,
-                          @RequestParam("size") final int size) {
+    public Page<Blog> getBlogs(@PathVariable final int id,
+                          @RequestParam final int page,
+                          @RequestParam final int size) {
         return mBlogService.findByUser(id, new PageRequest(page, size));
     }
 

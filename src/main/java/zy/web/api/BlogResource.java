@@ -21,23 +21,23 @@ public class BlogResource {
     @Autowired BlogService mBlogService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Page<Blog> get(@RequestParam("page") final int page,
-                          @RequestParam("size") final int size) {
+    public Page<Blog> get(@RequestParam final int page,
+                          @RequestParam final int size) {
         val pageReq = new PageRequest(page, size, Sort.Direction.DESC, "creationDate");
 
         return mBlogService.find(pageReq);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
-    public Blog get(@PathVariable("id") final int id) {
+    public Blog get(@PathVariable final int id) {
         return mBlogService.find(id);
     }
 
     // USE POST DUE TO SERVLET API DEFECTION
     @RequestMapping(value = "{id}", method = RequestMethod.POST)
-    public void put(@PathVariable("id") final int id,
-                    @RequestParam("title") final String title,
-                    @RequestParam("content") final String content) throws UserException {
+    public void put(@PathVariable final int id,
+                    @RequestParam final String title,
+                    @RequestParam final String content) throws UserException {
         if (!mBlogService.hasAccessTo(SecurityUtils.getUser().getId(), id)) {
             throw new UserException("user has no access");
         }
@@ -45,7 +45,7 @@ public class BlogResource {
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("id") final int id) throws UserException {
+    public void delete(@PathVariable final int id) throws UserException {
         if (!mBlogService.hasAccessTo(SecurityUtils.getUser().getId(), id)) {
             throw new UserException("user has no access");
         }
@@ -53,9 +53,14 @@ public class BlogResource {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Blog post(@RequestParam("title") final String title,
-                     @RequestParam("content") final String content) throws BlogException {
+    public Blog post(@RequestParam final String title,
+                     @RequestParam final String content) throws BlogException {
         return mBlogService.create(SecurityUtils.getUser().getId(), title, content);
+    }
+
+    @RequestMapping(value = "{blogId}/view", method = RequestMethod.POST)
+    public void post(@PathVariable final int blogId) {
+        mBlogService.addViewCount(blogId);
     }
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)

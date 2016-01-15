@@ -30,6 +30,9 @@
             <h1 class="article-title">
                 <a ng-href="#/blogView/{{blog.id}}">{{blog.title}}</a>
             </h1>
+            <small class="glyphicon glyphicon-eye-open">{{blog.viewCount}}</small>
+            <small class="glyphicon glyphicon-envelope">{{blog.commentCount}}</small>
+            <small class="glyphicon glyphicon-user">{{blog.user.name}}</small>
         </article>
     </div>
 

@@ -4,6 +4,7 @@ import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import zy.domain.Blog;
@@ -38,6 +39,8 @@ public class BlogServiceImpl implements BlogService {
         entity.setContent(content);
         entity.setCreationDate(new Timestamp(new Date().getTime()));
         entity.setModifiedDate(entity.getCreationDate());
+        entity.setCommentCount(0);
+        entity.setViewCount(0);
 
         return fromEntity(mBlogRepo.save(entity));
     }
@@ -91,6 +94,20 @@ public class BlogServiceImpl implements BlogService {
         return blog == null? false: blog.getUser().getId() == userId;
     }
 
+    @Override
+    @Async
+    @Transactional(readOnly = false)
+    public void addViewCount(final int blogId) {
+        mBlogRepo.addViewCount(blogId);
+    }
+
+    @Override
+    @Async
+    @Transactional(readOnly = false)
+    public void addCommentCount(final int blogId) {
+        mBlogRepo.addCommentCount(blogId);
+    }
+
     private final Blog fromEntity(final BlogEntity entity) {
         val user = mUserService.find(entity.getUser());
 
@@ -99,6 +116,8 @@ public class BlogServiceImpl implements BlogService {
                 entity.getTitle(),
                 entity.getContent(),
                 entity.getCreationDate().getTime(),
+                entity.getViewCount(),
+                entity.getCommentCount(),
                 user);
     }
 }

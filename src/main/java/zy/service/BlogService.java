@@ -2,6 +2,7 @@ package zy.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Async;
 import zy.domain.Blog;
 import zy.exception.blog.BlogException;
 
@@ -17,4 +18,7 @@ public interface BlogService {
 
     boolean exists(int id);
     boolean hasAccessTo(int userId, int blogId);
+
+    void addViewCount(int blogId);
+    void addCommentCount(int blogId);
 }

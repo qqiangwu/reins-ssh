@@ -12,9 +12,10 @@ public class BlogEntity {
     private String mContent;
     private Timestamp mCreationDate;
     private Timestamp mModifiedDate;
+    private int mCommentCount;
+    private int mViewCount;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public int getId() {
         return mId;
@@ -74,6 +75,26 @@ public class BlogEntity {
         mModifiedDate = modifiedDate;
     }
 
+    @Basic
+    @Column(name = "comment_count", nullable = false)
+    public int getCommentCount() {
+        return mCommentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        mCommentCount = commentCount;
+    }
+
+    @Basic
+    @Column(name = "view_count", nullable = false)
+    public int getViewCount() {
+        return mViewCount;
+    }
+
+    public void setViewCount(int viewCount) {
+        mViewCount = viewCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -83,6 +104,8 @@ public class BlogEntity {
 
         if (mId != that.mId) return false;
         if (mUser != that.mUser) return false;
+        if (mCommentCount != that.mCommentCount) return false;
+        if (mViewCount != that.mViewCount) return false;
         if (mTitle != null ? !mTitle.equals(that.mTitle) : that.mTitle != null) return false;
         if (mContent != null ? !mContent.equals(that.mContent) : that.mContent != null) return false;
         if (mCreationDate != null ? !mCreationDate.equals(that.mCreationDate) : that.mCreationDate != null)
@@ -101,6 +124,8 @@ public class BlogEntity {
         result = 31 * result + (mContent != null ? mContent.hashCode() : 0);
         result = 31 * result + (mCreationDate != null ? mCreationDate.hashCode() : 0);
         result = 31 * result + (mModifiedDate != null ? mModifiedDate.hashCode() : 0);
+        result = 31 * result + mCommentCount;
+        result = 31 * result + mViewCount;
         return result;
     }
 }

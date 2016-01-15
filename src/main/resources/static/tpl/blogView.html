@@ -31,6 +31,9 @@
             <h1>
                 {{blog.title}}
             </h1>
+            <small class="glyphicon glyphicon-eye-open">{{blog.viewCount}}</small>
+            <small class="glyphicon glyphicon-envelope">{{blog.commentCount}}</small>
+            <small class="glyphicon glyphicon-user">{{blog.user.name}}</small>
             <hr/>
             <div btf-markdown="blog.content"></div>
             <hr/>
@@ -46,7 +49,8 @@
 
     <div>
         <article class="jumbotron" ng-repeat="comment in comments">
-            <h3>{{comment.content}}</h3>
+            <h2><span class="small glyphicon glyphicon-user">{{blog.user.name}}</span></h2>
+            <h4>{{comment.content}}</h4>
         </article>
         <pagination class="pagination-sm"
                     ng-show="numPages > 1"

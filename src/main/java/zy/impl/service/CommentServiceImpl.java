@@ -43,7 +43,11 @@ public class CommentServiceImpl implements CommentService {
         entity.setContent(content);
         entity.setCreationDate(new Timestamp(new Date().getTime()));
 
-        return fromEntity(mCommentRepo.save(entity));
+        val result = fromEntity(mCommentRepo.save(entity));
+
+        mBlogService.addCommentCount(blogId);
+
+        return result;
     }
 
     @Override

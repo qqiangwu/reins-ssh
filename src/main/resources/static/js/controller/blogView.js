@@ -3,8 +3,14 @@
 
     module.controller('BlogViewCtrl', ['$scope', '$routeParams', 'Blog', 'Comment',
         function($scope, $routeParams, Blog, Comment){
+            var id = $routeParams.id;
+
             $scope.blog = Blog.get({id: $routeParams.id}, function(){
                 $scope.loadPage();
+            });
+
+            Blog.addView({
+                id: id
             });
 
             $scope.pageSize = 10;

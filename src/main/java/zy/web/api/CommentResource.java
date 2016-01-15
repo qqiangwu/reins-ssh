@@ -17,15 +17,15 @@ public class CommentResource {
     @Autowired CommentService mCommentService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Page<Comment> get(@PathVariable("blogId") final int blogId,
-                             @RequestParam("page") final int page,
-                             @RequestParam("size") final int size) {
+    public Page<Comment> get(@PathVariable final int blogId,
+                             @RequestParam final int page,
+                             @RequestParam final int size) {
         return mCommentService.findByBlog(blogId, new PageRequest(page, size));
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Comment post(@PathVariable("blogId") final int blogId,
-                        @RequestParam("content") final String content) throws CommentException {
+    public Comment post(@PathVariable final int blogId,
+                        @RequestParam final String content) throws CommentException {
         return mCommentService.create(SecurityUtils.getUserId(), blogId, content);
     }
 

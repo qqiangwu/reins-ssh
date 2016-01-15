@@ -14,7 +14,7 @@ CREATE TABLE `user` (
   `creationDate` timestamp NOT NULL default now(),
   `lastAccessDate` timestamp NOT NULL default now(),
   PRIMARY KEY (`id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `blog` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -25,7 +25,7 @@ CREATE TABLE `blog` (
   `modifiedDate` timestamp NOT NULL default now(),
   PRIMARY KEY (`id`),
   FOREIGN KEY (`user`) REFERENCES user(`id`) ON DELETE CASCADE
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `comment` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -36,6 +36,7 @@ CREATE TABLE `comment` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`blog`) REFERENCES blog(`id`) ON DELETE CASCADE ,
   FOREIGN KEY (`user`) REFERENCES user(`id`) ON DELETE CASCADE
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE UNIQUE INDEX user_email on user(email);
+ALTER TABLE `blog` ADD COLUMN `comment_count` INT NOT NULL DEFAULT 0;
+ALTER TABLE `blog` ADD COLUMN `view_count` INT NOT NULL DEFAULT 0;
