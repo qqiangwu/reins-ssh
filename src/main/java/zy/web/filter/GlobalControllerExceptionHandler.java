@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import zy.web.util.ErrorCode;
 
 @ControllerAdvice
@@ -24,6 +25,13 @@ public class GlobalControllerExceptionHandler {
     @ExceptionHandler(ServletRequestBindingException.class)
     @ResponseBody
     public ErrorCode handleBadInput(final ServletRequestBindingException e) {
+        return new ErrorCode(e.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    @ResponseBody
+    public ErrorCode handleBadInput(final MethodArgumentTypeMismatchException e) {
         return new ErrorCode(e.getMessage());
     }
 }
