@@ -7,6 +7,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.web.bind.annotation.*;
 import zy.domain.Blog;
 import zy.domain.User;
@@ -34,12 +36,11 @@ public class UserResource {
                        @RequestParam final String email,
                        @RequestParam final String name,
                        @RequestParam final String password) throws UserException, ServletException {
-        mUserService.create(email, name, password);
+        val user = mUserService.create(email, name, password);
 
-        req.logout();
         req.login(email, password);
 
-        return ((ZyUserDetails)mUserService.loadUserByUsername(email)).getUser();
+        return user;
     }
 
     @RequestMapping(method = RequestMethod.GET)

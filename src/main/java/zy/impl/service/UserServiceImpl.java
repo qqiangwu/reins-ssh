@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void create(final String email, final String name, final String password) throws UserException {
+    public User create(final String email, final String name, final String password) throws UserException {
         if (email.length() > 64) {
             throw new InvalidNewUserException(email);
         }
@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
         user.setCreationDate(now);
         user.setLastAccessDate(now);
 
-        mUserRepo.save(user);
+        return fromEntity(mUserRepo.save(user));
     }
 
     @Override

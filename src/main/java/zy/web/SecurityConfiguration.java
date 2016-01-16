@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -16,6 +17,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
@@ -40,12 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .userDetailsService(mUserDetailsService)
                 .addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
                 .exceptionHandling()
-                    .authenticationEntryPoint(new AuthenticationEntryPoint() {
-                        @Override
-                        public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-                            httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-                        }
-                    })
+                    .authenticationEntryPoint((req, resp, e) -> resp.sendError(HttpServletResponse.SC_UNAUTHORIZED))
                 .and().formLogin()
                     .passwordParameter("password")
                     .usernameParameter("email")
@@ -58,15 +56,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
                             httpServletResponse.setContentType(MediaType.APPLICATION_JSON_VALUE);
                             mObjectMapper.writeValue(httpServletResponse.getOutputStream(), user);
-                            httpServletResponse.getOutputStream().close();
+                            httpServletResponse.getOutputStream().flush();
                         }
                     })
-                    .failureHandler(new AuthenticationFailureHandler() {
-                        @Override
-                        public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-                            httpServletResponse.sendError(HttpServletResponse.SC_BAD_REQUEST);
-                        }
-                    })
+                    .failureHandler((httpServletRequest, httpServletResponse, e) -> httpServletResponse.sendError(HttpServletResponse.SC_BAD_REQUEST))
                 .and().authorizeRequests()
                     .antMatchers(HttpMethod.POST, "/api/users").permitAll()
                     .antMatchers(HttpMethod.GET, "/api/users").authenticated()
@@ -78,13 +71,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .invalidateHttpSession(true)
                     .clearAuthentication(true)
                     .logoutUrl("/logout")
-                    .logoutSuccessHandler(new LogoutSuccessHandler() {
-                        @Override
-                        public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-                            httpServletResponse.setStatus(HttpServletResponse.SC_ACCEPTED);
-                            httpServletResponse.getWriter().close();
-                        }
-                    })
+                    .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler(HttpStatus.OK))
                 .and().csrf()
                     .csrfTokenRepository(csrfTokenRepository());
     }
