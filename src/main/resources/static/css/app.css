@@ -102,3 +102,15 @@ section.view-frame.ng-leave {
   from { opacity: 1; }
   to { opacity: 0; }
 }
+
+aside div.blog-listing {
+    margin-bottom: 30px;
+    color: inherit;
+    background-color: #eee;
+    border-radius: 6px;
+    padding: 36px 5px;
+}
+
+aside li .article-title {
+    font-size: 2em;
+}

@@ -18,6 +18,20 @@
             };
 
             $scope.loadPage();
+
+            Blog.query({
+                page: 0,
+                size: 5
+            }, function(val){
+                $scope.newBlogs = val.content;
+            });
+            Blog.query({
+                page: 0,
+                size: 5,
+                order: "hot"
+            }, function(val){
+                $scope.hotBlogs = val.content;
+            });
         }
     ]);
 })(angular.module('miao.controller'));

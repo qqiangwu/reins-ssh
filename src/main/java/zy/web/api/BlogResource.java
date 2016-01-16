@@ -22,8 +22,13 @@ public class BlogResource {
 
     @RequestMapping(method = RequestMethod.GET)
     public Page<Blog> get(@RequestParam final int page,
-                          @RequestParam final int size) {
-        val pageReq = new PageRequest(page, size, Sort.Direction.DESC, "creationDate");
+                          @RequestParam final int size,
+                          @RequestParam(defaultValue = "creationDate") String order) {
+        if (!"creationDate".equals(order)) {
+            order = "viewCount";
+        }
+
+        val pageReq = new PageRequest(page, size, Sort.Direction.DESC, order);
 
         return mBlogService.find(pageReq);
     }

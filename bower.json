@@ -2,12 +2,12 @@
   "name": "ZyBlog",
   "version": "0.0.1",
   "dependencies": {
-    "angular": "1.2.x",
-    "angular-resource": "~1.2.21",
-    "angular-route": "~1.2.21",
+    "angular": "1.4.8",
+    "angular-resource": "1.4.8",
+    "angular-route": "1.4.8",
     "bootstrap": "~3.2.0",
     "angular-bootstrap": "~0.11.0",
     "angular-markdown-directive": "~0.3.0",
-    "angular-local-storage": "~0.0.7",
+    "angular-local-storage": "~0.0.7"
   }
 }

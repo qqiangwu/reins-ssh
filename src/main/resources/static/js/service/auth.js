@@ -81,7 +81,7 @@
                     return _user;
                 },
                 hasLogin: function() {
-                    return _user !== null;
+                    return !!_user;
                 }
             };
         }

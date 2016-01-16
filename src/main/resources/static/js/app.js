@@ -16,6 +16,7 @@
         'ngSanitize',
         'LocalStorageModule',
         'btford.markdown',
+        'angular-md5',
         'miao.filter', 'miao.directive', 'miao.util', 'miao.router',
         'miao.resource', 'miao.service', 'miao.tpl'
     ]);

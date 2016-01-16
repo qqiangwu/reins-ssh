@@ -25,16 +25,51 @@
     </a>
 </div>
 <section class="container">
-    <div>
-        <article class="jumbotron blog-listing" ng-repeat="blog in blogs">
-            <h1 class="article-title">
-                <a ng-href="#/blogView/{{blog.id}}">{{blog.title}}</a>
-            </h1>
-            <small class="glyphicon glyphicon-eye-open">{{blog.viewCount}}</small>
-            <small class="glyphicon glyphicon-envelope">{{blog.commentCount}}</small>
-            <small class="glyphicon glyphicon-user">{{blog.user.name}}</small>
+    <div class="col-md-9">
+        <article class="row jumbotron blog-listing" ng-repeat="blog in blogs">
+            <div class="col-md-3">
+                <img src="http://www.gravatar.com/avatar/{{blog.user.email | gravatar}}" />
+            </div>
+            <div class="col-md-9">
+                <h1 class="article-title">
+                    <a ng-href="#/blogView/{{blog.id}}">{{blog.title}}</a>
+                </h1>
+                <small class="glyphicon glyphicon-eye-open">{{blog.viewCount}}</small>
+                <small class="glyphicon glyphicon-envelope">{{blog.commentCount}}</small>
+                <small class="glyphicon glyphicon-user">{{blog.user.name}}</small>
+            </div>
         </article>
     </div>
+    <aside class="col-md-3">
+        <div ng-show="hasLogin()" class="jumbotron">
+            <a href="#/dashboard">
+                <img src="http://www.gravatar.com/avatar/{{user.email | gravatar}}" />
+            </a>
+            <p>{{user.name}}</p>
+        </div>
+
+        <div class="blog-listing">
+            Newest
+            <ul>
+                <li class="zy-new" ng-repeat="blog in newBlogs">
+                    <h1 class="article-title">
+                        <a ng-href="#/blogView/{{blog.id}}">{{blog.title}}</a>
+                    </h1>
+                </li>
+            </ul>
+        </div>
+
+        <div class="blog-listing">
+            Hotest
+            <ul>
+                <li class="zy-hot" ng-repeat="blog in hotBlogs">
+                    <h1 class="article-title">
+                        <a ng-href="#/blogView/{{blog.id}}">{{blog.title}}</a>
+                    </h1>
+                </li>
+            </ul>
+        </div>
+    </aside>
 
     <pagination class="pagination-sm"
                 ng-show="numPages > 1"
