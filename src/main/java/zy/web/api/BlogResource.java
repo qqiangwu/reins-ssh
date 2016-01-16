@@ -29,7 +29,7 @@ public class BlogResource {
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
-    public Blog get(@PathVariable final int id) {
+    public Blog getOne(@PathVariable final int id) {
         return mBlogService.find(id);
     }
 
@@ -59,7 +59,7 @@ public class BlogResource {
     }
 
     @RequestMapping(value = "{blogId}/view", method = RequestMethod.POST)
-    public void post(@PathVariable final int blogId) {
+    public void addView(@PathVariable final int blogId) {
         mBlogService.addViewCount(blogId);
     }
 
