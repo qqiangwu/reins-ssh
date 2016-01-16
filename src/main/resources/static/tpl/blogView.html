@@ -52,7 +52,7 @@
         <article class="jumbotron" ng-repeat="comment in comments">
             <img src="http://www.gravatar.com/avatar/{{blog.user.email | gravatar}}" />
             <h2><span class="small glyphicon glyphicon-user">{{comment.user.name}}</span></h2>
-            <h4>{{comment.content}}</h4>
+            <div btf-markdown="comment.content"></div>
         </article>
         <pagination class="pagination-sm"
                     ng-show="numPages > 1"
