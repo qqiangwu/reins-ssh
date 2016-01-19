@@ -46,6 +46,7 @@ public class CommentServiceImpl implements CommentService {
         val result = fromEntity(mCommentRepo.save(entity));
 
         mBlogService.addCommentCount(blogId);
+        mUserService.addCommentCount(userId);
 
         return result;
     }

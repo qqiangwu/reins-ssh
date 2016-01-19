@@ -16,4 +16,7 @@ public interface UserService extends UserDetailsService {
     void delete(int id);
 
     boolean exists(int id);
+
+    void addCommentCount(int userId);
+    void addBlogCount(int userId);
 }

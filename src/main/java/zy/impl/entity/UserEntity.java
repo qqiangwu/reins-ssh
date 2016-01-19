@@ -13,6 +13,8 @@ public class UserEntity {
     private String mName;
     private Timestamp mCreationDate;
     private Timestamp mLastAccessDate;
+    private int mCommentCount;
+    private int mBlogCount;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -85,6 +87,26 @@ public class UserEntity {
         mLastAccessDate = lastAccessDate;
     }
 
+    @Basic
+    @Column(name = "comment_count", nullable = false)
+    public int getCommentCount() {
+        return mCommentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        mCommentCount = commentCount;
+    }
+
+    @Basic
+    @Column(name = "blog_count", nullable = false)
+    public int getBlogCount() {
+        return mBlogCount;
+    }
+
+    public void setBlogCount(int blogCount) {
+        mBlogCount = blogCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -94,26 +116,27 @@ public class UserEntity {
 
         if (mId != that.mId) return false;
         if (mEnabled != that.mEnabled) return false;
-        if (mEmail != null ? !mEmail.equals(that.mEmail) : that.mEmail != null) return false;
-        if (mPassword != null ? !mPassword.equals(that.mPassword) : that.mPassword != null) return false;
-        if (mName != null ? !mName.equals(that.mName) : that.mName != null) return false;
-        if (mCreationDate != null ? !mCreationDate.equals(that.mCreationDate) : that.mCreationDate != null)
-            return false;
-        if (mLastAccessDate != null ? !mLastAccessDate.equals(that.mLastAccessDate) : that.mLastAccessDate != null)
-            return false;
+        if (mCommentCount != that.mCommentCount) return false;
+        if (mBlogCount != that.mBlogCount) return false;
+        if (!mEmail.equals(that.mEmail)) return false;
+        if (!mPassword.equals(that.mPassword)) return false;
+        if (!mName.equals(that.mName)) return false;
+        if (!mCreationDate.equals(that.mCreationDate)) return false;
+        return mLastAccessDate.equals(that.mLastAccessDate);
 
-        return true;
     }
 
     @Override
     public int hashCode() {
         int result = mId;
-        result = 31 * result + (mEmail != null ? mEmail.hashCode() : 0);
-        result = 31 * result + (mPassword != null ? mPassword.hashCode() : 0);
+        result = 31 * result + mEmail.hashCode();
+        result = 31 * result + mPassword.hashCode();
         result = 31 * result + (int) mEnabled;
-        result = 31 * result + (mName != null ? mName.hashCode() : 0);
-        result = 31 * result + (mCreationDate != null ? mCreationDate.hashCode() : 0);
-        result = 31 * result + (mLastAccessDate != null ? mLastAccessDate.hashCode() : 0);
+        result = 31 * result + mName.hashCode();
+        result = 31 * result + mCreationDate.hashCode();
+        result = 31 * result + mLastAccessDate.hashCode();
+        result = 31 * result + mCommentCount;
+        result = 31 * result + mBlogCount;
         return result;
     }
 }

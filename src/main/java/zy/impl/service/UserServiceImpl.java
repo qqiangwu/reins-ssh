@@ -4,6 +4,7 @@ import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -81,14 +82,32 @@ public class UserServiceImpl implements UserService {
         return mUserRepo.exists(id);
     }
 
+    @Override
+    @Async
+    @Transactional(readOnly = false)
+    public void addCommentCount(final int userId) {
+        mUserRepo.addCommentCount(userId);
+    }
+
+    @Override
+    @Async
+    @Transactional(readOnly = false)
+    public void addBlogCount(final int userId) {
+        mUserRepo.addBlogCount(userId);
+    }
+
     private final User fromEntity(final UserEntity entity) {
-        return new User(entity.getId(), entity.getName(), entity.getEmail(), entity.getCreationDate().getTime());
+        return User.fromEntity(entity);
     }
 
     @Override
     public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
         val entity = mUserRepo.findByEmail(email);
 
-        return new ZyUserDetails(fromEntity(entity), entity.getPassword());
+        entity.setLastAccessDate(new Timestamp(new Date().getTime()));
+
+        mUserRepo.save(entity);
+
+        return new ZyUserDetails(User.fromEntity(entity), entity.getPassword());
     }
 }

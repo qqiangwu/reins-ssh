@@ -46,10 +46,13 @@
                 <img src="http://www.gravatar.com/avatar/{{user.email | gravatar}}" />
             </a>
             <p>{{user.name}}</p>
+            <span class="row">上次登陆:{{user.lastAccess | date:'yyyy-MM-dd HH:mm:ss' }}</span>
+            <span class="row">文章数:{{user.blogCount}}</span>
+            <span class="row">评论数:{{user.commentCount}}</span>
         </div>
 
         <div class="blog-listing">
-            Newest
+            最新文章
             <ul>
                 <li class="zy-new" ng-repeat="blog in newBlogs">
                     <h1 class="article-title">
@@ -60,7 +63,7 @@
         </div>
 
         <div class="blog-listing">
-            Hotest
+            最热文章
             <ul>
                 <li class="zy-hot" ng-repeat="blog in hotBlogs">
                     <h1 class="article-title">

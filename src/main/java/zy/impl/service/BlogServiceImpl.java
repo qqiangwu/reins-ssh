@@ -42,7 +42,11 @@ public class BlogServiceImpl implements BlogService {
         entity.setCommentCount(0);
         entity.setViewCount(0);
 
-        return fromEntity(mBlogRepo.save(entity));
+        val result = fromEntity(mBlogRepo.save(entity));
+
+        mUserService.addBlogCount(userId);
+
+        return result;
     }
 
     @Override
