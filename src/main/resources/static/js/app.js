@@ -94,6 +94,10 @@
             $root.user = null;
         });
 
+        $root.$on('monitor:unauthorized', function(){
+            $root.go();
+        });
+
         $root.logout = function() {
             Auth.logout().then(function(){
                 $root.report({

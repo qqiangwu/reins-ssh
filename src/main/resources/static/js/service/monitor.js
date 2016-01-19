@@ -18,7 +18,7 @@
                 },
                 responseFilter: {
                     value: function(resp){
-                        if (resp.status == 401) {
+                        if (resp.status === 401) {
                             $root.$broadcast('monitor:unauthorized');
                         }
                         if (resp.status === InternalServerError) {

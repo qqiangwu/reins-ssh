@@ -57,6 +57,17 @@
             (function init(){
                 _user = $conf.get(key);
 
+                if (_user) {
+                    $http.get("api/users")
+                        .then(function(result){
+                            $conf.set(key, result);
+                            _user = result;
+                        })
+                        .catch(function(){
+                            invalidate();
+                        });
+                }
+
                 $root.$on('auth:login', function(ev, user){
                     $conf.set(key, user);
                     _user = user;
@@ -68,7 +79,6 @@
 
                 $root.$on('monitor:unauthorized', function(){
                     invalidate();
-                    $root.go();
                 });
             })();
 
