@@ -12,7 +12,7 @@
                 .then(function(blog){
                     $scope.blog = blog;
 
-                    if ($scope.blog.user.id !== $scope.user.id) {
+                    if ($scope.blog.user.id !== $scope.user().id) {
                         $scope.go();
                     }
                 });

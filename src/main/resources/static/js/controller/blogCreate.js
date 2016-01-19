@@ -16,6 +16,7 @@
                             timeout: 2,
                             url: '/blogView/' + blog.id
                         });
+                        $scope.$emit('blog:add');
                     },
                     function(resp){
                         var status = resp.status;

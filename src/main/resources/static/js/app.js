@@ -83,16 +83,7 @@
 
     app.run(['$rootScope', 'Auth', function($root, Auth){
         $root.hasLogin = Auth.hasLogin;
-
-        $root.$on('auth:login', function(_, user){
-            $root.log.info('login', user);
-            $root.user = user;
-        });
-
-        $root.$on('auth:logout', function(){
-            $root.log.info('logout');
-            $root.user = null;
-        });
+        $root.user = Auth.user;
 
         $root.$on('monitor:unauthorized', function(){
             $root.go();
@@ -107,12 +98,5 @@
                 });
             });
         };
-
-        var user = Auth.user();
-
-        if (user) {
-            $root.log.info('app init login', user);
-            $root.user = user;
-        }
     }]);
 })();

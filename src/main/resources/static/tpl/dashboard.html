@@ -20,7 +20,7 @@
         <article class="jumbotron blog-listing" ng-repeat="blog in blogs">
             <h1 class="article-title">
                 <a href="#/dashboard">
-                    <img src="http://www.gravatar.com/avatar/{{user.email | gravatar}}" />
+                    <img src="http://www.gravatar.com/avatar/{{user().email | gravatar}}" />
                 </a>
                 <a ng-href="#/blogView/{{blog.id}}">{{blog.title}}</a>
                 <small>

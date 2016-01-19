@@ -3,7 +3,7 @@
 
     module.controller('DashboardCtrl', ['$scope', 'Blog', 'Comment',
         function($scope, Blog, Comment){
-            if (!$scope.user) {
+            if (!$scope.user()) {
                 $scope.go();
             }
 
@@ -12,7 +12,7 @@
 
             $scope.loadPage = function(){
                 $scope.blogs = Blog.queryByUser({
-                    user: $scope.user.id,
+                    user: $scope.user().id,
                     page: $scope.currentPage - 1,
                     size: $scope.pageSize
                 }, function(value){

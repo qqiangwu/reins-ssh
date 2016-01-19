@@ -38,7 +38,9 @@
                             message: 'Post comment successfully',
                             timeout: 1
                         });
+
                         $scope.comments.unshift(c);
+                        $scope.$emit('comment:add');
                     });
                 };
             }

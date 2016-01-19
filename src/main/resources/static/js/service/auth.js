@@ -55,12 +55,9 @@
 
             // log info persistence
             (function init(){
-                _user = $conf.get(key);
-
-                if (_user) {
+                if ($conf.get(key)) {
                     $http.get("api/users")
                         .then(function(result){
-                            $conf.set(key, result);
                             _user = result;
                         })
                         .catch(function(){
@@ -69,7 +66,7 @@
                 }
 
                 $root.$on('auth:login', function(ev, user){
-                    $conf.set(key, user);
+                    $conf.set(key, true);
                     _user = user;
                 });
 
@@ -79,6 +76,18 @@
 
                 $root.$on('monitor:unauthorized', function(){
                     invalidate();
+                });
+
+                $root.$on('comment:add', function(){
+                    if (_user) {
+                        ++_user.commentCount;
+                    }
+                });
+
+                $root.$on('blog:add', function(){
+                    if (_user) {
+                        ++_user.blogCount;
+                    }
                 });
             })();
 
