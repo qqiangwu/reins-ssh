@@ -3,7 +3,7 @@
 
     module.controller('DashboardCtrl', ['$scope', 'Blog', 'Comment',
         function($scope, Blog, Comment){
-            if (!$scope.user()) {
+            if (!$scope.user || !$scope.user()) {
                 $scope.go();
             }
 
@@ -30,6 +30,7 @@
                         timeout: 1
                     });
                     $scope.blogs.splice(idx, 1);
+                    $scope.$emit('blog:delete');
                 });
             };
 

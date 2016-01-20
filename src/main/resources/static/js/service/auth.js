@@ -89,6 +89,12 @@
                         ++_user.blogCount;
                     }
                 });
+
+                $root.$on('blog:delete', function(){
+                    if (_user) {
+                        --_user.blogCount;
+                    }
+                })
             })();
 
             return {
