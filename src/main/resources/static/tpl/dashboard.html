@@ -1,37 +1,37 @@
 <div class="navbar navbar-right nav-bar-menu">
     <a ng-if="hasLogin()" class="nav-badge btn" ng-href="#/blogCreate">
         <span class="glyphicon glyphicon-plus"></span>
-        New Blog
+ 		发布新帖
     </a>
     <a class="nav-badge btn" ng-href="#">
         <span class="glyphicon glyphicon-home"></span>
-        Main
+		 首页
     </a>
     <a ng-if="hasLogin()" class="nav-badge btn" ng-click="logout()">
         <span class="glyphicon glyphicon-log-out"></span>
-        Logout
+ 		登出
     </a>
 </div>
 
 <section class="container">
     <div>
-        <h1 class="text-center subtitle">Personal Blogs</h1>
+        <h1 class="text-center subtitle">个人帖子</h1>
 
         <article class="jumbotron blog-listing" ng-repeat="blog in blogs">
-            <h1 class="article-title">
-                <a href="#/dashboard">
-                    <img src="http://www.gravatar.com/avatar/{{user().email | gravatar}}" />
-                </a>
-                <a ng-href="#/blogView/{{blog.id}}">{{blog.title}}</a>
-                <small>
-                    <span ng-click="remove($index, blog)" class="btn btn-small glyphicon glyphicon-remove"></span>
-                    <a ng-href="#/blogEdit/{{blog.id}}" class="btn btn-small glyphicon glyphicon-edit"></a>
-                </small>
-            </h1>
-                <small class="glyphicon glyphicon-eye-open">{{blog.viewCount}}</small>
-                <small class="glyphicon glyphicon-envelope">{{blog.commentCount}}</small>
-                <small class="glyphicon glyphicon-user">{{blog.user.name}}</small>
-                <small class="glyphicon glyphicon-time">{{blog.createTime | timeago}}</small>
+            <a href="#/dashboard">
+                <img src="http://www.gravatar.com/avatar/{{user().email | gravatar}}" width="100px" height="100px"/>
+            </a>
+            <a style="font-size: 1.5em; padding: 0 10px; margin-top: -10px;" ng-href="#/blogView/{{blog.id}}">{{blog.title}}</a>
+            <middle>
+                <a ng-href="#/blogEdit/{{blog.id}}" class="btn btn-small glyphicon glyphicon-edit"></a>
+                <span ng-click="remove($index, blog)" class="btn btn-small glyphicon glyphicon-remove"></span>
+            </middle>
+            <div style="margin-top:-30px; margin-left:115px;">
+	            <middle style="padding:0 5px;" class="glyphicon glyphicon-eye-open">{{blog.viewCount}}</middle>
+	            <middle style="padding:0 5px;" class="glyphicon glyphicon-envelope">{{blog.commentCount}}</middle>
+	            <middle style="padding:0 5px;" class="glyphicon glyphicon-user">{{blog.user.name}}</middle>
+                <middle style="padding:0 5px;" class="glyphicon glyphicon-time">{{blog.createTime | timeago}}</middle>
+	        </div>
         </article>
     </div>
 

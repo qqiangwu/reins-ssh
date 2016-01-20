@@ -1,11 +1,11 @@
 <div class="navbar navbar-right nav-bar-menu">
     <a class="nav-badge btn" ng-href="#">
         <span class="glyphicon glyphicon-backward"></span>
-        Main
+		首页
     </a>
     <a ng-if="!hasLogin()" class="nav-badge btn" ng-href="#/login">
         <span class="glyphicon glyphicon-log-in"></span>
-        Login
+		登录
     </a>
 </div>
 
@@ -14,34 +14,34 @@
 
         <!-- USERNAME -->
         <div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
-            <label>Username</label>
-            <input type="text" name="username" class="form-control" ng-model="user.name"
+            <label style="color: white;">用户名</label>
+          <input type="text" name="username" class="form-control" ng-model="user.name"
                    ng-minlength="3"
                    ng-maxlength="16">
-            <p ng-show="userForm.username.$error.minlength" class="help-block">Username is too short.</p>
-            <p ng-show="userForm.username.$error.maxlength" class="help-block">Username is too long.</p>
+            <p ng-show="userForm.username.$error.minlength" class="help-block">用户名字符过短，3~16个字符</p>
+            <p ng-show="userForm.username.$error.maxlength" class="help-block">用户名字符过长，3~16个字符</p>
         </div>
 
         <!-- EMAIL -->
         <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
-            <label>Email</label>
+            <label style="color: white;">邮箱</label>
             <input type="email" name="email" class="form-control" ng-model="user.email">
             <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">
-                Enter a valid email.
+				 请输入有效的邮箱地址
             </p>
         </div>
 
         <!-- NAME -->
         <div class="form-group" ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }">
-            <label>Password</label>
+            <label style="color: white;">密码</label>
             <input type="password" name="password" class="form-control" ng-model="user.password"
                    ng-minlength="6"
                    ng-maxlength="32">
-            <p ng-show="userForm.password.$error.minlength" class="help-block">Password is too short.</p>
-            <p ng-show="userForm.password.$error.maxlength" class="help-block">Password is too long.</p>
+            <p ng-show="userForm.password.$error.minlength" class="help-block">密码字符过短，6~32个字符</p>
+            <p ng-show="userForm.password.$error.maxlength" class="help-block">密码字符过长，6~32个字符</p>
         </div>
 
-        <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Submit</button>
+        <center><button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">注册</button></center>
 
     </form>
 </div>

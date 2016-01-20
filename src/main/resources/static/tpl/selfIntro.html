@@ -1,34 +1,36 @@
 <div class="navbar navbar-right nav-bar-menu">
     <a ng-if="hasLogin()" class="nav-badge btn" ng-href="#/blogCreate">
         <span class="glyphicon glyphicon-plus"></span>
-        New Blog
+		发布帖子
     </a>
     <a class="nav-badge btn" ng-href="#">
         <span class="glyphicon glyphicon-home"></span>
-        Main
+ 		 首页
     </a>
     <a ng-if="hasLogin()" class="nav-badge btn" ng-href="#/dashboard">
         <span class="glyphicon glyphicon-dashboard"></span>
-        Dashboard
+		个人中心
     </a>
     <a ng-if="hasLogin()" class="nav-badge btn" ng-click="logout()">
         <span class="glyphicon glyphicon-log-out"></span>
-        Logout
+ 		 登出
     </a>
     <a ng-if="!hasLogin()" class="nav-badge btn" ng-href="#/login">
         <span class="glyphicon glyphicon-log-in"></span>
-        Login
+		 登录
     </a>
     <a ng-if="!hasLogin()" class="nav-badge btn" ng-href="#/register">
         <span class="glyphicon glyphicon-registration-mark"></span>
-        Register
+		 注册
     </a>
 </div>
 <div class="container">
     <article class="jumbotron">
-        <h1>About me </h1>
-        <p>
-            This is something about me.
+        <h2>关于我们 </h2>
+        <p style="font-size: 1.2em;">
+		            大家在这里以平等•自由•奔放的价值观分享自己的见解，在展示自己的同时，也希望大家能够找到与自己志同道合的伙伴，共同成长，合作共赢。</br>
+		            最后请大家共同爱护这个自由的交流环境，并预祝大家在这里交流愉快！</br></br>
+		    Designed by ZH & Y, Jan 19, 2016
         </p>
     </article>
 </div>

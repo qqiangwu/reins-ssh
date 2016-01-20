@@ -1,21 +1,23 @@
 body {
-    background-image: url(/img/bk.jpg);
+    background-image: url(/img/bk-light.jpg);
     height: 100%;
+    font-family:"微软雅黑";
 }
-
+/*design by title*/
 footer {
-    color: #ffffff;
-    padding-top: 40px;
+	color: #FFF;
+	padding-top: 40px;
+	font-weight:bold;
 }
-
+/*联系我们 title*/
 footer a {
-    color: #ffffff;
+	color: #FFF;
 }
-
+/*导航 title*/
 .nav-badge {
-    background: #000;
-    background: rgba(0, 0, 0, 0.8);
-    color: #ffffff;
+	background: #000;
+	background: rgba(0, 0, 0, 0.8);
+	color: #9CF;
 }
 
 .nav-badge:hover {
@@ -24,26 +26,26 @@ footer a {
 }
 
 .nav-bar-menu {
-    position: fixed;
+    position: absolute;
     right: 3%;
     top: 5%;
 }
-
+/*幸而有诗 不复忘*/
 .blog-title {
-    font-size: 60px;
-    font-weight: bold;
-    margin-top: 8%;
+	font-size: 60px;
+	font-weight: bold;
+	margin-top: 8%;
 }
 
 .blog-title a {
-    color: #ffffff;
-    text-decoration: none;
+	color: #FFF;
+	text-decoration: none;
 }
-
+/* 个人帖子title*/
 .subtitle {
-    color: #ffffff;
-    margin-top: 60px;
-    margin-bottom: 40px
+	color: #FFF;
+	margin-top: 60px;
+	margin-bottom: 40px
 }
 
 .article-title a {
@@ -51,6 +53,15 @@ footer a {
 }
 
 /* Animation support for items */
+.blog-listing1{
+	background-color: #ffffff;
+	border: 1px solid #ff9f70;
+	-moz-border-radius: 11px;
+	-webkit-border-radius: 11px;
+	border-radius: 11px;
+	padding: 18px 10px;
+	margin-bottom: 30px;
+}
 .blog-listing.ng-enter {
     -webkit-animation: 1s fade-in;
 }
@@ -105,12 +116,21 @@ section.view-frame.ng-leave {
 
 aside div.blog-listing {
     margin-bottom: 30px;
-    color: inherit;
+    color:#ffffff;
     background-color: #eee;
-    border-radius: 6px;
-    padding: 36px 5px;
+    border-radius: 10px;
+    padding: 18px 10px;
 }
-
+/*最新最热文章*/
 aside li .article-title {
-    font-size: 2em;
+    font-size: 1.2em;
 }
+/*注册登录*/
+.form-group{
+	width:40%;
+    margin-left: 30%;
+	}
+comment_right{
+	 font-size:0.5em;
+}
+	

@@ -41,6 +41,8 @@
 
                         $scope.comments.unshift(c);
                         $scope.$emit('comment:add');
+
+                        ++$scope.blog.commentCount;
                     });
                 };
             }

@@ -1,19 +1,22 @@
 <div class="navbar navbar-right nav-bar-menu">
     <a class="nav-badge btn" ng-href="#">
         <span class="glyphicon glyphicon-backward"></span>
-        Main
+		首页
     </a>
     <a ng-if="!hasLogin()" class="nav-badge btn" ng-href="#/register">
         <span class="glyphicon glyphicon-registration-mark"></span>
-        Register
+		注册
     </a>
 </div>
 
 <div class="container">
+   <div class="form-group">
     <form class="form-signin" role="form">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="email" ng-model="token.email" class="form-control" placeholder="Email address" required autofocus/>
-        <input type="password" ng-model="token.password" class="form-control" placeholder="Password" required/>
-        <button class="btn btn-lg btn-primary btn-block" ng-click="login()">Sign in</button>
-    </form>
+        <h3 style="color: white;">请登录</h3> <div class=“logincss”>
+        <input type="email" ng-model="token.email" class="form-control" placeholder="邮箱" required autofocus/>
+        <p></p>
+        <input type="password" ng-model="token.password" class="form-control" placeholder="密码" required/>
+        <p></p>
+        <center><button class="btn btn-primary " ng-click="login()">登录</button></center></div>
+    </form></div>
 </div>

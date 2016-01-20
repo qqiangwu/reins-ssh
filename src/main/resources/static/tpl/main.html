@@ -1,58 +1,66 @@
-<div class="navbar navbar-right nav-bar-menu">
+<style type="text/css">
+<!--
+.container .col-md-3 .jumbotron span .row {
+	font-size: 1.2em;
+	font-weight: bold;
+	left: 5px;
+}
+-->
+</style><div class="navbar navbar-right nav-bar-menu">
     <a ng-if="hasLogin()" class="nav-badge btn" ng-href="#/blogCreate">
         <span class="glyphicon glyphicon-plus"></span>
-        New Blog
-    </a>
+		 发布新帖
+</a>
     <a class="nav-badge btn" ng-href="#">
         <span class="glyphicon glyphicon-home"></span>
-        Main
-    </a>
+		首页
+</a>
     <a ng-if="hasLogin()" class="nav-badge btn" ng-href="#/dashboard">
         <span class="glyphicon glyphicon-dashboard"></span>
-        Dashboard
-    </a>
+ 		个人中心
+</a>
     <a ng-if="hasLogin()" class="nav-badge btn" ng-click="logout()">
         <span class="glyphicon glyphicon-log-out"></span>
-        Logout
-    </a>
+		 登出
+</a>
     <a ng-if="!hasLogin()" class="nav-badge btn" ng-href="#/login">
         <span class="glyphicon glyphicon-log-in"></span>
-        Login
-    </a>
+		登录
+</a>
     <a ng-if="!hasLogin()" class="nav-badge btn" ng-href="#/register">
         <span class="glyphicon glyphicon-registration-mark"></span>
-        Register
-    </a>
+		注册
+  </a>
 </div>
 <section class="container">
     <div class="col-md-9">
         <article class="row jumbotron blog-listing" ng-repeat="blog in blogs">
             <div class="col-md-3">
-                <img src="http://www.gravatar.com/avatar/{{blog.user.email | gravatar}}" />
+                <img src="http://www.gravatar.com/avatar/{{blog.user.email | gravatar}}" width="100px" height="100px" />
             </div>
-            <div class="col-md-9">
-                <h1 class="article-title">
-                    <a ng-href="#/blogView/{{blog.id}}">{{blog.title}}</a>
-                </h1>
-                <small class="glyphicon glyphicon-eye-open">{{blog.viewCount}}</small>
-                <small class="glyphicon glyphicon-envelope">{{blog.commentCount}}</small>
-                <small class="glyphicon glyphicon-user">{{blog.user.name}}</small>
-                <small class="glyphicon glyphicon-time">{{blog.createTime | timeago }}</small>
+            <div class="col-md-9" style="margin-top:15px; margin-left:-50px;">
+                <span style="font-size: 1.5em;">
+                	<a ng-href="#/blogView/{{blog.id}}">{{blog.title}}</a>
+                </span>
+                </br></br>
+                <middle class="glyphicon glyphicon-eye-open" style="padding: 0px 5px;">{{blog.viewCount}}</middle>
+                <middle class="glyphicon glyphicon-envelope" style="padding: 0px 5px;">{{blog.commentCount}}</middle>
+                <middle style="padding: 0px 5px; font-family="微软雅黑";" class="glyphicon glyphicon-user">{{blog.user.name}}</middle>
+                <middle class="glyphicon glyphicon-time" style="padding: 0px 5px;">{{blog.createTime | timeago}}</middle>
             </div>
         </article>
     </div>
     <aside class="col-md-3">
         <div ng-show="hasLogin()" class="jumbotron">
             <a href="#/dashboard">
-                <img src="http://www.gravatar.com/avatar/{{user().email | gravatar}}" />
+               <center> <img src="http://www.gravatar.com/avatar/{{user().email | gravatar}}" /></center>
             </a>
-            <p>{{user().name}}</p>
-            <span class="row">上次登陆:{{user().lastAccess | timeago }}</span>
-            <span class="row">文章数:{{user().blogCount}}</span>
-            <span class="row">评论数:{{user().commentCount}}</span>
+            <center><p style="font-size: 1.5em; font-weight : bold;padding: 10px 0">{{user().name}}</p></center>
+            <center><span class=""><span class="row">帖子数: {{user().blogCount}}&nbsp;&nbsp;评论数: {{user().commentCount}}</span></span></center>
+            <span style="left :85px;position : absolute;">上次登陆:{{user().lastAccess |timeago }}</span>
         </div>
 
-        <div class="blog-listing">
+        <div class="blog-listing1">
             最新文章
             <ul>
                 <li class="zy-new" ng-repeat="blog in newBlogs">
@@ -63,7 +71,7 @@
             </ul>
         </div>
 
-        <div class="blog-listing">
+        <div class="blog-listing1">
             最热文章
             <ul>
                 <li class="zy-hot" ng-repeat="blog in hotBlogs">
