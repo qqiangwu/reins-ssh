@@ -48,6 +48,12 @@
                 return deferred.promise;
             }
 
+            function setState(user) {
+                $conf.set(key, true)
+                _user = user;
+                console.log('set:',user);
+            }
+
             function invalidate() {
                 $conf.clear(key);
                 _user = null;
@@ -58,25 +64,16 @@
                 if ($conf.get(key)) {
                     $http.get("api/users")
                         .then(function(result){
-                            _user = result;
+                            setState(result.data);
                         })
-                        .catch(function(){
-                            invalidate();
-                        });
+                        .catch(invalidate);
                 }
 
-                $root.$on('auth:login', function(ev, user){
-                    $conf.set(key, true);
-                    _user = user;
-                });
+                $root.$on('auth:login', setState);
 
-                $root.$on('auth:logout', function(){
-                    invalidate();
-                });
+                $root.$on('auth:logout', invalidate);
 
-                $root.$on('monitor:unauthorized', function(){
-                    invalidate();
-                });
+                $root.$on('monitor:unauthorized', invalidate);
 
                 $root.$on('comment:add', function(){
                     if (_user) {

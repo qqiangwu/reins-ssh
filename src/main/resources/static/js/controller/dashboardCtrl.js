@@ -3,7 +3,7 @@
 
     module.controller('DashboardCtrl', ['$scope', 'Blog', 'Comment',
         function($scope, Blog, Comment){
-            if (!$scope.user || !$scope.user()) {
+            if (!($scope.user && $scope.user())) {
                 $scope.go();
             }
 
