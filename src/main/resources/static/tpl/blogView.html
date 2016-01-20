@@ -35,6 +35,7 @@
             <small class="glyphicon glyphicon-eye-open">{{blog.viewCount}}</small>
             <small class="glyphicon glyphicon-envelope">{{blog.commentCount}}</small>
             <small class="glyphicon glyphicon-user">{{blog.user.name}}</small>
+            <small class="glyphicon glyphicon-time">{{blog.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</small>
             <hr/>
             <div btf-markdown="blog.content"></div>
             <hr/>
@@ -50,8 +51,11 @@
 
     <div>
         <article class="jumbotron" ng-repeat="comment in comments">
-            <img src="http://www.gravatar.com/avatar/{{blog.user.email | gravatar}}" />
-            <h2><span class="small glyphicon glyphicon-user">{{comment.user.name}}</span></h2>
+            <img src="http://www.gravatar.com/avatar/{{comment.user.email | gravatar}}" />
+            <div>
+                <small class="glyphicon glyphicon-user">{{comment.user.name}}</small>
+                <small class="glyphicon glyphicon-time">{{comment.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</small>
+            </div>
             <div btf-markdown="comment.content"></div>
         </article>
         <pagination class="pagination-sm"
