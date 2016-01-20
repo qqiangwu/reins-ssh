@@ -12,6 +12,7 @@ import zy.exception.blog.BlogException;
 import zy.exception.blog.InvalidUserException;
 import zy.exception.user.UserException;
 import zy.service.BlogService;
+import zy.support.datahub.Publish;
 import zy.web.util.ErrorCode;
 import zy.web.util.SecurityUtils;
 
@@ -33,6 +34,7 @@ public class BlogResource {
         return mBlogService.find(pageReq);
     }
 
+    @Publish(value = "test")
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public Blog getOne(@PathVariable final int id) {
         return mBlogService.find(id);

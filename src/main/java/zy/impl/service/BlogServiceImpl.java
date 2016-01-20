@@ -14,7 +14,8 @@ import zy.impl.entity.BlogEntity;
 import zy.impl.repo.BlogRepo;
 import zy.service.BlogService;
 import zy.service.UserService;
-import zy.support.aop.Monitor;
+import zy.support.datahub.Publish;
+import zy.support.track.Monitor;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -82,8 +83,10 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public void delete(final int id) {
+    @Publish("blog:delete")
+    public int delete(final int id) {
         mBlogRepo.delete(id);
+        return id;
     }
 
     @Override

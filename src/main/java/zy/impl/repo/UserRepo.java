@@ -15,4 +15,12 @@ public interface UserRepo extends PagingAndSortingRepository<UserEntity, Integer
     @Modifying
     @Query("UPDATE UserEntity t set t.blogCount = t.blogCount + 1 WHERE t.id = ?1")
     void addBlogCount(int id);
+
+    @Modifying
+    @Query("UPDATE UserEntity t set t.commentCount = t.commentCount - 1 WHERE t.id = ?1")
+    void decrCommentCount(int id);
+
+    @Modifying
+    @Query("UPDATE UserEntity t set t.blogCount = t.blogCount - 1 WHERE t.id = ?1")
+    void decrBlogCount(int id);
 }

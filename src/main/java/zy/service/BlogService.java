@@ -14,7 +14,7 @@ public interface BlogService {
     Page<Blog> findByUser(int userId, Pageable page);
 
     boolean update(int id, String title, String content);
-    void delete(int id);
+    int delete(int id);
 
     boolean exists(int id);
     boolean hasAccessTo(int userId, int blogId);
