@@ -51,7 +51,6 @@
             function setState(user) {
                 $conf.set(key, true)
                 _user = user;
-                console.log('set:',user);
             }
 
             function invalidate() {
@@ -69,7 +68,9 @@
                         .catch(invalidate);
                 }
 
-                $root.$on('auth:login', setState);
+                $root.$on('auth:login', function(_, user){
+                    setState(user);
+                });
 
                 $root.$on('auth:logout', invalidate);
 
