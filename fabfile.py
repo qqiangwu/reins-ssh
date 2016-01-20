@@ -5,7 +5,7 @@ def prepare():
 
 def run():
     prepare()
-    local('mvn spring-boot:run -Dlogging.level.org.springframework.orm=DEBUG')
+    local('mvn spring-boot:run -Drun.arguments=--logging.level.org.springframework.orm=DEBUG')
 
 def testUnit():
     prepare()
