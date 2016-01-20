@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-@Slf4j(topic = "GaugeCollector")
+@Slf4j(topic = "gaugeCollector")
 public class GaugeCollector {
     final Map<Object, Method> mGauges = new HashMap<>();
 

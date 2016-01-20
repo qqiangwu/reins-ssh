@@ -22,12 +22,14 @@ import java.util.Date;
 
 @Service
 @Monitor
+@Transactional
 public class BlogServiceImpl implements BlogService {
     @Autowired BlogRepo mBlogRepo;
     @Autowired UserService mUserService;
 
     @Override
-    @Transactional
+    @Transactional(readOnly = false)
+    @Publish("blog:create")
     public Blog create(final int userId, final String title, final String content) throws BlogException {
         if (!mUserService.exists(userId)) {
             throw new InvalidUserException(Integer.toString(userId));
@@ -43,11 +45,7 @@ public class BlogServiceImpl implements BlogService {
         entity.setCommentCount(0);
         entity.setViewCount(0);
 
-        val result = fromEntity(mBlogRepo.save(entity));
-
-        mUserService.addBlogCount(userId);
-
-        return result;
+        return fromEntity(mBlogRepo.save(entity));
     }
 
     @Override
@@ -84,9 +82,13 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     @Publish("blog:delete")
-    public int delete(final int id) {
+    @Transactional(readOnly = false)
+    public Blog delete(final int id) {
+        val blog = mBlogRepo.findOne(id);
+
         mBlogRepo.delete(id);
-        return id;
+
+        return fromEntity(blog);
     }
 
     @Override
@@ -106,13 +108,6 @@ public class BlogServiceImpl implements BlogService {
     @Transactional(readOnly = false)
     public void addViewCount(final int blogId) {
         mBlogRepo.addViewCount(blogId);
-    }
-
-    @Override
-    @Async
-    @Transactional(readOnly = false)
-    public void addCommentCount(final int blogId) {
-        mBlogRepo.addCommentCount(blogId);
     }
 
     private final Blog fromEntity(final BlogEntity entity) {

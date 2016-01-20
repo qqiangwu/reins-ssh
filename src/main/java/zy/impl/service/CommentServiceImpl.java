@@ -13,6 +13,7 @@ import zy.impl.repo.CommentRepo;
 import zy.service.BlogService;
 import zy.service.CommentService;
 import zy.service.UserService;
+import zy.support.datahub.Publish;
 import zy.support.track.Monitor;
 
 import java.sql.Timestamp;
@@ -20,13 +21,15 @@ import java.util.Date;
 
 @Service
 @Monitor
+@Transactional
 public class CommentServiceImpl implements CommentService {
     @Autowired CommentRepo mCommentRepo;
     @Autowired UserService mUserService;
     @Autowired BlogService mBlogService;
 
     @Override
-    @Transactional
+    @Transactional(readOnly = false)
+    @Publish("comment:create")
     public Comment create(final int userId, final int blogId, final String content) throws CommentException {
         if (!mUserService.exists(userId)) {
             throw new CommentException(String.format("userId:%d", userId));
@@ -43,12 +46,7 @@ public class CommentServiceImpl implements CommentService {
         entity.setContent(content);
         entity.setCreationDate(new Timestamp(new Date().getTime()));
 
-        val result = fromEntity(mCommentRepo.save(entity));
-
-        mBlogService.addCommentCount(blogId);
-        mUserService.addCommentCount(userId);
-
-        return result;
+        return fromEntity(mCommentRepo.save(entity));
     }
 
     @Override
@@ -62,6 +60,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @Transactional(readOnly = false)
     public Comment update(final Comment comment) {
         val entity = new CommentEntity();
 
@@ -83,6 +82,7 @@ public class CommentServiceImpl implements CommentService {
 
         return new Comment(
                 entity.getId(),
+                entity.getBlog(),
                 mUserService.find(entity.getUser()),
                 entity.getContent(),
                 entity.getCreationDate().getTime());

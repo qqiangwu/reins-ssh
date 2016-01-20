@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import zy.support.LoggingSupport;
 
 @Aspect
-@Order(100)
+@Order(0)
 @Component
 public class TrackAdvice {
     final Logger mLogger;

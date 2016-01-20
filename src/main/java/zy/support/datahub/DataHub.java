@@ -1,5 +1,6 @@
 package zy.support.datahub;
 
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -16,6 +17,7 @@ import javax.annotation.PostConstruct;
  *
  */
 @Component
+@Slf4j(topic = "dataHub")
 public class DataHub {
     private final MultiValueMap<String, Subscriber> mSubscribers = new LinkedMultiValueMap<>();
     private final ApplicationContext mContext;
@@ -29,11 +31,15 @@ public class DataHub {
     public void setup() {
         val candidates = mContext.getBeansWithAnnotation(Subscribe.class);
 
-        for (val bean: candidates.values()) {
-            if (bean instanceof Subscriber) {
-                val ann = ((Subscriber) bean).getClass().getAnnotation(Subscribe.class);
+        for (val entry: candidates.entrySet()) {
+            val beanName = entry.getKey();
+            val bean = entry.getValue();
 
-                mSubscribers.add(ann.value(), (Subscriber) bean);
+            if (bean instanceof Subscriber) {
+                val ann = mContext.findAnnotationOnBean(beanName, Subscribe.class);
+
+                log.info("Subscribe {} to topic {}", beanName, ann.topic());
+                mSubscribers.add(ann.topic(), (Subscriber) bean);
             }
         }
     }

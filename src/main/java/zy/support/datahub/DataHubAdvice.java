@@ -16,9 +16,9 @@ import org.springframework.stereotype.Component;
  *
  */
 @Aspect
-@Order(200)
+@Order(100)
 @Component
-@Slf4j(topic = "DataHub")
+@Slf4j(topic = "dataHub")
 public class DataHubAdvice {
     @Autowired DataHub mDataHub;
 
@@ -35,6 +35,7 @@ public class DataHubAdvice {
             return;
         }
 
+        log.info("event={}", topic);
         mDataHub.notify(topic, result);
     }
 }
