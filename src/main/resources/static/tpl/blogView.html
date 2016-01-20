@@ -35,7 +35,7 @@
             <small class="glyphicon glyphicon-eye-open">{{blog.viewCount}}</small>
             <small class="glyphicon glyphicon-envelope">{{blog.commentCount}}</small>
             <small class="glyphicon glyphicon-user">{{blog.user.name}}</small>
-            <small class="glyphicon glyphicon-time">{{blog.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</small>
+            <small class="glyphicon glyphicon-time">{{blog.createTime | timeago }}</small>
             <hr/>
             <div btf-markdown="blog.content"></div>
             <hr/>
@@ -54,7 +54,7 @@
             <img src="http://www.gravatar.com/avatar/{{comment.user.email | gravatar}}" />
             <div>
                 <small class="glyphicon glyphicon-user">{{comment.user.name}}</small>
-                <small class="glyphicon glyphicon-time">{{comment.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</small>
+                <small class="glyphicon glyphicon-time">{{comment.createTime | timeago}}</small>
             </div>
             <div btf-markdown="comment.content"></div>
         </article>

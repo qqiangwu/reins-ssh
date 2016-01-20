@@ -37,7 +37,7 @@
                 <small class="glyphicon glyphicon-eye-open">{{blog.viewCount}}</small>
                 <small class="glyphicon glyphicon-envelope">{{blog.commentCount}}</small>
                 <small class="glyphicon glyphicon-user">{{blog.user.name}}</small>
-                <small class="glyphicon glyphicon-time">{{blog.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</small>
+                <small class="glyphicon glyphicon-time">{{blog.createTime | timeago }}</small>
             </div>
         </article>
     </div>
@@ -47,7 +47,7 @@
                 <img src="http://www.gravatar.com/avatar/{{user().email | gravatar}}" />
             </a>
             <p>{{user().name}}</p>
-            <span class="row">上次登陆:{{user().lastAccess | date:'yyyy-MM-dd HH:mm:ss' }}</span>
+            <span class="row">上次登陆:{{user().lastAccess | timeago }}</span>
             <span class="row">文章数:{{user().blogCount}}</span>
             <span class="row">评论数:{{user().commentCount}}</span>
         </div>
