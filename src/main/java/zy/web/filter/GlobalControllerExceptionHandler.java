@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import zy.exception.common.ForbiddenException;
 import zy.web.util.ErrorCode;
 
 @ControllerAdvice
@@ -32,6 +33,13 @@ public class GlobalControllerExceptionHandler {
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     @ResponseBody
     public ErrorCode handleBadInput(final MethodArgumentTypeMismatchException e) {
+        return new ErrorCode(e.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(ForbiddenException.class)
+    @ResponseBody
+    public ErrorCode handleBadInput(final ForbiddenException e) {
         return new ErrorCode(e.getMessage());
     }
 }

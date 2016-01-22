@@ -22,4 +22,8 @@ public final class ZyUserDetails extends org.springframework.security.core.userd
     public User getUser() {
         return mUser;
     }
+
+    public void setUser(final User user) {
+        mUser = user;
+    }
 }

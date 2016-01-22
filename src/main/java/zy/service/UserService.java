@@ -13,7 +13,11 @@ public interface UserService extends UserDetailsService {
 
     Page<User> find(Pageable page);
 
+    User set(int id, String name);
+
     void delete(int id);
 
     boolean exists(int id);
+
+    void setAvatar(int id, byte[] image);
 }

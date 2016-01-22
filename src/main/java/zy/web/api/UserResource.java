@@ -7,18 +7,18 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.web.bind.annotation.*;
 import zy.domain.Blog;
 import zy.domain.User;
 import zy.domain.ZyUserDetails;
+import zy.exception.common.ForbiddenException;
 import zy.exception.user.EmailAlreadyFoundException;
 import zy.exception.user.InvalidNewUserException;
 import zy.exception.user.UserException;
 import zy.service.BlogService;
 import zy.service.UserService;
 import zy.web.util.ErrorCode;
+import zy.web.util.SecurityUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -49,6 +49,25 @@ public class UserResource {
         val details = (ZyUserDetails) token.getPrincipal();
 
         return details.getUser();
+    }
+
+    @RequestMapping(value = "{id}", method = RequestMethod.POST)
+    public User setUser(@PathVariable final int id,
+                        @RequestParam(required = false) final String userName,
+                        @RequestParam(required = false) final byte[] image) throws ForbiddenException {
+        if (SecurityUtils.getUserId() != id) {
+            throw new ForbiddenException();
+        }
+
+        val result = mUserService.set(SecurityUtils.getUserId(), userName);
+
+        SecurityUtils.getUser().setUser(result);
+
+        if (image != null && image.length != 0) {
+            mUserService.setAvatar(id, image);
+        }
+
+        return result;
     }
 
     @RequestMapping(value = "{id}/blogs", method = RequestMethod.GET)

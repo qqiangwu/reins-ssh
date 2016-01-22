@@ -14,35 +14,73 @@
 </div>
 
 <section class="container">
-    <div>
-        <h1 class="text-center subtitle">个人帖子</h1>
+    <tabset justified="true" type="pills">
+        <tab heading="个人设置">
+            <div ng-controller="SelfProfileCtrl" ng-init="userName = user().name">
+                <div flow-init="{singleFile:true}"
+                     flow-file-added="!!{jpg:1,jpeg:1}[$file.getExtension()]">
+                    <label for="user-name-label">用户名</label>
+                    <input id="user-name-label" class="form-control" ng-model="userName" placeholder="用户名">
 
-        <article class="jumbotron blog-listing" ng-repeat="blog in blogs">
-            <a href="#/dashboard">
-                <img src="http://www.gravatar.com/avatar/{{user().email | gravatar}}" width="100px" height="100px"/>
-            </a>
-            <a style="font-size: 1.5em; padding: 0 10px; margin-top: -10px;" ng-href="#/blogView/{{blog.id}}">{{blog.title}}</a>
-            <middle>
-                <a ng-href="#/blogEdit/{{blog.id}}" class="btn btn-small glyphicon glyphicon-edit"></a>
-                <span ng-click="remove($index, blog)" class="btn btn-small glyphicon glyphicon-remove"></span>
-            </middle>
-            <div style="margin-top:-30px; margin-left:115px;">
-	            <middle style="padding:0 5px;" class="glyphicon glyphicon-eye-open">{{blog.viewCount}}</middle>
-	            <middle style="padding:0 5px;" class="glyphicon glyphicon-envelope">{{blog.commentCount}}</middle>
-	            <middle style="padding:0 5px;" class="glyphicon glyphicon-user">{{blog.user.name}}</middle>
-                <middle style="padding:0 5px;" class="glyphicon glyphicon-time">{{blog.createTime | timeago}}</middle>
-	        </div>
-        </article>
-    </div>
+                    <h3>
+                        <a name="image-example" class="anchor">
+                            <span class="octicon octicon-link"></span>
+                        </a>Single Image upload
+                    </h3>
+                    <div class="thumbnail" ng-show="!$flow.files.length">
+                        <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image">
+                    </div>
+                    <div class="thumbnail ng-hide" ng-show="$flow.files.length">
+                        <img flow-img="$flow.files[0]">
+                    </div>
+                    <div>
+                        <span class="btn btn-primary" ng-show="!$flow.files.length" flow-btn="">Select image<input type="file" style="visibility: hidden; position: absolute;"></span>
+                        <span class="btn btn-info ng-hide" ng-show="$flow.files.length" flow-btn="">Change<input type="file" style="visibility: hidden; position: absolute;"></span>
+                      <span class="btn btn-danger ng-hide" ng-show="$flow.files.length" ng-click="$flow.cancel()">
+                        Remove
+                      </span>
+                    </div>
+                    <p>
+                        Only JPG,JEPG files allowed.
+                    </p>
+                    <input type="submit" class="btn btn-primary" ng-click="upload(userName, $flow.files[0])" value="确认">
+                </div>
+            </div>
+        </tab>
+        <tab heading="个人文章" >
+            <div ng-controller="SelfBlogCtrl">
+                <div>
+                    <h1 class="text-center subtitle">个人帖子</h1>
 
-    <pagination class="pagination-sm"
-                ng-show="numPages > 1"
-                ng-model="currentPage"
-                max-size="10"
-                items-per-page="pageSize"
-                total-items="totalElements"
-                boundary-links="true"
-                num-pages="numPages"
-                ng-change="loadPage()">
-    </pagination>
+                    <article class="jumbotron blog-listing" ng-repeat="blog in blogs">
+                        <a href="#/dashboard">
+                            <img ng-src="{{user() | avatar}}" width="100px" height="100px"/>
+                        </a>
+                        <a style="font-size: 1.5em; padding: 0 10px; margin-top: -10px;" ng-href="#/blogView/{{blog.id}}">{{blog.title}}</a>
+                        <middle>
+                            <a ng-href="#/blogEdit/{{blog.id}}" class="btn btn-small glyphicon glyphicon-edit"></a>
+                            <span ng-click="remove($index, blog)" class="btn btn-small glyphicon glyphicon-remove"></span>
+                        </middle>
+                        <div style="margin-top:-30px; margin-left:115px;">
+                            <middle style="padding:0 5px;" class="glyphicon glyphicon-eye-open">{{blog.viewCount}}</middle>
+                            <middle style="padding:0 5px;" class="glyphicon glyphicon-envelope">{{blog.commentCount}}</middle>
+                            <middle style="padding:0 5px;" class="glyphicon glyphicon-user">{{blog.user.name}}</middle>
+                            <middle style="padding:0 5px;" class="glyphicon glyphicon-time">{{blog.createTime | timeago}}</middle>
+                        </div>
+                    </article>
+                </div>
+
+                <pagination class="pagination-sm"
+                            ng-show="numPages > 1"
+                            ng-model="currentPage"
+                            max-size="10"
+                            items-per-page="pageSize"
+                            total-items="totalElements"
+                            boundary-links="true"
+                            num-pages="numPages"
+                            ng-change="loadPage()">
+                </pagination>
+            </div>
+        </tab>
+    </tabset>
 </section>

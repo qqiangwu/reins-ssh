@@ -1,7 +1,7 @@
 (function(module){
     'use strict';
 
-    module.controller('DashboardCtrl', ['$scope', 'Blog', 'Comment',
+    module.controller('SelfBlogCtrl', ['$scope', 'Blog', 'Comment',
         function($scope, Blog, Comment){
             if (!($scope.user && $scope.user())) {
                 $scope.go();
@@ -37,4 +37,43 @@
             $scope.loadPage();
         }
     ]);
+
+    module.controller('SelfProfileCtrl', ['$scope', 'Auth', 'User', function($scope, Auth, User){
+        if (!($scope.user && $scope.user())) {
+            $scope.go();
+        }
+
+        $scope.upload = function(userName, image) {
+            if (!userName) {
+                $scope.report({
+                    message: "Invalid user name",
+                    timeout: 1
+                });
+                return;
+            }
+
+            var fileReader = new FileReader();
+            fileReader.readAsDataURL(image.file);
+            fileReader.onload = function (event) {
+                User.update({
+                    id: $scope.user().id,
+                    userName: userName,
+                    image: event.target.result
+                }, function(result) {
+                    $scope.report({
+                        message: '修改信息成功, 这需要一段时间才能生效',
+                        timeout: 1,
+                        url: '/',
+                        reload: true
+                    });
+
+                    Auth.update(result);
+                });
+            };
+        };
+    }]);
+
+    module.controller('DashboardCtrl', ['$scope', function($scope){
+
+    }]);
 })(angular.module('miao.controller'));

@@ -16,7 +16,7 @@
         'ngSanitize',
         'LocalStorageModule',
         'btford.markdown',
-        'angular-md5',
+        'flow',
         'miao.filter', 'miao.directive', 'miao.util', 'miao.router',
         'miao.resource', 'miao.service', 'miao.tpl'
     ]);
@@ -52,8 +52,12 @@
             $rootScope.itemsPerPage = 5;
             $rootScope.maxPgSize = 7;
 
-            $rootScope.go = function(url){
+            $rootScope.go = function(url, reload){
                 $location.path(url || '/');
+
+                if (reload) {
+                    $location.reload(true);
+                }
             };
         }
     ]);
@@ -74,7 +78,7 @@
 
                 if (option.url) {
                     result.finally(function(){
-                        $rootScope.go(option.url);
+                        $rootScope.go(option.url, option.reload);
                     });
                 }
             };

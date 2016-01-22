@@ -1,5 +1,6 @@
 package zy.impl.service;
 
+import com.qiniu.common.QiniuException;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import zy.domain.User;
 import zy.domain.ZyUserDetails;
+import zy.exception.ServiceException;
 import zy.exception.user.EmailAlreadyFoundException;
 import zy.exception.user.InvalidNewUserException;
 import zy.exception.user.UserException;
@@ -25,6 +27,7 @@ import java.util.Date;
 @Monitor
 public class UserServiceImpl implements UserService {
     @Autowired UserRepo mUserRepo;
+    @Autowired QiniuServiceImpl mQiniuService;
 
     @Override
     @Transactional(readOnly = false)
@@ -72,6 +75,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = false)
+    public User set(final int id, final String name) {
+        UserEntity user = mUserRepo.findOne(id);
+
+        if (user == null) {
+            return null;
+        }
+
+        if (name != null && !"".equals(name)) {
+            user.setName(name);
+            user.setLastAccessDate(new Timestamp(new Date().getTime()));
+            user = mUserRepo.save(user);
+        }
+
+        return User.fromEntity(user);
+    }
+
+    @Override
     public void delete(final int id) {
         mUserRepo.delete(id);
     }
@@ -79,6 +100,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean exists(int id) {
         return mUserRepo.exists(id);
+    }
+
+    @Override
+    public void setAvatar(final int id, final byte[] image) {
+        try {
+            if (!mQiniuService.upload(id, image).isOK()) {
+                throw new ServiceException("Fail to upload to qiniu");
+            }
+        } catch (QiniuException e) {
+            throw new ServiceException("Fail to upload to qiniu: " + e.response.toString());
+        }
     }
 
     private final User fromEntity(final UserEntity entity) {

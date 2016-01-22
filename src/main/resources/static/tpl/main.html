@@ -36,7 +36,7 @@
     <div class="col-md-9">
         <article class="row jumbotron blog-listing" ng-repeat="blog in blogs">
             <div class="col-md-3">
-                <img src="http://www.gravatar.com/avatar/{{blog.user.email | gravatar}}" width="100px" height="100px" />
+                <img ng-src="{{blog.user | avatar}}" width="100px" height="100px" />
             </div>
             <div class="col-md-9" style="margin-top:15px; margin-left:-50px;">
                 <span style="font-size: 1.5em;">
@@ -53,7 +53,7 @@
     <aside class="col-md-3">
         <div ng-show="hasLogin()" class="jumbotron">
             <a href="#/dashboard">
-               <center> <img src="http://www.gravatar.com/avatar/{{user().email | gravatar}}" /></center>
+               <center> <img ng-src="{{user() | avatar}}" /></center>
             </a>
             <center><p style="font-size: 1.5em; font-weight : bold;padding: 10px 0">{{user().name}}</p></center>
             <center><span class=""><span class="row">帖子数: {{user().blogCount}}&nbsp;&nbsp;评论数: {{user().commentCount}}</span></span></center>

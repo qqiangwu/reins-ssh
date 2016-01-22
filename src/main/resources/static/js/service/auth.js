@@ -105,6 +105,9 @@
                 },
                 hasLogin: function() {
                     return !!_user;
+                },
+                update: function(user) {
+                    _user = user;
                 }
             };
         }

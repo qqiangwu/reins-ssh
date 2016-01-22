@@ -37,7 +37,7 @@
 <div class="container">
     <div>
         <article class="jumbotron">
-            <img src="http://www.gravatar.com/avatar/{{blog.user.email | gravatar}}" width="100px" height="100px"/>
+            <img ng-src="{{blog.user | avatar}}" width="100px" height="100px"/>
             <div style="margin-top: -80px; margin-left:120px;">
             	<span style="font-size:2em; padding:0 10px;">{{blog.title}}</span>
             	</br>
@@ -64,7 +64,7 @@
   <div>
     <article class="jumbotron" ng-repeat="comment in comments">
             <span style="float:left;width:15%">
-                <img src="http://www.gravatar.com/avatar/{{comment.user.email | gravatar}}" width="100px" height="100px"/>
+                <img ng-src="{{comment.user | avatar}}" width="100px" height="100px"/>
             </span>
             <span style="font-size:1.5em; padding: 0 5px; float:rightt;width:85%; margin-top:8px; margin-left:-10px;" class="small glyphicon glyphicon-user">{{comment.user.name}} {{comment.createTime |timeago}}</span>
             <span style="font-size:0.8em; padding: 0 5px;float:rightt;width:85%" btf-markdown="comment.content"></span>
