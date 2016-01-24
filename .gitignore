@@ -4,3 +4,4 @@ target
 src/main/java/META-INF/
 *.iml
 *.pyc
+.tmp

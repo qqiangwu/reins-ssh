@@ -1,0 +1,27 @@
+<!doctype html>
+<html ng-app="miao">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="./app.css">
+
+    <link href="./favicon.ico" rel="bookmark" type="image/x-icon" />
+    <link href="./favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="./favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <title>Blog</title>
+</head>
+<body>
+    <link rel="import" href="./partials/header.html?__inline"/>
+
+    <!-------------------------------------------------------------------------->
+    <section ng-view class="view-frame">
+    </section>
+
+    <link rel="import" href="./partials/footer.html?__inline"/>
+
+    <!--------------------------------------------------->
+    <!-- @require "boot/app" -->
+</body>
+</html>
