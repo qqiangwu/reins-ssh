@@ -21,6 +21,9 @@ fis.match('/import/(**)', {
 fis.match('/modules/(**)', {
         release: '${static}/$1'
     })
+    .match('/modules/pages/*/*.js', {
+        release: false
+    })
     .match('/views/(**)', {
         release: '$1'
     })
@@ -51,8 +54,11 @@ fis.media('prod')
     })
     .match('**.js', {
         preprocessor: fis.plugin('annotate'),
-//        optimizer: fis.plugin('uglify-js'),
+        //optimizer: fis.plugin('uglify-js'),
         useHash: true
+    })
+    .match('/modules/pages/*/*.js', {
+        optimizer: null
     })
     .match('**.css', {
         optimizer: fis.plugin('clean-css'),

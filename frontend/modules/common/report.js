@@ -5,11 +5,11 @@
     // @require /import/bootstrap/dist/css/bootstrap.css
     // @require /import/angular-bootstrap/ui-bootstrap-tpls.js
 
-    var common = angular.module('common.report', ['ui.bootstrap',]);
+    var common = angular.module('common.report', ['ui.bootstrap']);
 
     common.controller('ModalInstanceCtrl', function($scope, $timeout, $modalInstance, option){
         "ngInject";
-        
+
         // adjust options
         $scope.message = option.message;
         $scope.title = option.title || 'Message';

@@ -25,9 +25,7 @@
     ]);
 
     // 设置post格式兼容spring rest
-    app.config(function($httpProvider) {
-        "ngInject";
-
+    app.config(['$httpProvider', function($httpProvider) {
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
         $httpProvider.defaults.transformRequest = function(req) {
             var str = [];
@@ -38,7 +36,7 @@
             }
             return str.join("&");
         };
-    });
+    }]);
 
     app.run(function($rootScope, $location, CommonReport){
         "ngInject";

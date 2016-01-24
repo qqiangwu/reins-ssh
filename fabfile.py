@@ -19,14 +19,18 @@ def testAll():
     prepare()
     local('mvn integration-test')
 
-def deploy():
-    try:
-        local('git checkout -B deploy')
+def compile():
         with lcd('frontend'):
             local('npm install')
+        local('rm -rf src/main/resources/static')
         local('fis3 release prod -d src/main/resources/static -r frontend')
         local('rm -rf src/main/resources/static/import')
         local('rm -rf src/main/resources/static/s')
+
+def deploy():
+    try:
+        local('git checkout -B deploy')
+        compile()
         local('rm -rf db frontend')
         local('git add -f src/main/resources/static')
         local('git commit -am "update"')

@@ -5,13 +5,13 @@
     // @require /import/angular-route/angular-route.js
     // @require pages
 
-    router.config(function($routeProvider, PageDef){
+    router.config(['$routeProvider', 'PageDef', function($routeProvider, PageDef){
         "ngInject";
 
-        PageDef.forEach(function(item){
-            $routeProvider.when(item.url, item.config);
+        PageDef.forEach(function(x){
+            $routeProvider.when(x.url, x.config);
         });
 
         $routeProvider.otherwise('/main');
-    });
+    }]);
 })(angular.module('boot.router', ['ngRoute', 'pages']));
