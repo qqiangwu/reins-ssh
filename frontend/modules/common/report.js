@@ -7,9 +7,8 @@
 
     var common = angular.module('common.report', ['ui.bootstrap']);
 
-    common.controller('ModalInstanceCtrl', function($scope, $timeout, $modalInstance, option){
-        "ngInject";
-
+    common.controller('ModalInstanceCtrl', ['$scope', '$timeout', '$modalInstance', 'option',
+        function($scope, $timeout, $modalInstance, option){
         // adjust options
         $scope.message = option.message;
         $scope.title = option.title || 'Message';
@@ -33,9 +32,9 @@
                 $modalInstance.close();
             });
         }
-    });
+    }]);
 
-    common.factory('CommonReport', function($rootScope, $modal){
+    common.factory('CommonReport', ['$rootScope', '$modal', function($rootScope, $modal){
         return function(option){
             var result = $modal.open({
                 template: __inline('modal.html'),
@@ -54,5 +53,5 @@
                 });
             }
         };
-    });
+    }]);
 })();

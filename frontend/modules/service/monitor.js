@@ -3,8 +3,8 @@
 (function(module){
     'use strict';
 
-    module.factory('Monitor', function($rootScope, $location, $log, $q){
-        "ngInject";
+    module.factory('Monitor', ['$rootScope', '$location', '$log', '$q',
+        function($rootScope, $location, $log, $q){
 
         var monitorApi = {};
 
@@ -39,7 +39,7 @@
         Object.freeze(monitorApi);
 
         return monitorApi;
-    });
+    }]);
 
     module.config(['$httpProvider', function($httpProvider) {
             $httpProvider.interceptors.push({

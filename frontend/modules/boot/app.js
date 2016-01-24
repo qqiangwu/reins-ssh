@@ -38,9 +38,7 @@
         };
     }]);
 
-    app.run(function($rootScope, $location, CommonReport){
-        "ngInject";
-
+    app.run(['$rootScope', '$location', 'CommonReport', function($rootScope, $location, CommonReport){
         $rootScope.go = function(url, reload){
             $location.path(url || '/');
 
@@ -53,13 +51,9 @@
         $rootScope.$on('modal:dismiss', function(_, options){
             $rootScope.go(options.url, options.reload);
         });
-    });
+    }]);
 
-    app.run(function($rootScope, Auth){
-        "ngInject";
-
-        var $root = $rootScope;
-
+    app.run(['$rootScope', 'Auth', function($root, Auth){
         $root.hasLogin = Auth.hasLogin;
         $root.user = Auth.user;
 
@@ -76,5 +70,5 @@
                 });
             });
         };
-    });
+    }]);
 })();

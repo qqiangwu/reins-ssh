@@ -1,9 +1,7 @@
 (function(module){
     'use strict';
 
-    module.controller('MainCtrl', function($scope, Blog){
-        "ngInject";
-
+    module.controller('MainCtrl', ['$scope', 'Blog', function($scope, Blog){
         $scope.pageSize = 10;
         $scope.currentPage = 1;
 
@@ -33,7 +31,7 @@
         }, function(val){
             $scope.hotBlogs = val.content;
         });
-    });
+    }]);
 
     return {
         url: '/main',

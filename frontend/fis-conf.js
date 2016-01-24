@@ -53,8 +53,7 @@ fis.media('prod')
         release: false
     })
     .match('**.js', {
-        preprocessor: fis.plugin('annotate'),
-        //optimizer: fis.plugin('uglify-js'),
+        optimizer: fis.plugin('uglify-js'),
         useHash: true
     })
     .match('/modules/pages/*/*.js', {

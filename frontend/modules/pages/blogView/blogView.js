@@ -1,8 +1,8 @@
 (function(module){
     'use strict';
 
-    module.controller('BlogViewCtrl', function($scope, $routeParams, Blog, Comment){
-        "ngInject";
+    module.controller('BlogViewCtrl', ['$scope', '$routeParams', 'Blog', 'Comment',
+        function($scope, $routeParams, Blog, Comment){
 
         var id = $routeParams.id;
 
@@ -47,7 +47,7 @@
                 });
             };
         }
-    });
+    }]);
 
     return {
         url: '/blogView/:id',

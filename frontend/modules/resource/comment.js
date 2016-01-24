@@ -4,8 +4,7 @@
 (function(module){
     'use strict';
 
-    module.factory('Comment', function($resource){
-        "ngInject";
+    module.factory('Comment', ['$resource', function($resource){
 
         return $resource('api/blogs/:id/comments', {id: '@id'}, {
             query: {
@@ -13,5 +12,5 @@
                 method: 'GET'
             }
         });
-    });
+    }]);
 })(angular.module('resource.comment', ['ngResource']));

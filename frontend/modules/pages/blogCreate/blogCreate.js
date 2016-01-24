@@ -1,7 +1,7 @@
 (function(module){
     'use strict';
 
-    module.controller('BlogCreateCtrl', function($scope, Blog){
+    module.controller('BlogCreateCtrl', ['$scope', 'Blog', function($scope, Blog){
         "ngInject";
 
         if (!$scope.hasLogin()) {
@@ -31,7 +31,7 @@
                 }
             );
         };
-    });
+    }]);
 
     return {
         url: '/blogCreate',

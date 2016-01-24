@@ -1,8 +1,8 @@
 (function(module){
     'use strict';
 
-    module.controller('BlogEditCtrl', function($scope, $routeParams, Blog){
-        "ngInject";
+    module.controller('BlogEditCtrl', ['$scope', '$routeParams', 'Blog',
+        function($scope, $routeParams, Blog){
 
         if (!$scope.hasLogin()) {
             $scope.go();
@@ -49,7 +49,7 @@
                 }
             );
         };
-    });
+    }]);
 
     return {
         url: '/blogEdit/:id',

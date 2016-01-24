@@ -2,9 +2,7 @@
 (function(module){
     'use strict';
 
-    module.controller('LoginCtrl', function($scope, Auth){
-        "ngInject";
-
+    module.controller('LoginCtrl', ['$scope', 'Auth', function($scope, Auth){
         $scope.login = function(){
             var token = $scope.token;
             if (!token.email) {
@@ -34,7 +32,7 @@
                     });
             }
         };
-    });
+    }]);
 
     return {
         url: '/login',

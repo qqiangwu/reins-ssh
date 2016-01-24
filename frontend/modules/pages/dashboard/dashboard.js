@@ -1,9 +1,9 @@
+// @require /import/ng-flow/dist/ng-flow-standalone.js
+
 (function(module){
     'use strict';
 
-    module.controller('SelfBlogCtrl', function($scope, Blog, Comment){
-        "ngInject";
-
+    module.controller('SelfBlogCtrl', ['$scope', 'Blog', 'Comment', function($scope, Blog, Comment){
         if (!($scope.user && $scope.user())) {
             $scope.go();
         }
@@ -36,12 +36,9 @@
         };
 
         $scope.loadPage();
-    });
+    }]);
 
-    module.controller('SelfProfileCtrl', function($scope, Auth, User){
-        "ngInject";
-        // @require import/ng-flow/dist/ng-flow-standalone.min.js
-
+    module.controller('SelfProfileCtrl', ['$scope', 'Auth', 'User', function($scope, Auth, User){
         if (!($scope.user && $scope.user())) {
             $scope.go();
         }
@@ -74,7 +71,7 @@
                 });
             };
         };
-    });
+    }]);
 
     return {
         url: '/dashboard',

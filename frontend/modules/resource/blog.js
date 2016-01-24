@@ -4,7 +4,7 @@
 (function(module){
     'use strict';
 
-    module.factory('Blog', function($resource){
+    module.factory('Blog', ['$resource', function($resource){
         "ngInject";
 
         return $resource('api/blogs/:id', {id: '@id'}, {
@@ -29,5 +29,5 @@
                 url: 'api/blogs/:id/view'
             }
         });
-    });
+    }]);
 })(angular.module('resource.blog', ['ngResource']));
