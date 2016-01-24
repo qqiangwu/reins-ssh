@@ -20,15 +20,22 @@ def testAll():
     local('mvn integration-test')
 
 def deploy():
-    local('git checkout -b deploy')
-    local('fis3 release -d src/main/resources/static -r frontend')
-    local('rm -rf src/main/resources/static/import')
-    local('rm -rf src/main/resources/static/s')
-    local('rm -rf db frontend')
-    local('git add src/main/resources/static')
-    local('git push dokku deploy:master')
-    local('git checkout master')
-    local('git branch -d deploy')
+    try:
+        local('git checkout -B deploy')
+        with lcd('frontend'):
+            local('npm install')
+        local('fis3 release prod -d src/main/resources/static -r frontend')
+        local('rm -rf src/main/resources/static/import')
+        local('rm -rf src/main/resources/static/s')
+        local('rm -rf db frontend')
+        local('git add -f src/main/resources/static')
+        local('git commit -am "update"')
+        local('git push --force dokku deploy:master')
+    finally:
+        local('git reset --hard')
+        local('git checkout master')
+        local('git branch -D deploy')
+        local('git reset --hard')
 
 def commit(msg = 'update'):
     print('Prepare to commit to main repo')
