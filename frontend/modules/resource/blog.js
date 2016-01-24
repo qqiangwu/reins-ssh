@@ -5,6 +5,8 @@
     'use strict';
 
     module.factory('Blog', function($resource){
+        "ngInject";
+
         return $resource('api/blogs/:id', {id: '@id'}, {
             update: {
                 method: 'POST'
@@ -28,4 +30,4 @@
             }
         });
     });
-})(angular.module('resource.blog'));
+})(angular.module('resource.blog', ['ngResource']));

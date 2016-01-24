@@ -19,15 +19,16 @@ def testAll():
     prepare()
     local('mvn integration-test')
 
-def deploy_only():
-    local('git push dokku master')
-
-def deploy(msg = 'update'):
-    print('Prepare to deploy to dokku')
-
-    local('git add .')
-    local('git commit -am "{}"'.format(msg))
-    local('git push dokku master')
+def deploy():
+    local('git checkout -b deploy')
+    local('fis3 release -d src/main/resources/static -r frontend')
+    local('rm -rf src/main/resources/static/import')
+    local('rm -rf src/main/resources/static/s')
+    local('rm -rf db frontend')
+    local('git add src/main/resources/static')
+    local('git push dokku deploy:master')
+    local('git checkout master')
+    local('git branch -d deploy')
 
 def commit(msg = 'update'):
     print('Prepare to commit to main repo')

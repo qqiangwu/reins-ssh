@@ -1,12 +1,35 @@
+// @require /import/angular/angular.js
+// @require /import/angular-route/angular-route.js
+
+// @require resource/blog
+// @require resource/comment
+// @require resource/user
+// @require service/auth
+
 (function(module){
+    var blogCreate = __inline('./blogCreate/blogCreate.js');
+    var blogEdit = __inline('./blogEdit/blogEdit.js');
+    var blogView = __inline('./blogView/blogView.js');
+    var dashboard = __inline('./dashboard/dashboard.js');
+    var login = __inline('./login/login.js');
+    var main = __inline('./main/main.js');
+    var register = __inline('./register/register.js');
+    var self = __inline('./self/self.js');
+
     module.constant('PageDef', [
-        __inline('./blogCreate/blogCreate.js'),
-        __inline('./blogEdit/blogEdit.js'),
-        __inline('./blogView/blogView.js'),
-        __inline('./dashboard/dashboard.js'),
-        __inline('./login/login.js'),
-        __inline('./main/main.js'),
-        __inline('./register/register.js'),
-        __inline('./self/self.js')
+        blogCreate,
+        blogEdit,
+        blogView,
+        dashboard,
+        login,
+        main,
+        register,
+        self
     ]);
-})(angular.module('pages', []));
+})(angular.module('pages', [
+    'ngRoute',
+    'resource.blog',
+    'resource.comment',
+    'resource.user',
+    'service.auth'
+]));

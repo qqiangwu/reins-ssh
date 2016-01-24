@@ -1,35 +1,43 @@
 (function(module){
     'use strict';
 
-    module.controller('BlogCreateCtrl', ['$scope', 'Blog',
-        function($scope, Blog){
-            if (!$scope.hasLogin()) {
-                $scope.go();
-            }
+    module.controller('BlogCreateCtrl', function($scope, Blog){
+        "ngInject";
 
-            $scope.blog = new Blog();
-            $scope.save = function(){
-                $scope.blog.$save(
-                    function(blog){
-                        $scope.report({
-                            message: 'Post blog success',
-                            timeout: 2,
-                            url: '/blogView/' + blog.id
-                        });
-                        $scope.$emit('blog:add');
-                    },
-                    function(resp){
-                        var status = resp.status;
-
-                        if (status === 400) {
-                            $scope.report({
-                                message: 'Invalid title or content',
-                                timeout: 2
-                            });
-                        }
-                    }
-                );
-            };
+        if (!$scope.hasLogin()) {
+            $scope.go();
         }
-    ]);
-})(angular.module('miao.controller'));
+
+        $scope.blog = new Blog();
+        $scope.save = function(){
+            $scope.blog.$save(
+                function(blog){
+                    $scope.report({
+                        message: 'Post blog success',
+                        timeout: 2,
+                        url: '/blogView/' + blog.id
+                    });
+                    $scope.$emit('blog:add');
+                },
+                function(resp){
+                    var status = resp.status;
+
+                    if (status === 400) {
+                        $scope.report({
+                            message: 'Invalid title or content',
+                            timeout: 2
+                        });
+                    }
+                }
+            );
+        };
+    });
+
+    return {
+        url: '/blogCreate',
+        config: {
+            template: __inline('./blogCreate.html'),
+            controller: 'BlogCreateCtrl'
+        }
+    };
+})(angular.module('pages'));

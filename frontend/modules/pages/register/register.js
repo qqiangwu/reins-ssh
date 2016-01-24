@@ -27,4 +27,12 @@
             };
         }
     ]);
-})(angular.module('miao.controller'));
+
+    return {
+        url: '/register',
+        config: {
+            template: __inline('./register.html'),
+            controller: 'RegisterCtrl'
+        }
+    };
+})(angular.module('pages'));

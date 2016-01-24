@@ -1,44 +1,45 @@
 (function(module){
     'use strict';
 
-    module.controller('SelfBlogCtrl', ['$scope', 'Blog', 'Comment',
-        function($scope, Blog, Comment){
-            if (!($scope.user && $scope.user())) {
-                $scope.go();
-            }
+    module.controller('SelfBlogCtrl', function($scope, Blog, Comment){
+        "ngInject";
 
-            $scope.pageSize = 10;
-            $scope.currentPage = 1;
-
-            $scope.loadPage = function(){
-                $scope.blogs = Blog.queryByUser({
-                    user: $scope.user().id,
-                    page: $scope.currentPage - 1,
-                    size: $scope.pageSize
-                }, function(value){
-                    $scope.blogs = value.content;
-                    $scope.totalElements = value.totalElements;
-                    $scope.currentPage = value.number + 1;
-                });
-            };
-            $scope.remove = function(idx, blog){
-                Blog.delete({
-                    id: blog.id
-                }, function(){
-                    $scope.report({
-                        message: 'Delete blog successfully',
-                        timeout: 1
-                    });
-                    $scope.blogs.splice(idx, 1);
-                    $scope.$emit('blog:delete');
-                });
-            };
-
-            $scope.loadPage();
+        if (!($scope.user && $scope.user())) {
+            $scope.go();
         }
-    ]);
 
-    module.controller('SelfProfileCtrl', ['$scope', 'Auth', 'User', function($scope, Auth, User){
+        $scope.pageSize = 10;
+        $scope.currentPage = 1;
+
+        $scope.loadPage = function(){
+            $scope.blogs = Blog.queryByUser({
+                user: $scope.user().id,
+                page: $scope.currentPage - 1,
+                size: $scope.pageSize
+            }, function(value){
+                $scope.blogs = value.content;
+                $scope.totalElements = value.totalElements;
+                $scope.currentPage = value.number + 1;
+            });
+        };
+        $scope.remove = function(idx, blog){
+            Blog.delete({
+                id: blog.id
+            }, function(){
+                $scope.report({
+                    message: 'Delete blog successfully',
+                    timeout: 1
+                });
+                $scope.blogs.splice(idx, 1);
+                $scope.$emit('blog:delete');
+            });
+        };
+
+        $scope.loadPage();
+    });
+
+    module.controller('SelfProfileCtrl', function($scope, Auth, User){
+        "ngInject";
         // @require import/ng-flow/dist/ng-flow-standalone.min.js
 
         if (!($scope.user && $scope.user())) {
@@ -73,9 +74,12 @@
                 });
             };
         };
-    }]);
+    });
 
-    module.controller('DashboardCtrl', ['$scope', function($scope){
-
-    }]);
-})(angular.module('miao.controller'));
+    return {
+        url: '/dashboard',
+        config: {
+            template: __inline('./dashboard.html')
+        }
+    };
+})(angular.module('pages'));

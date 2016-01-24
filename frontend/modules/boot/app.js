@@ -4,6 +4,7 @@
 // @require /import/angular-markdown-directive/markdown.js
 // @require /import/bootstrap/dist/css/bootstrap.css
 // @require /import/angular-bootstrap/ui-bootstrap-tpls.js
+// @require /import/ng-flow/dist/ng-flow-standalone.js
 
 // @require boot/router
 // @require service/auth
@@ -25,6 +26,8 @@
 
     // 设置post格式兼容spring rest
     app.config(function($httpProvider) {
+        "ngInject";
+
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
         $httpProvider.defaults.transformRequest = function(req) {
             var str = [];
@@ -38,6 +41,8 @@
     });
 
     app.run(function($rootScope, $location, CommonReport){
+        "ngInject";
+
         $rootScope.go = function(url, reload){
             $location.path(url || '/');
 
@@ -46,13 +51,15 @@
             }
         };
 
-        $rootScope.report = CommonReport.report;
+        $rootScope.report = CommonReport;
         $rootScope.$on('modal:dismiss', function(_, options){
             $rootScope.go(options.url, options.reload);
         });
     });
 
     app.run(function($rootScope, Auth){
+        "ngInject";
+
         var $root = $rootScope;
 
         $root.hasLogin = Auth.hasLogin;

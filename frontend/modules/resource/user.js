@@ -5,10 +5,12 @@
     'use strict';
 
     module.factory('User', function($resource){
+        "ngInject";
+
         return $resource('api/users/:id', {id: '@id'}, {
             update: {
                 method: 'POST'
             }
         });
     });
-})(angular.module('resource.user'));
+})(angular.module('resource.user', ['ngResource']));

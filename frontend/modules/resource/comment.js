@@ -5,6 +5,8 @@
     'use strict';
 
     module.factory('Comment', function($resource){
+        "ngInject";
+
         return $resource('api/blogs/:id/comments', {id: '@id'}, {
             query: {
                 isArray: false,
@@ -12,4 +14,4 @@
             }
         });
     });
-})(angular.module('resource.comment'));
+})(angular.module('resource.comment', ['ngResource']));

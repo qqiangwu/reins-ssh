@@ -8,6 +8,8 @@
     var common = angular.module('common.report', ['ui.bootstrap',]);
 
     common.controller('ModalInstanceCtrl', function($scope, $timeout, $modalInstance, option){
+        "ngInject";
+        
         // adjust options
         $scope.message = option.message;
         $scope.title = option.title || 'Message';
@@ -36,7 +38,7 @@
     common.factory('CommonReport', function($rootScope, $modal){
         return function(option){
             var result = $modal.open({
-                templateUrl: __inline('modal.html'),
+                template: __inline('modal.html'),
                 controller: 'ModalInstanceCtrl',
                 size: 'sm',
                 resolve: {

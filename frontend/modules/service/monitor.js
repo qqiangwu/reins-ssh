@@ -4,6 +4,8 @@
     'use strict';
 
     module.factory('Monitor', function($rootScope, $location, $log, $q){
+        "ngInject";
+
         var monitorApi = {};
 
         Object.defineProperties(monitorApi, {

@@ -78,6 +78,7 @@
                 <configuration>
                     <excludeDevtools>true</excludeDevtools>
                     <fork>true</fork>
+                    <addResources>true</addResources>
                     <finalName>zy</finalName>
                 </configuration>
 			</plugin>
