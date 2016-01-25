@@ -1,4 +1,4 @@
-// @require /import/ng-flow/dist/ng-flow-standalone.js
+// @require ng-flow
 
 (function(module){
     'use strict';

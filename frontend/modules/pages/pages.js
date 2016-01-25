@@ -1,5 +1,5 @@
-// @require /import/angular/angular.js
-// @require /import/angular-route/angular-route.js
+// @require angular
+// @require angular-route
 
 // @require resource/blog
 // @require resource/comment

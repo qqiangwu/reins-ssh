@@ -1,5 +1,5 @@
-// @require /import/angular/angular.js
-// @require /import/angular-resource/angular-resource.js
+// @require angular
+// @require angular-resource
 
 (function(module){
     'use strict';

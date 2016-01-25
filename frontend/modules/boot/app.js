@@ -1,10 +1,8 @@
-// @require /import/angular/angular.js
-// @require /import/angular-sanitize/angular-sanitize.js
-// @require /import/showdown/src/showdown.js
-// @require /import/angular-markdown-directive/markdown.js
 // @require /import/bootstrap/dist/css/bootstrap.css
-// @require /import/angular-bootstrap/ui-bootstrap-tpls.js
-// @require /import/ng-flow/dist/ng-flow-standalone.js
+// @require angular
+// @require angular-markdown-directive
+// @require angular-bootstrap
+// @require ng-flow
 
 // @require boot/router
 // @require service/auth

@@ -2,14 +2,14 @@ fis.unhook('components');
 
 fis.set('static', 'static');
 fis.set('project.files', ['map.json', 'views/**', 'modules/**']);
-
 /////////////////////////////////////////////////////////
 // ID def
 // bower依赖必须全部限定
-fis.match('/import/(**)', {
-        id: '$1'
-    })
-    .match('/modules/(**).{js,css}', {
+fis.hook('bower', {
+    'bower': 'import'
+});
+
+fis.match('/modules/(**).{js,css}', {
         id: '$1'
     })
     .match(/^\/modules\/([^\/]+)\/\1\.(js|css)$/i, {

@@ -2,8 +2,6 @@
     'use strict';
 
     module.controller('BlogCreateCtrl', ['$scope', 'Blog', function($scope, Blog){
-        "ngInject";
-
         if (!$scope.hasLogin()) {
             $scope.go();
         }

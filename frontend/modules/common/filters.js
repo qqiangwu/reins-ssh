@@ -1,7 +1,7 @@
 (function(){
     'use strict';
 
-    // @require /import/angular/angular.js
+    // @require angular
 
     var common = angular.module('common.filters', []);
 

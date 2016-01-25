@@ -1,9 +1,9 @@
 (function(){
     'use strict';
 
-    // @require /import/angular/angular.js
+    // @require angular
     // @require /import/bootstrap/dist/css/bootstrap.css
-    // @require /import/angular-bootstrap/ui-bootstrap-tpls.js
+    // @require angular-bootstrap
 
     var common = angular.module('common.report', ['ui.bootstrap']);
 

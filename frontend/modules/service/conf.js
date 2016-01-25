@@ -1,4 +1,4 @@
-// @require /import/angular/angular.js
+// @require angular
 
 (function(module){
     'use strict';
