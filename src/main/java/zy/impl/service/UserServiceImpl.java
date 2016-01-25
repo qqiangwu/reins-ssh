@@ -18,6 +18,7 @@ import zy.exception.user.UserException;
 import zy.impl.entity.UserEntity;
 import zy.impl.repo.UserRepo;
 import zy.service.UserService;
+import zy.support.datahub.Publish;
 import zy.support.track.Monitor;
 
 import java.sql.Timestamp;
@@ -76,6 +77,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = false)
+    @Publish("user:modify")
     public User set(final int id, final String name) {
         UserEntity user = mUserRepo.findOne(id);
 

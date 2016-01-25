@@ -61,8 +61,6 @@ public class UserResource {
 
         val result = mUserService.set(SecurityUtils.getUserId(), userName);
 
-        SecurityUtils.getUser().setUser(result);
-
         if (image != null && image.length != 0) {
             mUserService.setAvatar(id, image);
         }
