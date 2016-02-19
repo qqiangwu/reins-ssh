@@ -3,9 +3,16 @@ from fabric.api import local, lcd
 def prepare():
     local('docker start mysql')
 
+def start():
+    local('mvn spring-boot:run -Drun.arguments=--logging.level.org.springframework.orm=DEBUG')
+
 def run():
     prepare()
-    local('mvn spring-boot:run -Drun.arguments=--logging.level.org.springframework.orm=DEBUG')
+    start()
+
+def build():
+    generate()
+    local('mvn package -Dmaven.test.skip=true')
 
 def testUnit():
     prepare()
@@ -20,12 +27,17 @@ def testAll():
     local('mvn integration-test')
 
 def compile():
-        with lcd('frontend'):
-            local('npm install')
-        local('rm -rf src/main/resources/static')
-        local('fis3 release prod -d src/main/resources/static -r frontend')
-        local('rm -rf src/main/resources/static/import')
-        local('rm -rf src/main/resources/static/s')
+    with lcd('frontend'):
+        local('npm install')
+    local('rm -rf src/main/resources/static')
+    local('fis3 release prod -d src/main/resources/static -r frontend')
+    local('rm -rf src/main/resources/static/import')
+    local('rm -rf src/main/resources/static/s')
+
+def generate():
+    with lcd('frontend'):
+        local('npm install')
+    local('fis3 release -d src/main/resources/static -r frontend')
 
 def deploy():
     try:
