@@ -58,6 +58,3 @@
 + spring-data-jpa: 提供ORM支持
 + spring-aop: 提供AOP支持
 + 七牛云存储: 提供图片存储服务
-
-# 贡献者
-All rights reserved by Zhang Yan.
